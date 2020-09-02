@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-sm-6 col-lg-3">
                     <div class="widget widget-about">
-                        <img src="{{ $web_source ?? '' }}/images/logo.png" class="footer-logo" alt="Footer Logo" width="105" height="25">
+                        <img src="{{ $web_source }}/images/logo.png" class="footer-logo" alt="Footer Logo" width="105" height="25">
                         <p>Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. </p>
 
                         <div class="social-icons">
@@ -43,14 +43,14 @@
                     </div><!-- End .widget -->
                 </div><!-- End .col-sm-6 col-lg-3 -->
             </div><!-- End .row -->
-        </div><!-- End .container --> 
+        </div><!-- End .container -->
     </div><!-- End .footer-middle -->
 
     <div class="footer-bottom">
         <div class="container">
             <p class="footer-copyright">Copyright &copy;<script>document.write(new Date().getFullYear());</script>Greener Norah Store. All Rights Reserved.</p><!-- End .footer-copyright -->
             <figure class="footer-payments">
-                <img src="{{ $web_source ?? '' }}/images/payments.png" alt="Payment methods" width="272" height="20">
+                <img src="{{ $web_source }}/images/payments.png" alt="Payment methods" width="272" height="20">
             </figure><!-- End .footer-payments -->
         </div><!-- End .container -->
     </div><!-- End .footer-bottom -->

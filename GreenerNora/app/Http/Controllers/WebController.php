@@ -6,7 +6,7 @@
 
     class WebController extends Controller{
 
-        public function indes(){
+        public function index(){
             return view('web.welcome');
         }
 
