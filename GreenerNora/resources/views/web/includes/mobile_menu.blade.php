@@ -11,10 +11,16 @@
         <nav class="mobile-nav">
             <ul class="mobile-menu">
                 <li class="">
-                    <a href="index.html">Home</a>
+                    <a href="{{ url('/') }}">Home</a>
                 </li>
                 <li>
-                    <a href="category.html">Shop</a>
+                    <a href="{{ route('shop') }}">Shop</a>
+                </li>
+                <li>
+                    <a  href="{{ route('contactus') }}">Contact Us</a>
+                </li>
+                <li>
+                    <a href="#signin-modal" data-toggle="modal"><i class="icon-user"></i>Login</a>
                 </li>
             </ul>
         </nav><!-- End .mobile-nav -->

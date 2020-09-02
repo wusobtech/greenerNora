@@ -1,21 +1,4 @@
 <header class="header">
-    <div class="header-top">
-        <div class="container">
-            <div class="header-right">
-                <ul class="top-menu">
-                    <li>
-                        <a href="#">Links</a>
-                        <ul>
-                            <li><a href="tel:#"><i class="icon-phone"></i>Call: +0123 456 789</a></li>
-                            <li><a href="wishlist.html"><i class="icon-heart-o"></i>Wishlist <span>(3)</span></a></li>
-                            <li><a href="contact.html">Contact Us</a></li>
-                            <li><a href="#signin-modal" data-toggle="modal"><i class="icon-user"></i>Login</a></li>
-                        </ul>
-                    </li>
-                </ul><!-- End .top-menu -->
-            </div><!-- End .header-right -->
-        </div>
-    </div>
     <div class="header-middle sticky-header">
         <div class="container">
             <div class="header-left">
@@ -27,10 +10,16 @@
                 <nav class="main-nav">
                     <ul class="menu">
                         <li class="megamenu-container">
-                            <a class="sf-with-ul" href="{{ url('/') }}">Home</a>
+                            <a class="sf" href="{{ url('/') }}">Home</a>
                         </li>
                         <li>
-                            <a class="sf-with-ul" href="{{ route('shop') }}">Shop</a>
+                            <a class="sf" href="{{ route('shop') }}">Shop</a>
+                        </li>
+                        <li>
+                            <a class="sf" href="{{ route('contactus') }}">Contact Us</a>
+                        </li>
+                        <li>
+                            <a href="#signin-modal" data-toggle="modal"><i class="icon-user"></i>Login</a>
                         </li>
                     </ul><!-- End .menu -->
                 </nav><!-- End .main-nav -->
