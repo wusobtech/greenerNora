@@ -23,3 +23,7 @@ Route::get('/product', 'WebController@product')->name('product');
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
