@@ -52,8 +52,8 @@ Welcome
                     <div class="toolbox-right">
                         <ul class="nav-filter product-filter">
                             <li class="active"><a href="#" data-filter="*">All</a></li>
-                            <li><a href="#" data-filter=".furniture">Furniture</a></li>
-                            <li><a href="#" data-filter=".lighting">Lighting</a></li>
+                            <li><a href="#" data-filter=".furniture">Fish</a></li>
+                            <li><a href="#" data-filter=".lighting">Poultry</a></li>
                             <li><a href="#" data-filter=".accessories">Accessories</a></li>
                             <li><a href="#" data-filter=".sale">Sale</a></li>
                         </ul>
@@ -83,7 +83,7 @@ Welcome
                                         <div class="filter-item">
                                             <div class="custom-control custom-checkbox">
                                                 <input type="checkbox" class="custom-control-input" id="cat-2">
-                                                <label class="custom-control-label" for="cat-2">Furniture</label>
+                                                <label class="custom-control-label" for="cat-2">Fish</label>
                                             </div><!-- End .custom-checkbox -->
                                             <span class="item-count">3</span>
                                         </div><!-- End .filter-item -->
@@ -91,23 +91,7 @@ Welcome
                                         <div class="filter-item">
                                             <div class="custom-control custom-checkbox">
                                                 <input type="checkbox" class="custom-control-input" id="cat-3">
-                                                <label class="custom-control-label" for="cat-3">Lighting</label>
-                                            </div><!-- End .custom-checkbox -->
-                                            <span class="item-count">2</span>
-                                        </div><!-- End .filter-item -->
-
-                                        <div class="filter-item">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="cat-4">
-                                                <label class="custom-control-label" for="cat-4">Accessories</label>
-                                            </div><!-- End .custom-checkbox -->
-                                            <span class="item-count">4</span>
-                                        </div><!-- End .filter-item -->
-
-                                        <div class="filter-item">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="cat-5">
-                                                <label class="custom-control-label" for="cat-5">Sale</label>
+                                                <label class="custom-control-label" for="cat-3">Poultry</label>
                                             </div><!-- End .custom-checkbox -->
                                             <span class="item-count">2</span>
                                         </div><!-- End .filter-item -->
