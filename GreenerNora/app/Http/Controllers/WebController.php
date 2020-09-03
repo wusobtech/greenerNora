@@ -22,6 +22,10 @@
             return view('web.cart');
         }
 
+        public function login(){
+            return view('auth.login');
+        }
+
         public function product(){
             return view('web.product');
         }

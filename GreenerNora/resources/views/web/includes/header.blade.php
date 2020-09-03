@@ -19,7 +19,7 @@
                             <a class="sf" href="{{ route('contactus') }}">Contact Us</a>
                         </li>
                         <li>
-                            <a href="#signin-modal" data-toggle="modal"><i class="icon-user"></i>Login</a>
+                            <a href="{{ route('login') }}" ><i class="icon-user"></i>Login</a>
                         </li>
                     </ul><!-- End .menu -->
                 </nav><!-- End .main-nav -->

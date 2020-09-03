@@ -41,7 +41,6 @@
         @include('web.includes.header')
     </div>
     @include('web.includes.mobile_menu')
-    @include('web.includes.login_register')
     @yield('content')
     @include('web.includes.footer')
 

@@ -16,6 +16,7 @@ Route::get('/', 'WebController@index');
 Route::get('/shop', 'WebController@shop')->name('shop');
 Route::get('/cart', 'WebController@cart')->name('cart');
 Route::get('/contactus', 'WebController@contactus')->name('contactus');
+Route::get('/login', 'WebController@login')->name('login');
 Route::get('/product', 'WebController@product')->name('product');
 /**Route::get('/product', function($id){
     return view('product');
