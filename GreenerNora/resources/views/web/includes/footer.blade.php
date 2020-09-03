@@ -22,11 +22,8 @@
                         <h4 class="widget-title">Useful Links</h4><!-- End .widget-title -->
 
                         <ul class="widget-list">
-                        {{--<li><a href="{{ route('aboutUs') }}">About Molla</a></li>
-                            <li><a href="{{ route('howto') }}">How to shop on Molla</a></li>
-                            <li><a href="{{ route('faq') }}">FAQ</a></li>
-                            <li><a href="{{ route('contact') }}">Contact us</a></li>
-                        --}}
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Contact us</a></li>
                         </ul><!-- End .widget-list -->
                     </div><!-- End .widget -->
                 </div><!-- End .col-sm-6 col-lg-3 -->
@@ -36,9 +33,8 @@
                         <h4 class="widget-title">Customer Service</h4><!-- End .widget-title -->
 
                         <ul class="widget-list">
-                        {{--  <li><a href="{{ route('tandc') }}">Terms and conditions</a></li>
-                            <li><a href="{{ route('policy') }}">Privacy Policy</a></li>
-                        --}}
+                            <li><a href="#">Terms and conditions</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
                         </ul><!-- End .widget-list -->
                     </div><!-- End .widget -->
                 </div><!-- End .col-sm-6 col-lg-3 -->
@@ -48,7 +44,7 @@
 
     <div class="footer-bottom">
         <div class="container">
-            <p class="footer-copyright">Copyright &copy;<script>document.write(new Date().getFullYear());</script>Greener Norah Store. All Rights Reserved.</p><!-- End .footer-copyright -->
+            <p class="footer-copyright">Copyright &copy;<script>document.write(new Date().getFullYear());</script> Greener Norah Store. All Rights Reserved.</p><!-- End .footer-copyright -->
             <figure class="footer-payments">
                 <img src="{{ $web_source }}/images/payments.png" alt="Payment methods" width="272" height="20">
             </figure><!-- End .footer-payments -->

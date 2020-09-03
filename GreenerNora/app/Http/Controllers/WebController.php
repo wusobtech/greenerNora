@@ -14,6 +14,10 @@
             return view('web.shop');
         }
 
+        public function contactus(){
+            return view('web.contactus');
+        }
+
         public function cart(){
             return view('web.cart');
         }
