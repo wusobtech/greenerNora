@@ -76,7 +76,7 @@
                                     </div><!-- End .form-group -->
                                     <div class="form-group">
                                         <label for="register-email-2">Your Phone Number *</label>
-                                        <input type="number" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" required>
+                                        <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" required>
                                         @error('phone')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -84,16 +84,7 @@
                                         @enderror
                                     </div><!-- End .form-group -->
                                     <div class="form-group">
-                                        <label for="register-email-2">State *</label>
-                                        <input type="text" class="form-control @error('state') is-invalid @enderror" id="state" name="state" required>
-                                        @error('state')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div><!-- End .form-group -->
-                                    <div class="form-group">
-                                        <label for="register-email-2">Your Address *</label>
+                                        <label for="register-email-2">Your Full Address *</label>
                                         <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" required>
                                         @error('address')
                                             <span class="invalid-feedback" role="alert">
