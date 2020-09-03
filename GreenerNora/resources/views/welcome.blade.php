@@ -1,4 +1,4 @@
-@extends('web.layouts.app')
+@extends('web.layouts.app2')
 @section('title')
 Welcome
 @endsection
@@ -576,5 +576,5 @@ Welcome
             <div class="more-container text-center mt-0 mb-7">
                 <a href="category.html" class="btn btn-outline-dark-3 btn-more"><span>more products</span><i class="la la-refresh"></i></a>
             </div><!-- End .more-container -->
-        </main><!-- End .main -->
+        </main><!-- End .main -->  
 @endsection
