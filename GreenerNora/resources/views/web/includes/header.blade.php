@@ -18,9 +18,13 @@
                         <li>
                             <a class="sf" href="{{ route('contactus') }}">Contact Us</a>
                         </li>
+                        @guest
                         <li>
                             <a href="{{ route('login') }}" ><i class="icon-user"></i>Login</a>
                         </li>
+                        @else
+                            <li><a href="{{ route('home') }}"<i class="icon-admin">Dashboard</a></li>
+                    @endguest
                     </ul><!-- End .menu -->
                 </nav><!-- End .main-nav -->
             </div><!-- End .header-left -->
