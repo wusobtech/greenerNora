@@ -109,28 +109,14 @@ Welcome
                                         <div class="filter-item">
                                             <div class="custom-control custom-checkbox">
                                                 <input type="radio" class="custom-control-input" checked id="sort-1" name="sortby">
-                                                <label class="custom-control-label" for="sort-1">Default</label>
+                                                <label class="custom-control-label" for="sort-1">Bulk</label>
                                             </div><!-- End .custom-checkbox -->
                                         </div><!-- End .filter-item -->
 
                                         <div class="filter-item">
                                             <div class="custom-control custom-checkbox">
                                                 <input type="radio" class="custom-control-input" id="sort-2" name="sortby">
-                                                <label class="custom-control-label" for="sort-2">Popularity</label>
-                                            </div><!-- End .custom-checkbox -->
-                                        </div><!-- End .filter-item -->
-
-                                        <div class="filter-item">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="radio" class="custom-control-input" id="sort-3" name="sortby">
-                                                <label class="custom-control-label" for="sort-3">Average Rating</label>
-                                            </div><!-- End .custom-checkbox -->
-                                        </div><!-- End .filter-item -->
-
-                                        <div class="filter-item">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="radio" class="custom-control-input" id="sort-4" name="sortby">
-                                                <label class="custom-control-label" for="sort-4">Newness</label>
+                                                <label class="custom-control-label" for="sort-2">Kilo(KG)</label>
                                             </div><!-- End .custom-checkbox -->
                                         </div><!-- End .filter-item -->
 
@@ -148,22 +134,6 @@ Welcome
                                             </div><!-- End .custom-checkbox -->
                                         </div><!-- End .filter-item -->
                                     </div><!-- End .filter-items -->
-                                </div><!-- End .widget -->
-                            </div><!-- End .col-sm-6 col-lg-3 -->
-
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="widget">
-                                    <h3 class="widget-title">
-                                        Colour:
-                                    </h3><!-- End .widget-title -->
-
-                                    <div class="filter-colors filter-colors-vertical">
-                                        <a href="#" style="background: #b87145;"><span>Brown</span></a>
-                                        <a href="#" style="background: #f0c04a;"><span>Yellow</span></a>
-                                        <a href="#" style="background: #333333;"><span>Black</span></a>
-                                        <a href="#" class="selected" style="background: #cc3333;"><span>Red</span></a>
-                                        <a href="#" style="background: #ebebeb;"><span>White</span></a>
-                                    </div><!-- End .filter-colors -->
                                 </div><!-- End .widget -->
                             </div><!-- End .col-sm-6 col-lg-3 -->
 
