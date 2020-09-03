@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use Auth;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -23,6 +26,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $user = Auth::User();
+        if($user->role == "Admin"){
+            return redirect('admin/dashboard');
+        }
         return view('home');
     }
 }

@@ -76,7 +76,7 @@
                                     </div><!-- End .form-group -->
                                     <div class="form-group">
                                         <label for="register-email-2">Your Phone Number *</label>
-                                        <input type="number" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" required>
+                                        <input type="tel" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" required>
                                         @error('phone')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
