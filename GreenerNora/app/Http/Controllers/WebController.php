@@ -11,7 +11,13 @@
         }
 
         public function shop(){
-            return view('web.shop');
+            return view('web.frozen_foods');
+        }
+        public function frozenfoods(){
+            return view('web.frozen_foods');
+        }
+        public function lounge(){
+            return view('web.lounge');
         }
 
         public function contactus(){

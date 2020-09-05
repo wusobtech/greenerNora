@@ -13,7 +13,11 @@
                             <a class="sf" href="{{ url('/') }}">Home</a>
                         </li>
                         <li>
-                            <a class="sf" href="{{ route('shop') }}">Shop</a>
+                            <a class="sf-with-ul" href="{{ route('shop') }}">Shop</a>
+                            <ul>
+                                <li><a href="{{ route('frozenfoods') }}" class="menu-title">Frozen Foods</a></li>
+                                <li><a href="{{ route('lounge') }}" class="menu-title">Lounge Shop</a></li>
+                            </ul>
                         </li>
                         <li>
                             <a class="sf" href="{{ route('contactus') }}">Contact Us</a>

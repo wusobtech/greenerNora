@@ -15,6 +15,10 @@
                 </li>
                 <li>
                     <a href="{{ route('shop') }}">Shop</a>
+                    <ul>
+                        <li><a href="{{ route('frozenfoods') }}" class="menu-title">Frozen Foods</a></li>
+                        <li><a href="{{ route('lounge') }}" class="menu-title">Lounge Shop</a></li>
+                    </ul>
                 </li>
                 <li>
                     <a  href="{{ route('contactus') }}">Contact Us</a>
