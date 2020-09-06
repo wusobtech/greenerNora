@@ -23,12 +23,12 @@
     <meta name="msapplication-config" content="{{ $web_source }}/images/icons/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="{{ $web_source }}/vendor/line-awesome/line-awesome/line-awesome/css/line-awesome.min.css">
-    
+
     <!-- Plugins CSS File -->
     <link rel="stylesheet" href="{{ $web_source }}/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ $web_source }}/css/plugins/owl-carousel/owl.carousel.css">
     <link rel="stylesheet" href="{{ $web_source }}/css/plugins/magnific-popup/magnific-popup.css">
-    
+
     <!-- Main CSS File -->
     <link rel="stylesheet" href="{{ $web_source }}/css/style.css">
     <link rel="stylesheet" href="{{ $web_source }}/css/plugins/nouislider/nouislider.css">
@@ -50,11 +50,11 @@
     <script src="{{ $web_source }}/js/jquery.hoverIntent.min.js"></script>
     <script src="{{ $web_source }}/js/jquery.waypoints.min.js"></script>
     <script src="{{ $web_source }}/js/superfish.min.js"></script>
-    <script src="{{ $web_source }}/js/owl.carousel.min.js"></script>   
+    <script src="{{ $web_source }}/js/owl.carousel.min.js"></script>
     <script src="{{ $web_source }}/js/imagesloaded.pkgd.min.js"></script>
     <script src="{{ $web_source }}/js/isotope.pkgd.min.js"></script>
     <script src="{{ $web_source }}/js/wNumb.js"></script>
-    <script src="{{ $web_source }}/js/nouislider.min.js"></script>  
+    <script src="{{ $web_source }}/js/nouislider.min.js"></script>
     <script src="{{ $web_source }}/js/bootstrap-input-spinner.js"></script>
     <script src="{{ $web_source }}/js/jquery.elevateZoom.min.js"></script>
     <script src="{{ $web_source }}/js/jquery.magnific-popup.min.js"></script>
@@ -64,6 +64,17 @@
     <script type="text/javascript">
         function myFunction() {
             var x = document.getElementById("password");
+            if (x.type === "password") {
+            x.type = "text";
+            } else {
+            x.type = "password";
+            }
+        }
+    </script>
+
+    <script type="text/javascript">
+        function myFunction2() {
+            var x = document.getElementById("password1");
             if (x.type === "password") {
             x.type = "text";
             } else {

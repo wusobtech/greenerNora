@@ -7,7 +7,7 @@
             <input type="search" class="form-control" name="mobile-search" id="mobile-search" placeholder="Search in..." required>
             <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
         </form>
-        
+
         <nav class="mobile-nav">
             <ul class="mobile-menu">
                 <li class="">
@@ -24,7 +24,7 @@
                     <a  href="{{ route('contactus') }}">Contact Us</a>
                 </li>
                 <li>
-                    <a href="#signin-modal" data-toggle="modal"><i class="icon-user"></i>Login</a>
+                    <a href="{{ route('login') }}"><i class="icon-user"></i>Login</a>
                 </li>
             </ul>
         </nav><!-- End .mobile-nav -->
