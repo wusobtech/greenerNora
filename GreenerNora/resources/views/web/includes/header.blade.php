@@ -13,10 +13,11 @@
                             <a class="sf" href="{{ url('/') }}">Home</a>
                         </li>
                         <li>
-                            <a class="sf-with-ul" href="{{ route('shop') }}">Shop</a>
+                            <a class="sf-with-ul">Shop</a>
                             <ul>
-                                <li><a href="{{ route('frozenfoods') }}" class="menu-title">Frozen Foods</a></li>
-                                <li><a href="{{ route('lounge') }}" class="menu-title">Lounge Shop</a></li>
+                                @foreach ($category_list as $cat)
+                            <li><a href="{{ url('/shop/'.$cat->id)}}" class="menu-title">{{$cat->name}}</a></li>
+                                @endforeach
                             </ul>
                         </li>
                         <li>

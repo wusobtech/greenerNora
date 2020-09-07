@@ -1,18 +1,25 @@
 <?php
 
     namespace App\Http\COntrollers;
+    use App\Product;
+    use App\ProductCategory;
 
     use Illuminate\Http\Request;
 
     class WebController extends Controller{
 
         public function index(){
-            return view('welcome');
+            $categories = ProductCategory::get();
+            return view('welcome', compact('categories'));
         }
 
-        public function shop(){
-            return view('web.frozen_foods');
+        public function shop($id){
+            $category_list = ProductCategory::get();
+            $categories = ProductCategory::where('id', $id)->get();
+            $products = Product::where('category_id', $id)->get();
+            return view('web.shop', compact('products','categories','category_list'));
         }
+        
         public function frozenfoods(){
             return view('web.frozen_foods');
         }

@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/', 'WebController@index');
 Route::get('/shop', 'WebController@shop')->name('shop');
+Route::get('/shop/{id}', 'WebController@shop')->name('shops');
 Route::get('/frozenfoods', 'WebController@shop')->name('frozenfoods');
 Route::get('/lounge', 'WebController@lounge')->name('lounge');
 Route::get('/cart', 'WebController@cart')->name('cart');

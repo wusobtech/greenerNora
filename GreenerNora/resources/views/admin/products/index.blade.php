@@ -135,7 +135,7 @@
                             @foreach ($products as $product)
                                 <td>{{ $product->id }}</td>
                                 <td>{{ $product->name }}</td>
-                                <td>{{ $product->category->name }}</td>
+                                <td>{{ $product->category}}</td>
                                 <td>
                                     @if (!empty($product->image))
                                       <a href="{{ asset('Product_images/'.$product->image) }}" target="_blank" class="btn btn-primary btn-block">Click to View Image</a>
