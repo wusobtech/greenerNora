@@ -26,7 +26,7 @@ Login Page
                             </li>
                         </ul>
                         <div class="tab-content">
-                            <div class="tab-pane fade" id="signin-2" role="tabpanel" aria-labelledby="signin-tab-2">
+                            <div class="tab-pane fade show active" id="signin-2" role="tabpanel" aria-labelledby="signin-tab-2">
                                 <form method="POST" action="{{ route('login') }}">
                                     @csrf
                                     <div class="form-group">
@@ -69,49 +69,14 @@ Login Page
 
                                     </div><!-- End .form-footer -->
                                 </form>
-                                <div class="form-choice">
-                                    <p class="text-center">or sign in with</p>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <a href="#" class="btn btn-login btn-g">
-                                                <i class="icon-google"></i>
-                                                Login With Google
-                                            </a>
-                                        </div><!-- End .col-6 -->
-                                        <div class="col-sm-6">
-                                            <a href="#" class="btn btn-login btn-f">
-                                                <i class="icon-facebook-f"></i>
-                                                Login With Facebook
-                                            </a>
-                                        </div><!-- End .col-6 -->
-                                    </div><!-- End .row -->
-                                </div><!-- End .form-choice -->
                             </div><!-- .End .tab-pane -->
-                            <div class="tab-pane fade show active" id="register-2" role="tabpanel" aria-labelledby="register-tab-2">
+                            <div class="tab-pane fade" id="register-2" role="tabpanel" aria-labelledby="register-tab-2">
                                 <form method="POST" action="{{ route('register') }}">
                                     @csrf
                                     <div class="form-group">
                                         <label for="register-email-2">Your Full name *</label>
                                         <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" required>
                                         @error('name')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div><!-- End .form-group -->
-                                    <div class="form-group">
-                                        <label for="register-email-2">Your Phone Number *</label>
-                                        <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" required>
-                                        @error('phone')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div><!-- End .form-group -->
-                                    <div class="form-group">
-                                        <label for="register-email-2">Your Address *</label>
-                                        <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" required>
-                                        @error('address')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -127,14 +92,41 @@ Login Page
                                         @enderror
                                     </div><!-- End .form-group -->
                                     <div class="form-group">
+                                        <label for="register-email-2">Your Phone Number *</label>
+                                        <input type="tel" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" required>
+                                        @error('phone')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div><!-- End .form-group -->
+                                    <div class="form-group">
+                                        <label for="register-email-2">Your State *</label>
+                                        <input type="text" class="form-control @error('state') is-invalid @enderror" id="state" name="state" required>
+                                        @error('state')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div><!-- End .form-group -->
+                                    <div class="form-group">
+                                        <label for="register-email-2">Your Address *</label>
+                                        <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" required>
+                                        @error('address')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div><!-- End .form-group -->
+                                    <div class="form-group">
                                         <label for="register-password-2">Password *</label>
-                                        <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required>
+                                        <input type="password" class="form-control @error('password') is-invalid @enderror" id="password1" name="password" required>
                                         @error('password')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
-                                        <input type="checkbox" onclick="myFunction()">&nbsp;&nbsp;Show Password
+                                        <input type="checkbox" onclick="myFunction2()">&nbsp;&nbsp;Show Password
                                     </div><!-- End .form-group -->
                                     <div class="form-group">
                                         <label for="register-password-2">Confirm Password *</label>
@@ -154,23 +146,6 @@ Login Page
                                         </div><!-- End .custom-checkbox -->
                                     </div><!-- End .form-footer -->
                                 </form>
-                                <div class="form-choice">
-                                    <p class="text-center">or sign in with</p>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <a href="#" class="btn btn-login btn-g">
-                                                <i class="icon-google"></i>
-                                                Login With Google
-                                            </a>
-                                        </div><!-- End .col-6 -->
-                                        <div class="col-sm-6">
-                                            <a href="#" class="btn btn-login  btn-f">
-                                                <i class="icon-facebook-f"></i>
-                                                Login With Facebook
-                                            </a>
-                                        </div><!-- End .col-6 -->
-                                    </div><!-- End .row -->
-                                </div><!-- End .form-choice -->
                             </div><!-- .End .tab-pane -->
                         </div><!-- End .tab-content -->
                     </div><!-- End .form-tab -->

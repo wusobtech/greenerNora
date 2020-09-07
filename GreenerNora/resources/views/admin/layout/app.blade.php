@@ -9,6 +9,12 @@
         <meta content="Admin Dashboard" name="description" />
         <meta content="ThemeDesign" name="author" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <link rel="shortcut icon" href="{{ $admin_source }}/assets/images/favicon.ico">
 
@@ -65,14 +71,14 @@
                             <li class="has_sub">
                                 <a href="javascript:void(0);" class="waves-effect"><i class="dripicons-calendar"></i> <span> Categories List </span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                                 <ul class="list-unstyled">
-                                    <li><a href="#">View</a></li>
+                                    <li><a href="{{ route('adminCategories') }}">View</a></li>
                                 </ul>
                             </li>
 
                             <li class="has_sub">
                                 <a href="javascript:void(0);" class="waves-effect"><i class="dripicons-broadcast"></i> <span> Products List </span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                                 <ul class="list-unstyled">
-                                    <li><a href="#">View</a></li>
+                                    <li><a href="{{ route('adminProducts') }}">View</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -110,7 +116,7 @@
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated profile-dropdown ">
                                         <a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
                                         <a class="dropdown-item" href="#"><span class="badge badge-success mt-1 float-right">5</span><i class="mdi mdi-settings m-r-5 text-muted"></i> Settings</a>
-                                        <a class="dropdown-item" href="#"><i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>
+                                        <a class="dropdown-item" href="{{ route('logout') }}"><i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>
                                     </div>
                                 </li>
 
@@ -205,6 +211,41 @@
 
         <!-- App js -->
         <script src="{{ $admin_source }}/assets/js/app.js"></script>
+
+        <script type="text/javascript">
+            function deleteConfirmation(id) {
+                swal({
+                    title: "Delete?",
+                    text: "Please ensure and then confirm!",
+                    type: "warning",
+                    showCancelButton: !0,
+                    confirmButtonText: "Yes, delete it!",
+                    cancelButtonText: "No, cancel!",
+                    reverseButtons: !0
+                }).then(function (e) {
+                    if (e.value === true) {
+                        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+                        $.ajax({
+                            type: 'POST',
+                            url: "{{url('/category-delete')}}/" + id,
+                            data: {_token: CSRF_TOKEN},
+                            dataType: 'JSON',
+                            success: function (results) {
+                                if (results.success === true) {
+                                    swal("Done!", results.message, "success");
+                                } else {
+                                    swal("Error!", results.message, "error");
+                                }
+                            }
+                        });
+                    } else {
+                        e.dismiss;
+                    }
+                }, function (dismiss) {
+                    return false;
+                })
+            }
+        </script>
 
         @toastr_js
 
