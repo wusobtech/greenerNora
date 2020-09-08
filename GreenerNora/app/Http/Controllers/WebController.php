@@ -10,7 +10,8 @@
 
         public function index(){
             $categories = ProductCategory::get();
-            return view('welcome', compact('categories'));
+            $products = Product::paginate(50);
+            return view('welcome', compact('categories' , 'products'));
         }
 
         public function shop($id){
@@ -19,7 +20,7 @@
             $products = Product::where('category_id', $id)->get();
             return view('web.shop', compact('products','categories','category_list'));
         }
-        
+
         public function frozenfoods(){
             return view('web.frozen_foods');
         }

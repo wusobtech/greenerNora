@@ -12,12 +12,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', 'WebController@index');
+Route::get('/', 'WebController@index')->name('homepage');
 Route::get('/shop', 'WebController@shop')->name('shop');
 Route::get('/shop/{id}', 'WebController@shop')->name('shops');
 Route::get('/frozenfoods', 'WebController@shop')->name('frozenfoods');
 Route::get('/lounge', 'WebController@lounge')->name('lounge');
-Route::get('/cart', 'WebController@cart')->name('cart');
+Route::get('/cart', 'CartController@items')->name('cart');
 Route::get('/contactus', 'WebController@contactus')->name('contactus');
 Route::get('/login', 'WebController@login')->name('login');
 Route::get('/product', 'WebController@product')->name('product');
@@ -27,7 +27,17 @@ Route::get('/product', 'WebController@product')->name('product');
 */
 
 
-Auth::routes();
+Route::prefix('cart')->as('cart.')->middleware(['auth'])->group(function () {
+    Route::get('/items', 'CartController@items')->name('items');
+    Route::post('/add', 'CartController@addProductToCart')->name('add');
+    Route::post('/remove', 'CartController@removeProductFromCart')->name('remove');
+    Route::post('/checkout', 'CartController@checkout')->name('checkout');
+    Route::get('/checkout/success/{data}', 'CartController@checkoutSuccess')->name('checkout.success');
+});
+
+
+
+Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout','HomeController@logout');

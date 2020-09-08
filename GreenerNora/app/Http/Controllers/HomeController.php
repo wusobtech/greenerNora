@@ -26,11 +26,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = Auth::User();
+        $user = auth()->user();
         if($user->role == "Admin"){
             return redirect('admin/dashboard');
         }
-        return view('home');
+        return redirect()->route('homepage');
     }
 
     public function logout(){

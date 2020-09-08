@@ -59,11 +59,7 @@ class ProductController extends Controller
         try{
             if(!empty($request['image'])){
                 $image = $request->file('image');
-                $image_filename = time().'.'.$image->getClientOriginalExtension();
-                $image_path = public_path('/Product_images');
-                $image->move($image_path,$image_filename);
-
-                $data['image'] = $image_filename;
+                $data['image'] = putFileInStorage($image ,$this->productImagePath);
             }
 
         }
@@ -128,24 +124,10 @@ class ProductController extends Controller
         $products = Product::findorfail($id);
 
         if (isset($image)) {
-            try{
+                $image = $request->file('image');
+                $image_filename = putFileInStorage($image ,$this->productImagePath);
+                deleteFileFromStorage($products->getImage());
 
-                $image_image = $request->file('image');
-                $image_filename = time().'.'.$image_image->getClientOriginalExtension();
-                $image_path = public_path('/Product_images');
-                $image_image->move($image_path,$image_filename);
-
-                // $data['image']  = $image_filename;
-            }
-            catch(Exception $e){
-                toastr()->error('An error has occurred please try again later.');
-                return back();
-            }
-
-            $image_path1  = public_path('Product_images/'.$products->image);
-            if(File::exists($image_path1)) {
-                File::delete($image_path1);
-            }
         }else {
             $image_filename = $products->image;
         }
@@ -174,9 +156,9 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::findOrFail($id);
-        $image_path = public_path('Product_images/'.$product->image);
-        if(File::exists($image_path)) {
-            File::delete($image_path);
-        }
+        deleteFileFromStorage($product->getImage());
+        $product->delete();
+        toastr()->success('Product deleted successfully!');
+        return redirect('admin/products');
     }
 }

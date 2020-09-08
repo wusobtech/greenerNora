@@ -33,6 +33,8 @@
     <link rel="stylesheet" href="{{ $web_source }}/css/style.css">
     <link rel="stylesheet" href="{{ $web_source }}/css/plugins/nouislider/nouislider.css">
     <link rel="stylesheet" href="{{ $web_source }}/css/demos/demo-11.css">
+     <!-- Jquery Toast css -->
+     <link href="{{asset('toast')}}/jquery.toast.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <!-- main content -->
@@ -43,54 +45,5 @@
     @include('web.includes.mobile_menu')
     @yield('content')
     @include('web.includes.footer')
-
-    <!-- Plugins JS File -->
-    <script src="{{ $web_source }}/js/jquery.min.js"></script>
-    <script src="{{ $web_source }}/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ $web_source }}/js/jquery.hoverIntent.min.js"></script>
-    <script src="{{ $web_source }}/js/jquery.waypoints.min.js"></script>
-    <script src="{{ $web_source }}/js/superfish.min.js"></script>
-    <script src="{{ $web_source }}/js/owl.carousel.min.js"></script>
-    <script src="{{ $web_source }}/js/imagesloaded.pkgd.min.js"></script>
-    <script src="{{ $web_source }}/js/isotope.pkgd.min.js"></script>
-    <script src="{{ $web_source }}/js/wNumb.js"></script>
-    <script src="{{ $web_source }}/js/nouislider.min.js"></script>
-    <script src="{{ $web_source }}/js/bootstrap-input-spinner.js"></script>
-    <script src="{{ $web_source }}/js/jquery.elevateZoom.min.js"></script>
-    <script src="{{ $web_source }}/js/jquery.magnific-popup.min.js"></script>
-    <!-- Main JS File -->
-    <script src="{{ $web_source }}/js/main.js"></script>
-
-    <script type="text/javascript">
-        function myFunction() {
-            var x = document.getElementById("password");
-            if (x.type === "password") {
-            x.type = "text";
-            } else {
-            x.type = "password";
-            }
-        }
-    </script>
-
-    <script type="text/javascript">
-        function myFunction2() {
-            var x = document.getElementById("password1");
-            if (x.type === "password") {
-            x.type = "text";
-            } else {
-            x.type = "password";
-            }
-        }
-    </script>
-
-    <script type="text/javascript">
-        function myFunction1() {
-            var y = document.getElementById("password_confirmation");
-            if (y.type === "password") {
-                y.type = "text";
-            } else {
-                y.type = "password";
-            }
-        }
-    </script>
+    @include('web.includes.scripts')
 </body>
