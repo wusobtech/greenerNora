@@ -28,7 +28,7 @@ Shop
                         <div class="product product-3">
                             <figure class="product-media">
                                 <span class="product-label">{{$product->type}}</span>
-                                <a href="product.html">
+                                <a href="{{ route('product',['id'=>$product->id])}}">
                                     <img src="{{ asset('Product_images/'.$product->image) }}" alt="Product image" class="product-image">
                                 </a>
                             </figure><!-- End .product-media -->
@@ -40,7 +40,7 @@ Shop
                                 <div class="product-cat">
                                     <a href="#">{{$product->category->name}}</a>
                                 </div><!-- End .product-cat -->
-                                <h3 class="product-title"><a href="product.html">{{$product->name}}</a></h3><!-- End .product-title -->
+                                <h3 class="product-title"><a href="{{ route('product',['id'=>$product->id])}}">{{$product->name}}</a></h3><!-- End .product-title -->
                                 <div class="product-price">
                                      &#x20a6 {{$product->price}}
                                 </div><!-- End .product-price -->
