@@ -236,6 +236,7 @@
                                 } else {
                                     swal("Error!", results.message, "error");
                                 }
+                                location.reload();
                             }
                         });
                     } else {

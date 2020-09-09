@@ -10,14 +10,15 @@
 
         public function index(){
             $categories = ProductCategory::get();
-            $products = Product::paginate(50);
-            return view('welcome', compact('categories' , 'products'));
+            $newArrivals = Product::where('type', 'New')->orderBy('id' , 'desc')->get();
+            $featuredArrivals = Product::inRandomOrder()->get();
+            return view('welcome', compact('categories', 'newArrivals', 'featuredArrivals'));
         }
 
         public function shop($id){
             $category_list = ProductCategory::get();
             $categories = ProductCategory::where('id', $id)->get();
-            $products = Product::where('category_id', $id)->get();
+            $products = Product::where('category_id', $id)->where('status', 'Active')->orderBy('id' , 'desc')->paginate(8);
             return view('web.shop', compact('products','categories','category_list'));
         }
 
@@ -36,12 +37,10 @@
             return view('web.cart');
         }
 
-        public function login(){
-            return view('auth.login');
-        }
 
-        public function product(){
-            return view('web.product');
+        public function product($id){
+            $product=Product::where('id', $id)->first();
+            return view('web.product', compact('product'));
         }
 
     }
