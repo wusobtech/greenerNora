@@ -40,6 +40,7 @@
     <!-- main content -->
     <!-- header -->
     <div class="main-content" id="home">
+        @php($categories = App\ProductCategory::get())
         @include('web.includes.header')
     </div>
     @include('web.includes.mobile_menu')

@@ -14,13 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/', 'WebController@index')->name('homepage');
 Route::get('/shop', 'WebController@shop')->name('shop');
-Route::get('/shop/{id}', 'WebController@shop')->name('shops');
+Route::get('/shop/{id}/{name}', 'WebController@shop')->name('shops');
 Route::get('/frozenfoods', 'WebController@shop')->name('frozenfoods');
 Route::get('/lounge', 'WebController@lounge')->name('lounge');
-Route::get('/cart', 'CartController@items')->name('cart');
+Route::get('/cart', 'CartController@items')->name('cart')->middleware('auth');
 Route::get('/contactus', 'WebController@contactus')->name('contactus');
 Route::get('/login', 'WebController@login')->name('login');
-Route::get('/product', 'WebController@product')->name('product');
+Route::get('/productInfo/{id}', 'WebController@product')->name('product');
 /**Route::get('/product', function($id){
     return view('product');
 });
@@ -28,11 +28,11 @@ Route::get('/product', 'WebController@product')->name('product');
 
 
 Route::prefix('cart')->as('cart.')->middleware(['auth'])->group(function () {
-    Route::get('/items', 'CartController@items')->name('items');
-    Route::post('/add', 'CartController@addProductToCart')->name('add');
-    Route::post('/remove', 'CartController@removeProductFromCart')->name('remove');
-    Route::post('/checkout', 'CartController@checkout')->name('checkout');
-    Route::get('/checkout/success/{data}', 'CartController@checkoutSuccess')->name('checkout.success');
+    Route::match(['get','post'],'/items', 'CartController@items')->name('items');
+    Route::match(['get','post'],'/add', 'CartController@addProductToCart')->name('add');
+    Route::match(['get','post'],'/remove', 'CartController@removeProductFromCart')->name('remove');
+    Route::match(['get','post'],'/checkout', 'CartController@checkout')->name('checkout');
+    Route::match(['get','post'],'/checkout/success/{data}', 'CartController@checkoutSuccess')->name('checkout.success');
 });
 
 
@@ -57,4 +57,9 @@ Route::group(['middleware'=> ['admin']],function(){
     Route::match(['get','post'],'/update-product/{id}','ProductController@update')->name('updateProduct');
     Route::match('product-delete/{id}' , 'ProductController@destroy')->name('deleteProduct');
 });
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
 

@@ -15,9 +15,9 @@
                         <li>
                             <a class="sf-with-ul">Shop</a>
                             <ul>
-                                {{-- @foreach ($category_list as $cat)
-                            <li><a href="{{ url('/shop/'.$cat->id)}}" class="menu-title">{{$cat->name}}</a></li>
-                                @endforeach --}}
+                                @foreach ($categories as $cat)
+                            <li><a href="{{ route('shops',['id'=>$cat->id,'name'=>$cat->name])}}" class="menu-title">{{$cat->name}}</a></li>
+                                @endforeach
                             </ul>
                         </li>
                         <li>
@@ -48,7 +48,11 @@
                 <div class="dropdown cart-dropdown">
                     <a href="{{ route('cart') }}" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" data-display="static">
                         <i class="icon-shopping-cart"></i>
-                        <span class="cart-count cart_count">{{ getUserCart()->items }}</span>
+                        <span class="cart-count cart_count">
+                            @if(Illuminate\Support\Facades\Auth::check())
+                                {{ getUserCart()->items }}
+                            @endif
+                        </span>
                     </a>
                 </div><!-- End .cart-dropdown -->
             </div><!-- End .header-right -->

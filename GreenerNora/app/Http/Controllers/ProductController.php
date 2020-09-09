@@ -57,10 +57,16 @@ class ProductController extends Controller
         DB::beginTransaction();
 
         try{
-            if(!empty($request['image'])){
-                $image = $request->file('image');
-                $data['image'] = putFileInStorage($image ,$this->productImagePath);
-            }
+            // if(!empty($request['image'])){
+            //     $image = $request->file('image');
+            //     $data['image'] = putFileInStorage($image ,$this->productImagePath);
+            // }
+            $image_image = $request->file('image');
+            $image_filename = time().'.'.$image_image->getClientOriginalExtension();
+            $image_path = public_path('/Product_images');
+            $image_image->move($image_path,$image_filename);
+
+            $data['image'] = $image_filename;
 
         }
         catch(\Exception $e){
@@ -125,8 +131,14 @@ class ProductController extends Controller
 
         if (isset($image)) {
                 $image = $request->file('image');
-                $image_filename = putFileInStorage($image ,$this->productImagePath);
-                deleteFileFromStorage($products->getImage());
+                // $image_filename = putFileInStorage($image ,$this->productImagePath);
+                // deleteFileFromStorage($products->getImage());
+
+                $image_filename = time().'.'.$image->getClientOriginalExtension();
+                $image_path = public_path('Product_images/'.$product->image);
+                if(File::exists($image_path)) {
+                    File::delete($image_path);
+                }
 
         }else {
             $image_filename = $products->image;
@@ -156,7 +168,11 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::findOrFail($id);
-        deleteFileFromStorage($product->getImage());
+        //deleteFileFromStorage($product->getImage());
+        $image_path = public_path('Product_images/'.$product->image);
+        if(File::exists($image_path)) {
+            File::delete($image_path);
+        }
         $product->delete();
         toastr()->success('Product deleted successfully!');
         return redirect('admin/products');
