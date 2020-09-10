@@ -43,6 +43,12 @@
             return view('web.product', compact('product'));
         }
 
+        public function read_file($path){
+            return getFileFromPrivateStorage(decrypt($path));
+        }
+
     }
+
+
 
 ?>
