@@ -23,10 +23,6 @@ Route::get('/login', 'WebController@login')->name('login');
 Route::get('/productInfo/{id}', 'WebController@product')->name('product');
 Route::get('/file/{path}', 'WebController@read_file')->name('read_file');
 
-/**Route::get('/product', function($id){
-    return view('product');
-});
-*/
 
 
 Route::prefix('cart')->as('cart.')->middleware(['auth'])->group(function () {
@@ -65,3 +61,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+
+Route::get('/command', function() {
+    $output = [];  //'--path' => 'vendor/laravel/passport/database/migrations'
+    \Artisan::call('migrate', $output);
+    dd($output);
+});
