@@ -78,7 +78,7 @@ function my_asset($path = null ){
 
 
 /**Gets file from public storage */
-function getFileFromStorage($fullpath , $storage = 'public'){
+function getFileFromStorage($fullpath , $storage = 'storage'){
     if($storage == 'storage'){
         return route('read_file',encrypt($fullpath));
     }
