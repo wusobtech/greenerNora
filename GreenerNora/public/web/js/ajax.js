@@ -78,7 +78,7 @@ $('.cart_ajax_form').on('submit', function(e) {
         success: function(data) {
             if (data.success) {
                 successMsg("Success", data.msg);
-                $('.course_cart_input_' + item_id).val(data.item_id);
+                $('.product_cart_input_' + item_id).val(data.item_id);
                 $('.cart_btn_text_' + item_id).text(data.title);
                 $('.cart_btn_' + item_id).attr('title', data.title);
                 $('.cart_form_' + item_id).attr('action', data.action);

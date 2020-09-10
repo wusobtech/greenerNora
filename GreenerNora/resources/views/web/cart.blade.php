@@ -20,8 +20,16 @@ Cart
         </nav><!-- End .breadcrumb-nav -->
 
         <div class="page-content">
-            <div class="cart">
-                <div class="container">
+                <div class="cart">
+                    @php
+                    if($items->count() > 0){
+                        $show = true;
+                    }
+                    else{
+                        $show = false;
+                    }
+                @endphp
+                <div class="container {{ $show == true ? '' : 'd-none'}}" id="has_cart_items">
                     <div class="row">
                         <div class="col-lg-9">
                             <table class="table table-cart table-mobile">
@@ -39,7 +47,7 @@ Cart
                                 <tbody>
                                     @foreach ($items as $item)
 
-                                    <tr>
+                                    <tr class="cartItem_{{ $item->id }}">
                                         <td class="product-col">
                                             <div class="product">
                                                 <figure class="product-media">
@@ -62,7 +70,7 @@ Cart
                                         </td> --}}
                                         <td class="total-col">{{ format_money($item->getPrice() )}}</td>
                                         <td class="remove-col">
-                                            <form action="{{ route('cart.remove') }}" method="post" item_id="{{$item->id}}" class="cart_ajax_form cart_form_{{$item->id}}"> @csrf
+                                            <form action="{{ route('cart.remove') }}" method="post" item_id="{{$item->id}}" class="cart_ajax_form cart_form_{{$item->id}} hideItem"> @csrf
                                                 <input type="hidden" name="product_id" value="{{$item->id}}">
                                                 <input type="hidden" class="product_cart_input_{{$item->id}}" name="product_cart_id" value="{{$item->id}}">
                                                 <button type="submit" class="product_enroll_btn btn cart_btn_{{$item->id}} btn-remove" title="Remove from cart">
@@ -109,6 +117,17 @@ Cart
                         </aside><!-- End .col-lg-3 -->
                     </div><!-- End .row -->
                 </div><!-- End .container -->
+                <div class="container {{ $show == false ? '' : 'd-none'}}" id="no_cart_item">
+                    <div class="text-center row offset-md-2">
+                        <div class="col-md-4 ">
+                        </div>
+                        <div class="col-md-4 p-4 mt-md-5">
+                            No item in your cart at the moment!
+                            <br>
+                            <a href="{{ route('homepage')}}" class="btn btn-outline-primary">Browse Products</a>
+                        </div>
+                    </div>
+                   </div>
             </div><!-- End .cart -->
         </div><!-- End .page-content -->
     </main><!-- End .main -->

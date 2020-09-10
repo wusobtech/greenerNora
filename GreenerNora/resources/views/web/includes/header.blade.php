@@ -49,7 +49,7 @@
                     <a href="{{ route('cart') }}" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" data-display="static">
                         <i class="icon-shopping-cart"></i>
                         <span class="cart-count cart_count">
-                            @if(Illuminate\Support\Facades\Auth::check())
+                            @if(auth()->check())
                                 {{ getUserCart()->items }}
                             @endif
                         </span>
