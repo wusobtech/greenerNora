@@ -76,25 +76,9 @@ Welcome
                                         "dots": false
                                     }
                                 }
-                            }'>@foreach ($newArrivals as $product)
-                                <div class="product product-11 text-center">
-                                    <figure class="product-media">
-                                        <a href="{{ route('product',['id'=>$product->id])}}">
-                                            <img src="{{ asset('Product_images/'.$product->image) }}" alt="Product image" class="product-image">
-                                            <img src="{{ asset('Product_images/'.$product->image) }}" alt="Product image" class="product-image-hover">
-                                        </a>
-                                    </figure><!-- End .product-media -->
-
-                                    <div class="product-body">
-                                        <h3 class="product-title"><a href="{{ route('product',['id'=>$product->id])}}">{{ $product->name }}</a></h3><!-- End .product-title -->
-                                        <div class="product-price">
-                                            &#x20a6 {{$product->price}}
-                                        </div><!-- End .product-price -->
-                                    </div><!-- End .product-body -->
-                                    <div class="product-action">
-                                        <a href="{{ route('cart.add') }}" class="btn-product btn-cart"><span>add to cart</span></a>
-                                    </div><!-- End .product-action -->
-                                </div><!-- End .product -->
+                            }'>
+                                @foreach ($newArrivals as $product)
+                                    @include('web.fragments.product_item' , ['product' => $product])
                                 @endforeach
                             </div><!-- End .owl-carousel -->
 
@@ -136,25 +120,9 @@ Welcome
                                         "dots": false
                                     }
                                 }
-                            }'>@foreach ($featuredArrivals as $product)
-                            <div class="product product-11 text-center">
-                                <figure class="product-media">
-                                    <a href="{{ route('product',['id'=>$product->id])}}">
-                                        <img src="{{ asset('Product_images/'.$product->image) }}" alt="Product image" class="product-image">
-                                        <img src="{{ asset('Product_images/'.$product->image) }}" alt="Product image" class="product-image-hover">
-                                    </a>
-                                </figure><!-- End .product-media -->
-
-                                <div class="product-body">
-                                    <h3 class="product-title"><a href="{{ route('product',['id'=>$product->id])}}">{{ $product->name }}</a></h3><!-- End .product-title -->
-                                    <div class="product-price">
-                                        &#x20a6 {{$product->price}}
-                                    </div><!-- End .product-price -->
-                                </div><!-- End .product-body -->
-                                <div class="product-action">
-                                    <a href="{{ route('cart.add') }}" class="btn-product btn-cart"><span>add to cart</span></a>
-                                </div><!-- End .product-action -->
-                            </div><!-- End .product -->
+                            }'>
+                            @foreach ($featuredArrivals as $product)
+                                @include('web.fragments.product_item' , ['product' => $product])
                             @endforeach
                         </div><!-- End .owl-carousel -->
                     </div><!-- .End .tab-pane -->
