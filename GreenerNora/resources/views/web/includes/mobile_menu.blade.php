@@ -16,8 +16,9 @@
                 <li>
                     <a href="{{ route('shop') }}">Shop</a>
                     <ul>
-                        <li><a href="{{ route('frozenfoods') }}" class="menu-title">Frozen Foods</a></li>
-                        <li><a href="{{ route('lounge') }}" class="menu-title">Lounge Shop</a></li>
+                        @foreach ($categories as $cat)
+                    <li><a href="{{ route('shops',['id'=>$cat->id,'name'=>$cat->name])}}" class="menu-title">{{$cat->name}}</a></li>
+                        @endforeach
                     </ul>
                 </li>
                 <li>
