@@ -1,8 +1,8 @@
 <div class="product product-11 text-center">
     <figure class="product-media">
         <a href="{{ route('product',['id'=>$product->id])}}">
-            <img src="{{ getFileFromStorage($product->getImage()) }}" alt="Product image" class="product-image">
-            <img src="{{ getFileFromStorage($product->getImage()) }}" alt="Product image" class="product-image-hover">
+            <img src="{{ getFileFromStorage($product->getImage() , 'storage') }}" alt="Product image" class="product-image">
+            <img src="{{ getFileFromStorage($product->getImage() , 'storage') }}" alt="Product image" class="product-image-hover">
         </a>
     </figure><!-- End .product-media -->
 
