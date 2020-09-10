@@ -133,6 +133,7 @@
 
                             <tbody>
                             @foreach ($products as $product)
+                            <tr>
                                 <td>{{ $product->id }}</td>
                                 <td>{{ $product->name }}</td>
                                 <td>{{ $product->category->name}}</td>
@@ -148,7 +149,9 @@
                                     <div class="fr"><td class="center"><a href="{{ route('editProduct', $product->id) }}" class="btn btn-primary btn-sm"><i class="ti-pencil"></i></a>
                                         <a  href="{{ route('deleteProduct', $product->id )}}" class="btn btn-primary btn-sm"><i class="ti-trash"></i></a></td>
                                     </div>
+                            </tr>
                             @endforeach
+                            
                             {{ $products->links() }}
                             </tbody>
                         </table>
