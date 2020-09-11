@@ -160,4 +160,5 @@ class ProductController extends Controller
         toastr()->success('Product deleted successfully!');
         return redirect('admin/products');
     }
+
 }

@@ -34,7 +34,7 @@
                 </nav><!-- End .main-nav -->
             </div><!-- End .header-left -->
 
-            <div class="header-right">
+                <div class="header-right">
                 <div class="header-search">
                     <a href="#" class="search-toggle" role="button" title="Search"><i class="icon-search"></i></a>
                     <form action="#" method="get">

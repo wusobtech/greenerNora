@@ -37,12 +37,30 @@
             return view('web.cart');
         }
 
-
         public function product($id){
             $product=Product::where('id', $id)->first();
             return view('web.product', compact('product'));
         }
 
+<<<<<<< Updated upstream
+=======
+        public function read_file($path){
+            return getFileFromPrivateStorage(decrypt($path));
+        }
+
+        /**
+         * Queries the collection and returns result
+         *
+         * @param  \App\Product  $product
+         * @return \Illuminate\Http\Response
+         */
+        public function search(Request $request)
+        {
+        
+        }
+
+
+>>>>>>> Stashed changes
     }
 
 ?>

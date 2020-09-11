@@ -63,3 +63,14 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+<<<<<<< Updated upstream
+=======
+
+Route::get('/command', function() {
+    $output = [];  //'--path' => 'vendor/laravel/passport/database/migrations'
+    \Artisan::call('migrate', $output);
+    dd($output);
+});
+
+Route::get('search', 'WebController@search')->name('search');
+>>>>>>> Stashed changes
