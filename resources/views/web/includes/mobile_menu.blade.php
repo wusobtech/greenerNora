@@ -2,9 +2,9 @@
     <div class="mobile-menu-wrapper">
         <span class="mobile-menu-close"><i class="icon-close"></i></span>
 
-        <form action="#" method="get" class="mobile-search">
+        <form action="{{route('search')}}" method="get" class="mobile-search">
             <label for="mobile-search" class="sr-only">Search</label>
-            <input type="search" class="form-control" name="mobile-search" id="mobile-search" placeholder="Search in..." required>
+            <input type="search" class="form-control" name="q" id="q" value="{{request()->input('q')}}" placeholder="Search in..." required>
             <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
         </form>
 
@@ -14,7 +14,7 @@
                     <a href="{{ url('/') }}">Home</a>
                 </li>
                 <li>
-                    <a href="{{ route('shop') }}">Shop</a>
+                    <a href="#">Shop</a>
                     <ul>
                         @foreach ($categories as $cat)
                     <li><a href="{{ route('shops',['id'=>$cat->id,'name'=>$cat->name])}}" class="menu-title">{{$cat->name}}</a></li>
