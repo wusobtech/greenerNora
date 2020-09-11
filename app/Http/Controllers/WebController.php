@@ -42,8 +42,6 @@
             return view('web.product', compact('product'));
         }
 
-<<<<<<< Updated upstream
-=======
         public function read_file($path){
             return getFileFromPrivateStorage(decrypt($path));
         }
@@ -59,8 +57,6 @@
         
         }
 
-
->>>>>>> Stashed changes
     }
 
 ?>
