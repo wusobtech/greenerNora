@@ -42,6 +42,18 @@
             return view('web.product', compact('product'));
         }
 
+        public function faq(){
+            return view('web.faq');
+        }
+
+        public function tandc(){
+            return view('web.tandc');
+        }
+
+        public function privacypolicy(){
+            return view('web.privacypolicy');
+        }
+
         public function read_file($path){
             return getFileFromPrivateStorage(decrypt($path));
         }
