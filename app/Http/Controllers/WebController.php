@@ -2,6 +2,8 @@
 
     namespace App\Http\COntrollers;
     use App\Product;
+    use Auth;
+    use App\User;
     use App\ProductCategory;
 
     use Illuminate\Http\Request;
@@ -11,7 +13,7 @@
         public function index(){
             $categories = ProductCategory::get();
             $newArrivals = Product::where('type', 'New')->orderBy('id' , 'desc')->get();
-            $featuredArrivals = Product::inRandomOrder()->get();
+            $featuredArrivals = Product::inRandomOrder()->paginate(8);
             return view('welcome', compact('categories', 'newArrivals', 'featuredArrivals'));
         }
 
@@ -33,14 +35,21 @@
             return view('web.contactus');
         }
 
+        public function checkout(){
+            $user = Auth::User();
+            return view('web.checkout',compact('user'));
+        }
+
         public function cart(){
             return view('web.cart');
         }
 
 
-        public function product($id){
-            $product=Product::where('id', $id)->first();
-            return view('web.product', compact('product'));
+        public function product(Request $request, $id = null){
+            //$product = Product::where('id', $id)->get();
+            $product = Product::where('id', $id)->first();
+            $similars = Product::where('category_id' , $product->category_id)->where('id' , '!=' , $product->id)->get();
+            return view('web.product', compact('product','similars'));
         }
 
         public function read_file($path){

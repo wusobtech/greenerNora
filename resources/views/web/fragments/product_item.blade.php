@@ -9,7 +9,7 @@
     <div class="product-body">
         <h3 class="product-title"><a href="{{ route('product',['id'=>$product->id])}}">{{ $product->name }}</a></h3><!-- End .product-title -->
         <div class="product-price">
-            {{ format_money($product->getPrice() )}}
+           {{ format_money($product->getPrice() )}}
         </div><!-- End .product-price -->
     </div><!-- End .product-body -->
     <div class="product-action text-center">
@@ -37,3 +37,4 @@
 
     </div><!-- End .product-action -->
 </div><!-- End .product -->
+

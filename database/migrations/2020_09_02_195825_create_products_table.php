@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->double('price', 10, 2);
             $table->integer('quantityonhand');
-            $table->integer('weight');
+            $table->integer('weight')->nullable();
             $table->integer('discount')->nullable();
             $table->string('image');
             $table->text('description');

@@ -19,6 +19,7 @@ Route::get('/frozenfoods', 'WebController@shop')->name('frozenfoods');
 Route::get('/lounge', 'WebController@lounge')->name('lounge');
 Route::get('/cart', 'CartController@items')->name('cart')->middleware('auth');
 Route::get('/contactus', 'WebController@contactus')->name('contactus');
+Route::get('/checkout', 'WebController@checkout')->name('checkout')->middleware('auth');
 Route::get('/login', 'WebController@login')->name('login');
 Route::get('/productInfo/{id}', 'WebController@product')->name('product');
 Route::get('/file/{path}', 'WebController@read_file')->name('read_file');

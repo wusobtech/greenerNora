@@ -19,7 +19,7 @@ class ProductSeeder extends Seeder
                 'price' => 1000.00,
                 'quantityonhand' => $faker->randomDigit,
                 'weight' => $faker->randomDigit,
-                'image' => $faker->image('public/Product_images',640,480, null, false),
+                'image' => $faker->image('storage/app/images/products',640,480, null, false),
                 'description' => $faker->text,
                 'type' => 'New',
                 'status' => 'Active'

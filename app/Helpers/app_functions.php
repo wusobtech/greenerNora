@@ -299,7 +299,7 @@ function getFileType(String $type)
      * @param int places
      * @param string symbol
      */
-    function format_money($amount , $places = 2, $symbol = '$'){
+    function format_money($amount , $places = 2, $symbol = '₦'){
         return $symbol.''.number_format((float)$amount ,$places);
     }
 
