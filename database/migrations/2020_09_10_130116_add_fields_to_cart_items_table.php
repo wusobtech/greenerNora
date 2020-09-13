@@ -15,7 +15,7 @@ class AddFieldsToCartItemsTable extends Migration
     {
         Schema::table('cart_items', function (Blueprint $table) {
             $table->decimal('price')->after('quantity');
-            $table->decimal('discount')->nullable()->after('price');
+            $table->decimal('discount')->after('price');
         });
     }
 

@@ -22,9 +22,13 @@ Route::get('/contactus', 'WebController@contactus')->name('contactus');
 Route::get('/checkout', 'WebController@checkout')->name('checkout')->middleware('auth');
 Route::get('/login', 'WebController@login')->name('login');
 Route::get('/productInfo/{id}', 'WebController@product')->name('product');
-Route::get('/file/{path}', 'WebController@read_file')->name('read_file');
-
-
+Route::get('/faq', 'WebController@faq')->name('faq');
+Route::get('/terms', 'WebController@tandc')->name('terms');
+Route::get('/privacypolicy', 'WebController@privacypolicy')->name('privacypolicy');
+/**Route::get('/product', function($id){
+    return view('product');
+});
+*/
 
 Route::prefix('cart')->as('cart.')->middleware(['auth'])->group(function () {
     Route::match(['get','post'],'/items', 'CartController@items')->name('items');
@@ -57,6 +61,9 @@ Route::group(['middleware'=> ['admin']],function(){
     Route::match('product-delete/{id}' , 'ProductController@destroy')->name('deleteProduct');
 });
 
+Route::group(['middleware' => ['user']], function () {
+    Route::get('/user/dashboard', 'UserController@index')->name('user');
+});
 
 Auth::routes();
 
@@ -68,3 +75,5 @@ Route::get('/command', function() {
     \Artisan::call('migrate', $output);
     dd($output);
 });
+
+Route::get('search', 'WebController@search')->name('search');

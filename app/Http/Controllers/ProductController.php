@@ -46,7 +46,7 @@ class ProductController extends Controller
             'name' => 'required|unique:products',
             'category_id' => 'required',
             'description' => 'required',
-            'weight' => 'required',
+            'weight' => 'nullable',
             'status' => 'required',
             'image' => 'required|image',
             'type' => 'required',
@@ -111,7 +111,7 @@ class ProductController extends Controller
             'name' => 'required|unique:products',
             'category_id' => 'required',
             'description' => 'required',
-            'weight' => 'required',
+            'weight' => 'nullable',
             'status' => 'required',
             'image' => 'required|image',
             'type' => 'required',
@@ -160,4 +160,5 @@ class ProductController extends Controller
         toastr()->success('Product deleted successfully!');
         return redirect('admin/products');
     }
+
 }

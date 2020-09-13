@@ -151,10 +151,10 @@
                                     </div>
                             </tr>
                             @endforeach
+                            
                             {{ $products->links() }}
                             </tbody>
                         </table>
-
                     </div>
                 </div>
             </div> <!-- end col -->

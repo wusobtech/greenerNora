@@ -12,6 +12,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        return view('user.dashboard', compact('users'));
+        $users = User::where('role','Customer')->orderBy('id','desc')->get();
+        return view('user.dashboard');
     }
 }
