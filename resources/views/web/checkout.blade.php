@@ -25,48 +25,51 @@ Checkout
                         <div class="row">
                             <div class="col-lg-9">
                                 <h2 class="checkout-title">Billing Details</h2><!-- End .checkout-title -->
-                                    <div class="row">
-                                        <div class="col-lg-9">
-                                            <label>Full Name *</label>
-                                            <input type="text" value="{{ $user->name }}" class="form-control" required>
-                                        </div><!-- End .col-sm-6 -->
-
-
-                                    </div><!-- End .row -->
-
-                                    <label>Company Name (Optional)</label>
-                                    <input type="text" class="form-control">
+                                    <label>Full Name *</label>
+                                    <input type="text" name="name" value="{{ $userDetails->name }}" id="billing_name" class="form-control" required>
 
                                     <label>Country *</label>
-                                    <input type="text" class="form-control" required>
-
+                                    <select id="country" name="country" class="form-control" required>
+                                        <option value="">Select Country</option>
+                                        @foreach ($countries as $country)
+                                            <option value="{{ $country->name }}"
+                                            @if ($country->name == $userDetails->country)
+                                            selected @endif>{{ $country->name }}</option>
+                                        @endforeach
+                                    </select>
                                     <label>Street address *</label>
-                                    <input type="text" class="form-control" placeholder="House number and Street name" required>
-                                    <input type="text" class="form-control" placeholder="Appartments, suite, unit etc ..." required>
-
+                                    <input type="text" name="address" value="{{ $userDetails->address }}" class="form-control" placeholder="House number and Street name" required>
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <label>Town / City *</label>
-                                            <input type="text" class="form-control" required>
+                                            <input type="text" name="city" class="form-control" required>
                                         </div><!-- End .col-sm-6 -->
 
                                         <div class="col-sm-6">
                                             <label>State / County *</label>
-                                            <input type="text" class="form-control" required>
+                                            <input type="text" name="state" value="{{ $userDetails->state }}" class="form-control" required>
                                         </div><!-- End .col-sm-6 -->
                                     </div><!-- End .row -->
 
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <label>Postcode / ZIP *</label>
-                                            <input type="text" class="form-control" required>
+                                            <input type="tel" name="postcode" class="form-control" required>
                                         </div><!-- End .col-sm-6 -->
 
                                         <div class="col-sm-6">
                                             <label>Phone *</label>
-                                            <input type="tel" class="form-control" required>
+                                            <input type="tel" name="phone" value="{{ $userDetails->phone }}" class="form-control" required>
                                         </div><!-- End .col-sm-6 -->
                                     </div><!-- End .row -->
+
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="checkout-diff-address">
+                                        <label class="custom-control-label" for="checkout-diff-address">Shipping address same as Billing address?</label>
+                                    </div><!-- End .custom-checkbox -->
+
+                                    <label>Order notes (optional)</label>
+                                    <textarea class="form-control" cols="30" rows="4" placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
                             </div><!-- End .col-lg-9 -->
                             <aside class="col-lg-3">
                                 <div class="summary">
@@ -170,7 +173,7 @@ Checkout
                                                 <h2 class="card-title">
                                                     <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-5" aria-expanded="false" aria-controls="collapse-5">
                                                         Credit Card (Stripe)
-                                                        <img src="({{ $web_source ?? '' }}/images/payments-summary.png" alt="payments cards">
+                                                        <img src="assets/images/payments-summary.png" alt="payments cards">
                                                     </a>
                                                 </h2>
                                             </div><!-- End .card-header -->

@@ -35,11 +35,6 @@
             return view('web.contactus');
         }
 
-        public function checkout(){
-            $user = Auth::User();
-            return view('web.checkout',compact('user'));
-        }
-
         public function cart(){
             return view('web.cart');
         }
@@ -61,7 +56,8 @@
             return view('web.privacypolicy');
         }
 
-        public function read_file($path){
+        public function read_file($path)
+        {
             return getFileFromPrivateStorage(decrypt($path));
         }
 
