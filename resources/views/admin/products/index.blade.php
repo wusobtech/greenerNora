@@ -139,7 +139,7 @@
                                 <td>{{ $product->category->name}}</td>
                                 <td>
                                     @if (!empty($product->image))
-                                      <a href="{{ asset('Product_images/'.$product->image) }}" target="_blank" class="btn btn-primary btn-block">Click to View Image</a>
+                                      <a href="{{ getFileFromStorage($product->getImage() , 'storage') }}" target="_blank" class="btn btn-primary btn-block">Click to View Image</a>
                                     @endif
                                 </td>
                                 <td>{{ $product->quantityonhand }}</td>

@@ -19,11 +19,13 @@ Route::get('/frozenfoods', 'WebController@shop')->name('frozenfoods');
 Route::get('/lounge', 'WebController@lounge')->name('lounge');
 Route::get('/cart', 'CartController@items')->name('cart')->middleware('auth');
 Route::get('/contactus', 'WebController@contactus')->name('contactus');
+Route::get('/checkout', 'CheckoutController@index')->name('checkout')->middleware('auth');
 Route::get('/login', 'WebController@login')->name('login');
 Route::get('/productInfo/{id}', 'WebController@product')->name('product');
 Route::get('/faq', 'WebController@faq')->name('faq');
 Route::get('/terms', 'WebController@tandc')->name('terms');
 Route::get('/privacypolicy', 'WebController@privacypolicy')->name('privacypolicy');
+Route::get('/file/{path}', 'WebController@read_file')->name('read_file');
 /**Route::get('/product', function($id){
     return view('product');
 });
@@ -67,6 +69,7 @@ Route::group(['middleware' => ['user']], function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
 
 Route::get('/command', function() {
     $output = [];  //'--path' => 'vendor/laravel/passport/database/migrations'

@@ -78,7 +78,7 @@ function my_asset($path = null ){
 
 
 /**Gets file from public storage */
-function getFileFromStorage($fullpath , $storage = 'public'){
+function getFileFromStorage($fullpath , $storage = 'storage'){
     if($storage == 'storage'){
         return route('read_file',encrypt($fullpath));
     }
@@ -299,7 +299,7 @@ function getFileType(String $type)
      * @param int places
      * @param string symbol
      */
-    function format_money($amount , $places = 2, $symbol = '$'){
+    function format_money($amount , $places = 2, $symbol = '₦'){
         return $symbol.''.number_format((float)$amount ,$places);
     }
 

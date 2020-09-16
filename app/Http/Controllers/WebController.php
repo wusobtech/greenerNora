@@ -2,6 +2,8 @@
 
     namespace App\Http\COntrollers;
     use App\Product;
+    use Auth;
+    use App\User;
     use App\ProductCategory;
 
     use Illuminate\Http\Request;
@@ -11,7 +13,7 @@
         public function index(){
             $categories = ProductCategory::get();
             $newArrivals = Product::where('type', 'New')->orderBy('id' , 'desc')->get();
-            $featuredArrivals = Product::inRandomOrder()->get();
+            $featuredArrivals = Product::inRandomOrder()->paginate(8);
             return view('welcome', compact('categories', 'newArrivals', 'featuredArrivals'));
         }
 
@@ -54,7 +56,8 @@
             return view('web.privacypolicy');
         }
 
-        public function read_file($path){
+        public function read_file($path)
+        {
             return getFileFromPrivateStorage(decrypt($path));
         }
 
@@ -77,5 +80,7 @@
         }
 
     }
+
+
 
 ?>
