@@ -72,7 +72,6 @@
             $request->validate([
                 'q'=>'required|min:3',
             ]);
-
             $query = $request->input('q');
             $products = product::where('name','like', "%$query%")->where('status', 'Active')
                                 ->orWhere('description','like', "%$query%")->paginate(8);

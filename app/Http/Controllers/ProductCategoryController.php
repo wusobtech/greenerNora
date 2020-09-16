@@ -63,7 +63,7 @@ class ProductCategoryController extends Controller
      * @param  \App\ProductCategory  $productCategory
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProductCategory $id)
+    public function edit($id)
     {
         $categoryDetails = ProductCategory::FindorFail($id);
         return view('admin.categories.edit',compact('categoryDetails'));
