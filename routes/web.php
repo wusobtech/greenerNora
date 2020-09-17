@@ -76,5 +76,4 @@ Route::get('/command', function() {
     \Artisan::call('migrate', $output);
     dd($output);
 });
-Route::get('/file/{path}', 'WebController@read_file')->name('read_file') ;
 Route::get('search', 'WebController@search')->name('search');
