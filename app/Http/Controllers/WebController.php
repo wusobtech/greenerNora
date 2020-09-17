@@ -41,7 +41,9 @@
 
         public function product($id){
             $product=Product::where('id', $id)->first();
-            return view('web.product', compact('product'));
+            $cat = Product::where('id', $id)->first();
+            $similars = Product::where('category_id' , $cat->category_id)->where('id' , '!=' , $cat->id)->get();
+            return view('web.product', compact('product','similars'));
         }
 
         public function faq(){
