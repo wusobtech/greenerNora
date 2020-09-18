@@ -25,7 +25,13 @@
                     <a  href="{{ route('contactus') }}">Contact Us</a>
                 </li>
                 <li>
-                    <a href="{{ route('login') }}"><i class="icon-user"></i>Login</a>
+                    <a href="{{ route('login') }}"><i class="icon-user"></i>@if(Auth::check())
+                        {{Auth::user()->name}}
+                        @else
+                           Login 
+                      @endif
+                
+                </a>
                 </li>
             </ul>
         </nav><!-- End .mobile-nav -->

@@ -62,14 +62,13 @@ Route::group(['middleware'=> ['admin']],function(){
     Route::match('product-delete/{id}' , 'ProductController@destroy')->name('deleteProduct');
 });
 
-Route::group(['middleware' => ['user']], function () {
-    Route::get('/user/dashboard', 'UserController@index')->name('user');
-});
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/profile', 'ProfileController@index')->name('profile');
+Route::put('/profile', 'ProfileController@update')->name('profile.update');
+Route::put('/setting', 'ProfileController@changeProfile')->name('profile.changeprofile');
 
 Route::get('/command', function() {
     $output = [];  //'--path' => 'vendor/laravel/passport/database/migrations'

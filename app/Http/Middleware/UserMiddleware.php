@@ -19,7 +19,7 @@ class UserMiddleware
     {
         if (Auth::check()) {
             $user = Auth::User();
-            if ($user->role != 'Customer') {
+            if ($user->role != 'user') {
                 Session::flash('error_msg','Access Denied!.....Login First');
                 return redirect('/');
             }
