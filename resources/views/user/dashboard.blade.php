@@ -13,6 +13,7 @@ Dashboard
             <div class="container">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('shop') }}">Shop</a></li>
                     <li class="breadcrumb-item active" aria-current="page">My Account</li>
                 </ol>
             </div><!-- End .container -->
@@ -31,16 +32,13 @@ Dashboard
                                     <a class="nav-link" id="tab-orders-link" data-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="false">Orders</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="tab-downloads-link" data-toggle="tab" href="#tab-downloads" role="tab" aria-controls="tab-downloads" aria-selected="false">Downloads</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="tab-address-link" data-toggle="tab" href="#tab-address" role="tab" aria-controls="tab-address" aria-selected="false">Adresses</a>
+                                    <a class="nav-link" id="tab-downloads-link" data-toggle="tab" href="#tab-downloads" role="tab" aria-controls="tab-downloads" aria-selected="false">Change Password</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="tab-account-link" data-toggle="tab" href="#tab-account" role="tab" aria-controls="tab-account" aria-selected="false">Account Details</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Sign Out</a>
+                                    <a class="nav-link" href="{{ route('logout') }}">Sign Out</a>
                                 </li>
                             </ul>
                         </aside><!-- End .col-lg-3 -->
@@ -48,7 +46,7 @@ Dashboard
                         <div class="col-md-8 col-lg-9">
                             <div class="tab-content">
                                 <div class="tab-pane fade show active" id="tab-dashboard" role="tabpanel" aria-labelledby="tab-dashboard-link">
-                                    <p>Hello <span class="font-weight-normal text-dark">User</span> (not <span class="font-weight-normal text-dark">User</span>? <a href="#">Log out</a>) 
+                                <p>Hello(<span class="font-weight-normal text-dark">{{Auth::user()->name}}) 
                                     <br>
                                     From your account dashboard you can view your <a href="#tab-orders" class="tab-trigger-link link-underline">recent orders</a>, manage your <a href="#tab-address" class="tab-trigger-link">shipping and billing addresses</a>, and <a href="#tab-account" class="tab-trigger-link">edit your password and account details</a>.</p>
                                 </div><!-- .End .tab-pane -->
@@ -56,74 +54,87 @@ Dashboard
                                 <div class="tab-pane fade" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
                                     <p>No order has been made yet.</p>
                                     <a href="category.html" class="btn btn-outline-primary-2"><span>GO SHOP</span><i class="icon-long-arrow-right"></i></a>
+                                    
                                 </div><!-- .End .tab-pane -->
 
                                 <div class="tab-pane fade" id="tab-downloads" role="tabpanel" aria-labelledby="tab-downloads-link">
-                                    <p>No downloads available yet.</p>
-                                    <a href="category.html" class="btn btn-outline-primary-2"><span>GO SHOP</span><i class="icon-long-arrow-right"></i></a>
-                                </div><!-- .End .tab-pane -->
-
-                                <div class="tab-pane fade" id="tab-address" role="tabpanel" aria-labelledby="tab-address-link">
-                                    <p>The following addresses will be used on the checkout page by default.</p>
-
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="card card-dashboard">
-                                                <div class="card-body">
-                                                    <h3 class="card-title">Billing Address</h3><!-- End .card-title -->
-                                                    <p>User Name<br>
-                                                    User Company<br>
-                                                    John str<br>
-                                                    New York, NY 10001<br>
-                                                    1-234-987-6543<br>
-                                                    yourmail@mail.com<br>
-                                                    <a href="#">Edit <i class="icon-edit"></i></a></p>
-                                                </div><!-- End .card-body -->
-                                            </div><!-- End .card-dashboard -->
-                                        </div><!-- End .col-lg-6 -->
-
-                                        <div class="col-lg-6">
-                                            <div class="card card-dashboard">
-                                                <div class="card-body">
-                                                    <h3 class="card-title">Shipping Address</h3><!-- End .card-title -->
-
-                                                    <p>You have not set up this type of address yet.<br>
-                                                    <a href="#">Edit <i class="icon-edit"></i></a></p>
-                                                </div><!-- End .card-body -->
-                                            </div><!-- End .card-dashboard -->
-                                        </div><!-- End .col-lg-6 -->
-                                    </div><!-- End .row -->
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            @if (session('error'))
+                                            <div class="alert alert-danger">
+                                                {{ session('error') }}
+                                            </div>
+                                        @endif
+                                            @if (session()->get('success'))
+                                                <div class="alert alert-success">
+                                                    {{ session()->get('success') }}
+                                                </div>
+                                            @endif
+                                            <form method="POST" action="{{route('profile.update')}}" autocomplete="off">
+                                               @csrf
+                                               @method('PUT')
+                                                <h6 class="heading-small text-muted mb-4 text-center">User information</h6>
+                        
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group focused">
+                                                            <label class="form-control-label" for="current_password">Current password</label>
+                                                            <input type="password" id="current_password" class="form-control" name="current_password" placeholder="Current password" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group focused">
+                                                            <label class="form-control-label" for="new_password">New password</label>
+                                                            <input type="password" id="new_password" class="form-control" name="new_password" placeholder="New password" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group focused">
+                                                            <label class="form-control-label" for="confirm_password">Confirm password</label>
+                                                            <input type="password" id="confirm_password" class="form-control" name="password_confirmation" placeholder="Confirm password" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                <!-- Button -->
+                                                <div class="pl-lg-4">
+                                                    <div class="row">
+                                                        <div class="col text-center">
+                                                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                    
+                        
+                                    </div>
                                 </div><!-- .End .tab-pane -->
 
                                 <div class="tab-pane fade" id="tab-account" role="tabpanel" aria-labelledby="tab-account-link">
-                                    <form action="#">
+                                    <form method="POST" action="{{route('profile.changeprofile')}}">
+                                        @csrf
+                                        @method('PUT')
                                         <div class="row">
-                                            <div class="col-sm-6">
-                                                <label>First Name *</label>
-                                                <input type="text" class="form-control" required>
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <label>Full Name<small style="color: red;">*</small></label>
+                                            <input type="text" name="name" value="{{Auth::user()->name}}" class="form-control" required>
                                             </div><!-- End .col-sm-6 -->
-
-                                            <div class="col-sm-6">
-                                                <label>Last Name *</label>
-                                                <input type="text" class="form-control" required>
-                                            </div><!-- End .col-sm-6 -->
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <label>phone Number <small style="color: red;">*</small></label>
+                                                <input type="text" value="{{Auth::user()->phone}}" name="phone" class="form-control" required>
+                                            </div>
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <label>State <small style="color: red;">*</small></label>
+                                                <input type="text" value="{{Auth::user()->state}}" name="state" class="form-control" required>
+                                            </div>
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <label>Address <small style="color: red;">*</small></label>
+                                                <input type="text" value="{{Auth::user()->address}}" name="address" class="form-control" required>
+                                            </div>
                                         </div><!-- End .row -->
 
-                                        <label>Display Name *</label>
-                                        <input type="text" class="form-control" required>
-                                        <small class="form-text">This will be how your name will be displayed in the account section and in reviews</small>
-
-                                        <label>Email address *</label>
-                                        <input type="email" class="form-control" required>
-
-                                        <label>Current password (leave blank to leave unchanged)</label>
-                                        <input type="password" class="form-control">
-
-                                        <label>New password (leave blank to leave unchanged)</label>
-                                        <input type="password" class="form-control">
-
-                                        <label>Confirm new password</label>
-                                        <input type="password" class="form-control mb-2">
+                                        <label>Email address <small style="color: red;">*</small></label>
+                                        <input type="email" value="{{Auth::user()->email}}" class="form-control" name="email" required readonly>
 
                                         <button type="submit" class="btn btn-outline-primary-2">
                                             <span>SAVE CHANGES</span>
