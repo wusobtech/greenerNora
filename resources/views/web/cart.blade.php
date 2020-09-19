@@ -38,7 +38,7 @@ Cart
                                         <th>Product</th>
                                         <th>Price</th>
                                         <th>Discount</th>
-                                        {{-- <th>Quantity</th> --}}
+                                        <th>Quantity</th>
                                         <th>Total</th>
                                         <th></th>
                                     </tr>
@@ -63,12 +63,26 @@ Cart
                                         </td>
                                         <td class="price-col">{{ format_money($item->price )}}</td>
                                         <td class="price-col">{{ format_money($item->discount )}}</td>
-                                        {{-- <td class="quantity-col">
+                                        <td class="quantity-col">
                                             <div class="cart-product-quantity">
-                                                <input type="number" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
-                                            </div><!-- End .cart-product-quantity -->
-                                        </td> --}}
-                                        <td class="total-col">{{ format_money($item->getPrice() )}}</td>
+
+                                            <form action="{{ route('cart.update_quantity') }}" id="quantity_form_{{$item->product->id}}" method="POST">@csrf
+                                            <input  type="number"
+                                                    name="quantity"
+                                                    id="product_cart_qty"
+                                                    cart_item_id="{{ !empty($item) ? $item->id : ''}}"
+                                                    item_id="{{$item->product->id}}"
+                                                    product-target=".itemTotal_{{$item->id}}"
+                                                    class="form-control product_cart_item_quantity_{{$item->product->id}} updateItemProduct"
+                                                    value="{{ !empty($item) ? $item->quantity : '1'}}"
+                                                    min="1"
+                                                    max="10"
+                                                    step="1"
+                                                    data-decimals="0"
+                                                    required>
+                                            </form>                                            </div><!-- End .cart-product-quantity -->
+                                        </td>
+                                        <td class="total-col itemTotal_{{$item->id}}">{{ format_money($item->getPrice() )}}</td>
                                         <td class="remove-col">
                                             <form action="{{ route('cart.remove') }}" method="post" item_id="{{$item->id}}" class="cart_ajax_form cart_form_{{$item->id}} hideItem"> @csrf
                                                 <input type="hidden" name="product_id" value="{{$item->id}}">

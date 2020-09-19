@@ -255,9 +255,11 @@ function getFileType(String $type)
         $count = 0;
         foreach($items as $item){
             $count++;
-            $price += $item->price;
-            $discount += $item->discount;
-            $total += ($item->price - $item->discount);
+            $price_= ($item->price * $item->quantity);
+            $disc_ = ($item->discount * $item->quantity);
+            $price += $price_;
+            $discount += $disc_;
+            $total += ($price_ - $disc_);
         }
 
         $cart->price = $price;
