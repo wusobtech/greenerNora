@@ -6,7 +6,7 @@ use App\CartItem;
 use App\Product;
 
 trait Cart{
-    public function addToCart($product_id  = null , $plan_id = null){
+    public function addToCart($product_id  = null ,$quantity = 1, $plan_id = null){
         $cart = getUserCart();
 
         if(!empty($product_id)){
@@ -14,8 +14,12 @@ trait Cart{
 
             if(empty($product)){
                 return ['success' => false, 'msg' => 'Item could not be validated!'];
-
             }
+
+            if($product->quantityonhand < $quantity){
+                return ['success' => false, 'msg' => 'Product is out of stock!'];
+            }
+
 
             $check = CartItem::where('cart_id' , $cart->id)->where('product_id' , $product->id)->count();
             if($check > 0){
@@ -26,7 +30,7 @@ trait Cart{
             $item = CartItem::create([
                 'cart_id' => $cart->id,
                 'product_id' => $product->id,
-                'quantity' => 1,
+                'quantity' => $quantity,
                 'price' => $product->price,
                 'discount' => $product->discount,
             ]);
@@ -66,6 +70,29 @@ trait Cart{
             'price' => format_money($cart->price),
             'discount' => format_money($cart->total),
             'quantity' => $cart->items,
+        ];
+    }
+
+    public function updateCartItemQuantity($item_id , $quantity){
+        $item = Cartitem::find($item_id);
+        if(empty($item->id)){
+            return ['success' => false, 'msg' => 'Could not update item in cart!'];
+        }
+
+        $cart = ModelsCart::find($item->cart_id);
+        $item->quantity = $quantity;
+        $item->save();
+        $item->total = format_money($item->getPrice() , 0);
+
+        $cart = refreshCart($cart->id);
+        return [
+            'success' => true,
+            'msg' => 'Item quantity updated!',
+            'total' => format_money($cart->total),
+            'price' => format_money($cart->price),
+            'discount' => format_money($cart->discount),
+            'quantity' => $cart->items,
+            'item' =>  $item,
         ];
     }
 

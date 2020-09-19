@@ -82,6 +82,7 @@ $('.cart_ajax_form').on('submit', function(e) {
                 $('.cart_btn_text_' + item_id).text(data.title);
                 $('.cart_btn_' + item_id).attr('title', data.title);
                 $('.cart_form_' + item_id).attr('action', data.action);
+                $('.product_cart_item_quantity_' + item_id).attr('cart_item_id', data.item_id);
 
                 if (hide) {
                     $('.cartItem_' + item_id).addClass('d-none');
@@ -95,6 +96,7 @@ $('.cart_ajax_form').on('submit', function(e) {
 
     });
 });
+
 
 function updateCart(count, price = 0, discount = 0, total) {
     $('.cart_count').text(count);
@@ -119,3 +121,55 @@ function hideSpinner(item_id) {
     $('.cart_btn_' + item_id).removeAttr('disabled');
     $('.cart_btn_spinner_' + item_id).addClass('d-none');
 }
+$('#product_cart_qty').on('change', function() {
+    var target = $(this).attr('data-target');
+    var item_id = $(this).attr('item_id');
+    var cart_item_id = $(this).attr('cart_item_id');
+    var quantity = $(this).val();
+    var update = $(this).hasClass('updateItemProduct');
+    var updateTarget = $(this).attr('product-target');
+    $(target).val(quantity);
+
+
+    if (cart_item_id.length > 0) {
+        // $('.input-group.input-spinner').css('z-index', '-100');
+        var form = $('#quantity_form_' + item_id);
+        var url = form.attr('action');
+        var formdata = new FormData(form[0]);
+        formdata.append('product_cart_id', cart_item_id);
+
+        $.ajax({
+            url: url,
+            type: 'Post',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: formdata,
+            success: function(data) {
+                if (data.success) {
+                    successMsg("Success", data.msg);
+                    if (update) {
+                        $(updateTarget).html(data.item.total);
+                    }
+                } else {
+                    errorMsg("Error", data.msg);
+                }
+                updateCart(data.quantity, data.price, data.discount, data.total);
+            }
+        });
+
+        $('.input-group.input-spinner').css('z-index', '1');
+    }
+
+});
+
+// updateCartItem();
+
+// function updateCartItem() {
+//     jQuery.each($('.update_cart_item_id'), function() {
+//         var target = $(this).attr('target');
+//         console.log(target);
+//         console.log($(this).val());
+//         $(target).val($(this).val());
+//     });
+// }

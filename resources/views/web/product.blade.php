@@ -53,14 +53,36 @@
                                     <b>{{$product->weight}}kg</b>
                                 </div><!-- End .select-custom -->
                             @endif
-
+                             @auth
                                 <div class="details-action-col">
                                     <div class="product-details-quantity">
-                                        <input type="number" id="qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
+                                    @php
+                                        $item = cartHasItem($product->id)
+                                    @endphp
+                                    <form action="{{ route('cart.update_quantity') }}" id="quantity_form_{{$product->id}}" method="POST">@csrf
+                                    <input  type="number"
+                                            name="quantity"
+                                            id="product_cart_qty"
+                                            cart_item_id="{{ !empty($item) ? $item->id : ''}}"
+                                            item_id="{{$product->id}}"
+                                            data-target=".quantity_input_{{$product->id}}"
+                                            class="form-control product_cart_item_quantity_{{$product->id}}"
+                                            value="{{ !empty($item) ? $item->quantity : '1'}}"
+                                            min="1"
+                                            max="10"
+                                            step="1"
+                                            data-decimals="0"
+                                            required>
+                                    </form>
                                     </div><!-- End .product-details-quantity -->
 
-                                    <a href="{{ route('cart.add') }}" class="btn-product btn-cart"><span>add to cart</span></a>
+                                    @include('web.fragments.cart_actions' , ['product' => $product ])
                                 </div><!-- End .details-action-col -->
+                                @else
+                                    <div class="text-center">
+                                        Login to add to cart
+                                    </div>
+                                @endauth
                             </div><!-- End .product-details-action -->
 
                             <div class="product-details-footer">

@@ -37,6 +37,7 @@ Route::prefix('cart')->as('cart.')->middleware(['auth'])->group(function () {
     Route::match(['get','post'],'/remove', 'CartController@removeProductFromCart')->name('remove');
     Route::match(['get','post'],'/checkout', 'CartController@checkout')->name('checkout');
     Route::match(['get','post'],'/checkout/success/{data}', 'CartController@checkoutSuccess')->name('checkout.success');
+    Route::post('/update-quantity', 'CartController@updateQuantity')->name('update_quantity');
 });
 
 
