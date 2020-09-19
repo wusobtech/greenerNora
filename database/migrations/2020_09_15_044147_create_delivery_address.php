@@ -16,7 +16,7 @@ class CreateDeliveryAddress extends Migration
         Schema::create('delivery_address', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->index();
-            $table->unsignedBigInteger('user_email')->index();
+            $table->string('user_email');
             $table->string('name');
             $table->string('country');
             $table->text('address');

@@ -68,8 +68,10 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/profile', 'ProfileController@index')->name('profile');
-Route::put('/profile', 'ProfileController@update')->name('profile.update');
-Route::put('/setting', 'ProfileController@changeProfile')->name('profile.changeprofile');
+Route::match(['get','post'],'/profile', 'ProfileController@update')->name('profile.update');
+Route::match(['get','post'],'/setting', 'ProfileController@changeProfile')->name('profile.changeprofile');
+
+Route::match(['get','post'],'/saveaddress', 'CheckoutController@store')->name('saveAddress');
 
 Route::get('/command', function() {
     $output = [];  //'--path' => 'vendor/laravel/passport/database/migrations'

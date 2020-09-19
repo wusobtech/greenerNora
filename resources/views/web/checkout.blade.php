@@ -21,7 +21,7 @@ Checkout
         <div class="page-content">
             <div class="checkout">
                 <div class="container">
-                    <form action="#">
+                    <form action="{{ route('saveAddress') }}" method="POST">
                         <div class="row">
                             <div class="col-lg-9">
                                 <h2 class="checkout-title">Billing Details</h2><!-- End .checkout-title -->
@@ -63,10 +63,11 @@ Checkout
                                         </div><!-- End .col-sm-6 -->
                                     </div><!-- End .row -->
 
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="checkout-diff-address">
-                                        <label class="custom-control-label" for="checkout-diff-address">Shipping address same as Billing address?</label>
-                                    </div><!-- End .custom-checkbox -->
+                                    <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">
+                                        <span class="btn-text">Save Billing Address </span>
+                                        <span class="btn-hover-text">Save Billing Address</span>
+                                    </button>
+                                </form>
 
                             </div><!-- End .col-lg-9 -->
                             <aside class="col-lg-3">
@@ -84,11 +85,25 @@ Checkout
                                         <tbody>
                                             @foreach ($items as $item)
 
-                                            <tr class="cartItem_{{ $item->id }}">
-                                                <td><a href="#">{{ $item->product->name }}</a></td>
-                                                <td class="summary-subtotal">{{ format_money($item->price )}}</td>
-                                            </tr>
-                                            @endforeach
+                                    <tr class="cartItem_{{ $item->id }}">
+                                        <td class="product-col">
+                                            <div class="product">
+                                                <figure class="product-media">
+                                                    <a href="#">
+                                                        <img src="{{ getFileFromStorage($item->product->getImage()) }}" alt="Product image">
+                                                    </a>
+                                                </figure>
+
+                                                <h3 class="product-title">
+                                                    <a href="#">{{ $item->product->name }}</a>
+                                                </h3><!-- End .product-title -->
+                                            </div><!-- End .product -->
+                                        </td>
+
+
+                                        <td class="total-col itemTotal_{{$item->id}}">{{ format_money($item->getPrice() )}}</td>
+                                    </tr>
+                                    @endforeach
 
                                         </tbody>
                                     </table><!-- End .table table-summary -->
@@ -146,7 +161,6 @@ Checkout
                                 </div><!-- End .summary -->
                             </aside><!-- End .col-lg-3 -->
                         </div><!-- End .row -->
-                    </form>
                 </div><!-- End .container -->
             </div><!-- End .checkout -->
         </div><!-- End .page-content -->

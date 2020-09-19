@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Product;
+use App\DeliveryAddress;
 use App\Country;
 use Auth;
 
@@ -24,6 +25,8 @@ class CheckoutController extends Controller
         $cart = getUserCart();
         $items = getUserCart()->cartItems;
         $reference = $cart->reference;
+
+
         return view('web.checkout',compact('userDetails','countries','cart','items','reference'));
     }
 
@@ -45,7 +48,26 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'user_id' => 'required',
+            'user_email' => 'required',
+            'description' => 'required',
+            'name' => 'required',
+            'country' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'postcode' => 'required',
+            'phone' => 'required'
+        ]);
+
+        DB::beginTransaction();
+
+        $form = DeliveryAddress::create($data);
+        DB::commit();
+
+        toastr()->success('Billing Address has been saved successfully!');
+        return redirect()->back();
     }
 
     /**
