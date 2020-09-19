@@ -23,6 +23,9 @@ Shop
         <div class="page-content">
             <div class="container">
                 <div class="row">
+                    <div class="col-lg-9">
+                        <div class="products mb-3">
+                                <div class="row justify-content-center">
                     @forelse ($products as $product)
                         @include('web.fragments.product_item' , ['product' => $product])
                     @empty
@@ -38,6 +41,9 @@ Shop
 
                     </div><!-- End .col-sm-6 col-lg-3 -->
                     @endforelse
+                                </div>
+                        </div>
+                    </div>
                 </div><!-- End .row -->
                 <nav aria-label="Page navigation">
                     {{ $products->links() }}
