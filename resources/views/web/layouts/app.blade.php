@@ -35,6 +35,7 @@
     <link rel="stylesheet" href="{{ $web_source }}/css/demos/demo-11.css">
      <!-- Jquery Toast css -->
      <link href="{{asset('toast')}}/jquery.toast.min.css" rel="stylesheet" type="text/css" />
+     @toastr_css
 </head>
 <body>
     <!-- main content -->
@@ -47,4 +48,7 @@
     @yield('content')
     @include('web.includes.footer')
     @include('web.includes.scripts')
+    @toastr_js
 </body>
+    @toastr_render
+</html>

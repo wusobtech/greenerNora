@@ -21,7 +21,10 @@ class CheckoutController extends Controller
         $user_id = Auth::User()->id;
         $userDetails = User::find($user_id);
         $countries = Country::get();
-        return view('web.checkout',compact('userDetails','countries'));
+        $cart = getUserCart();
+        $items = getUserCart()->cartItems;
+        $reference = $cart->reference;
+        return view('web.checkout',compact('userDetails','countries','cart','items','reference'));
     }
 
     /**

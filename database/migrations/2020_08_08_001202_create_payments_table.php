@@ -19,6 +19,7 @@ class CreatePaymentsTable extends Migration
             $table->decimal('price');
             $table->string('method');
             $table->string('reference')->unique();
+            $table->string('image')->nullable();
             $table->string('receipt')->nullable();
             $table->string('status')->default('Pending');
             $table->timestamps();
