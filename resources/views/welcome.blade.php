@@ -17,25 +17,22 @@ Welcome
                     }'>
                     <div class="intro-slide" style="background-image: url({{ $web_source ?? '' }}/images/demos/demo-11/slider/slide-1.jpg);">
                         <div class="container intro-content">
-                            <h3 class="intro-subtitle text-primary">SEASONAL PICKS</h3><!-- End .h3 intro-subtitle -->
+                            <h3 class="intro-subtitle text-white">SEASONAL PICKS</h3><!-- End .h3 intro-subtitle -->
                             <h1 class="intro-title">Get All <br>The Good Stuff</h1><!-- End .intro-title -->
-
-                            <a href="category.html" class="btn btn-outline-primary-2">
-                                <span>DISCOVER MORE</span>
-                                <i class="icon-long-arrow-right"></i>
-                            </a>
                         </div><!-- End .intro-content -->
                     </div><!-- End .intro-slide -->
 
                     <div class="intro-slide" style="background-image: url({{ $web_source ?? '' }}/images/demos/demo-11/slider/slide-2.jpg);">
                         <div class="container intro-content">
-                            <h3 class="intro-subtitle text-primary">all at 50% off</h3><!-- End .h3 intro-subtitle -->
+                            <h3 class="intro-subtitle text-white">all at 50% off</h3><!-- End .h3 intro-subtitle -->
                             <h1 class="intro-title text-white">The Most Beautiful <br>Novelties In Our Shop</h1><!-- End .intro-title -->
+                        </div><!-- End .intro-content -->
+                    </div><!-- End .intro-slide -->
 
-                            <a href="category.html" class="btn btn-outline-primary-2 min-width-sm">
-                                <span>SHOP NOW</span>
-                                <i class="icon-long-arrow-right"></i>
-                            </a>
+                    <div class="intro-slide" style="background-image: url({{ $web_source ?? '' }}/images/demos/demo-11/slider/slide-3.jpg);">
+                        <div class="container intro-content">
+                            <h3 class="intro-subtitle text-white">our rooms</h3><!-- End .h3 intro-subtitle -->
+                            <h1 class="intro-title text-white">The Most Elegant <br>for Relaxation</h1><!-- End .intro-title -->
                         </div><!-- End .intro-content -->
                     </div><!-- End .intro-slide -->
                 </div><!-- End .intro-slider owl-carousel owl-simple -->
@@ -78,7 +75,7 @@ Welcome
                                 }
                             }'>
                                 @foreach ($newArrivals as $product)
-                                    @include('web.fragments.product_item' , ['product' => $product])
+                                    @include('web.fragments.product_item3' , ['product' => $product])
                                 @endforeach
                             </div><!-- End .owl-carousel -->
 
@@ -98,12 +95,13 @@ Welcome
                             <div class="products">
 
                                 <div class="row justify-content-center">
-                            @foreach ($featuredArrivals as $product)
-                                @include('web.fragments.product_item2' , ['product' => $product])
-                            @endforeach
-                        </div><!-- End .owl-carousel -->
-                    </div><!-- .End .tab-pane -->
-                </div><!-- End .tab-content -->
-            </div><!-- End .container -->
+                                    @foreach ($featuredArrivals as $product)
+                                        @include('web.fragments.product_item2' , ['product' => $product])
+                                    @endforeach
+                                </div><!-- End .owl-carousel -->
+                            </div><!--End products-->
+                        </div><!-- .End .tab-pane -->
+                    </div><!-- End .tab-content -->
+                </div><!-- End .container -->
         </main><!-- End .main -->
 @endsection
