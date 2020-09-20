@@ -1,4 +1,4 @@
-<div class="col-6 col-md-4 col-lg-4">
+<div class="col-6 col-md-4 col-lg-3">
     <div class="product product-11 text-center">
         <figure class="product-media">
             <a href="{{ route('product',['id'=>$product->id])}}">
