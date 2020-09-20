@@ -1,5 +1,4 @@
-<div class="col-6 col-md-4 col-lg-3">
-    <div class="product product-11 text-center">
+<div class="product product-11 text-center">
         <figure class="product-media">
             <a href="{{ route('product',['id'=>$product->id])}}">
                 <img src="{{ getFileFromStorage($product->getImage() , 'storage') }}" alt="Product image" class="product-image">
@@ -17,5 +16,4 @@
             @include('web.fragments.cart_actions' , ['product' => $product , 'item_quantity' => 1])
 
         </div><!-- End .product-action -->
-    </div>
 </div><!-- End .product -->

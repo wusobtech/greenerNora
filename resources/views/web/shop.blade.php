@@ -23,21 +23,27 @@ Shop
         <div class="page-content">
             <div class="container">
                 <div class="row">
-                    @forelse ($products as $product)
-                        @include('web.fragments.product_item' , ['product' => $product])
-                    @empty
-                    <div class="col-6 col-md-4 col-lg-3">
-                        <div class="product product-3">
-                            <div class="product-body">
-                                <div class="product-cat">
-                                    <h2 class="title text-center mb-3">No Products Found</h2><!-- End .title -->
-                                </div><!-- End .product-cat -->
-                            </div><!-- End .product-body -->
+                    <div class="col-lg-12">
+                        <div class="products mb-3">
+                                <div class="row justify-content-center">
+                                    @forelse ($products as $product)
+                                        @include('web.fragments.product_item' , ['product' => $product])
+                                    @empty
+                                    <div class="col-6 col-md-4 col-lg-3">
+                                        <div class="product product-3">
+                                            <div class="product-body">
+                                                <div class="product-cat">
+                                                    <h2 class="title text-center mb-3">No Products Found</h2><!-- End .title -->
+                                                </div><!-- End .product-cat -->
+                                            </div><!-- End .product-body -->
 
-                        </div><!-- End .product -->
+                                        </div><!-- End .product -->
 
-                    </div><!-- End .col-sm-6 col-lg-3 -->
-                    @endforelse
+                                    </div><!-- End .col-sm-6 col-lg-3 -->
+                                    @endforelse
+                                </div>
+                        </div>
+                    </div>
                 </div><!-- End .row -->
                 <nav aria-label="Page navigation">
                     {{ $products->links() }}

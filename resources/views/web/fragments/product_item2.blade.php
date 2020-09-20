@@ -17,19 +17,19 @@
         <div class="product-action">
             @if (auth('web')->check())
             @if(!empty($item = cartHasItem($product->id)))
-                <form action="{{ route('cart.remove') }}" method="post" item_id="{{$product->id}}" class="cart_ajax_form cart_form_{{$product->id}}"> @csrf
+                <form action="{{ route('cart.remove') }}" method="post" item_id="{{$product->id}}" class="cart_ajax_form cart_form_{{$product->id}}" style="width: 100%"> @csrf
                     <input type="hidden" name="product_id" value="{{$product->id}}">
                     <input type="hidden" class="product_cart_input_{{$product->id}}" name="product_cart_id" value="{{$item->id}}">
-                    <button type="submit" class="product_enroll_btn btn cart_btn_{{$product->id}} btn-product btn-cart" title="Remove from cart">
+                    <button type="submit" class="product_enroll_btn btn cart_btn_{{$product->id}} btn-product btn-cart" title="Remove from cart" style="width: 100%">
                         <span class="spinner-border text-light spinner cart_btn_spinner_{{$product->id}} d-none"></span>
                         <span class="cart_btn_text_{{$product->id}}">Remove from cart</span>
                     </button>
                 </form>
             @else
-                <form action="{{ route('cart.add') }}" method="post" item_id="{{$product->id}}" class="cart_ajax_form"> @csrf
+                <form action="{{ route('cart.add') }}" method="post" item_id="{{$product->id}}" class="cart_ajax_form" style="width: 100%"> @csrf
                     <input type="hidden" name="product_id" value="{{$product->id}}">
                     <input type="hidden" class="product_cart_input_{{$product->id}}" name="product_cart_id" value="">
-                    <button type="submit" class="product_enroll_btn btn cart_btn_{{$product->id}} btn-product btn-cart" title="Add To Cart">
+                    <button type="submit" class="product_enroll_btn btn cart_btn_{{$product->id}} btn-product btn-cart" title="Add To Cart" style="width: 100%">
                         <span class="spinner-border text-light spinner cart_btn_spinner_{{$product->id}} d-none"></span>
                         <span class="cart_btn_text_{{$product->id}} ">Add to cart</span>
                     </button>
