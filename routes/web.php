@@ -37,7 +37,7 @@ Route::prefix('cart')->as('cart.')->middleware(['auth'])->group(function () {
 
 
 
-Auth::routes(['register' => false]);
+Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout','HomeController@logout');
@@ -59,10 +59,8 @@ Route::group(['middleware'=> ['admin']],function(){
 });
 
 
-Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
-
+Route::resource('/contact-process','ContactController');
 Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::put('/profile', 'ProfileController@update')->name('profile.update');
 Route::put('/setting', 'ProfileController@changeProfile')->name('profile.changeprofile');
