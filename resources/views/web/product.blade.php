@@ -53,7 +53,12 @@
                                     <b>{{$product->weight}}kg</b>
                                 </div><!-- End .select-custom -->
                             @endif
+                            <div class="text-center">
+                                <b>{{ $stockLevel }}</b> &nbsp;
+                            </div><!-- End .product-price -->
+
                              @auth
+                             @if($product->quantityonhand > 0)
                                 <div class="details-action-col">
                                     <div class="product-details-quantity">
                                     @php
@@ -74,10 +79,12 @@
                                             data-decimals="0"
                                             required>
                                     </form>
+
                                     </div><!-- End .product-details-quantity -->
 
                                     @include('web.fragments.cart_actions' , ['product' => $product ])
                                 </div><!-- End .details-action-col -->
+                                @endif
                                 @else
                                     <div class="text-center">
                                         Login to add to cart

@@ -16,9 +16,10 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('admin_id')->nullable();
-            $table->decimal('price');
+            $table->double('price', 10,2);
             $table->string('method');
             $table->string('reference')->unique();
+            $table->string('image')->nullable();
             $table->string('receipt')->nullable();
             $table->string('status')->default('Pending');
             $table->timestamps();

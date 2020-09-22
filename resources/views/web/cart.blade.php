@@ -80,7 +80,8 @@ Cart
                                                     step="1"
                                                     data-decimals="0"
                                                     required>
-                                            </form>                                            </div><!-- End .cart-product-quantity -->
+                                            </form>
+                                        </div><!-- End .cart-product-quantity -->
                                         </td>
                                         <td class="total-col itemTotal_{{$item->id}}">{{ format_money($item->getPrice() )}}</td>
                                         <td class="remove-col">
