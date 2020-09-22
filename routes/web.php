@@ -71,7 +71,13 @@ Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::match(['get','post'],'/profile', 'ProfileController@update')->name('profile.update');
 Route::match(['get','post'],'/setting', 'ProfileController@changeProfile')->name('profile.changeprofile');
 
-Route::match(['get','post'],'/saveaddress', 'CheckoutController@store')->name('saveAddress');
+//Blling Address Routes
+Route::post('/save-address', 'CheckoutController@store')->name('submitAddress');
+Route::post('/update-address', 'CheckoutController@update')->name('updateAddress');
+
+// Place Order
+Route::match(['get','post'],'/place-order', 'CheckoutController@placeOrder')->name('placeOrder');
+Route::get('/payment/callback', 'CheckoutController@handleGatewayCallback');
 
 Route::get('/command', function() {
     $output = [];  //'--path' => 'vendor/laravel/passport/database/migrations'

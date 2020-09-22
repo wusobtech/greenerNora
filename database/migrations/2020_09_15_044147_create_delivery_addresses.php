@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDeliveryAddress extends Migration
+class CreateDeliveryAddresses extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateDeliveryAddress extends Migration
      */
     public function up()
     {
-        Schema::create('delivery_address', function (Blueprint $table) {
+        Schema::create('delivery_addresses', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->index();
             $table->string('user_email');
@@ -36,6 +36,6 @@ class CreateDeliveryAddress extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('delivery_address');
+        Schema::dropIfExists('delivery_addresses');
     }
 }
