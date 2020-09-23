@@ -26,13 +26,31 @@ class CartController extends Controller
             return response()->json(['success' => false, 'msg' => 'Could not validate request!']);
         }
 
-        $processCart = $this->addToCart($request['product_id'] , $request['plan_id']);
+        if(empty($request['quantity'])){
+            $request['quantity'] = 1;
+        }
+
+
+        $processCart = $this->addToCart($request['product_id'] , $request['quantity'], $request['plan_id']);
         if($processCart['success']){
             $processCart['type'] = 'add';
             $processCart['msg'] =  $processCart['msg'] ?? 'Item added to cart!';
             $processCart['title'] = 'Remove from cart';
             $processCart['action'] = route('cart.remove');
         }
+        return response()->json($processCart);
+    }
+
+
+    public function updateQuantity(Request $request){
+        if(empty($request['product_cart_id'])){
+            return response()->json(['success' => false, 'msg' => 'Could not validate request!']);
+        }
+        if(empty($request['quantity'])){
+            return response()->json(['success' => false, 'msg' => 'No quantity provided!']);
+        }
+        $processCart = $this->updateCartItemQuantity($request['product_cart_id'] , $request['quantity']);
+        
         return response()->json($processCart);
     }
 

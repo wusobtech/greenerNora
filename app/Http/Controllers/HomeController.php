@@ -16,7 +16,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth','verified']);
+        $this->middleware('auth');
     }
 
     /**
@@ -30,7 +30,7 @@ class HomeController extends Controller
         if($user->role == "Admin"){
             return redirect('admin/dashboard');
         }
-        return view('user\dashboard');
+        return view('user/dashboard');
     }
 
     public function logout(){

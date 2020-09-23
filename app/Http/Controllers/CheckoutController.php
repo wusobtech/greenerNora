@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Contact;
-use App\Mail\ContactMessage;
-use Illuminate\Support\Facades\Mail;
+use App\User;
+use App\Product;
+use App\Country;
+use Auth;
 
-class ContactController extends Controller
+
+class CheckoutController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +18,10 @@ class ContactController extends Controller
      */
     public function index()
     {
-        //
+        $user_id = Auth::User()->id;
+        $userDetails = User::find($user_id);
+        $countries = Country::get();
+        return view('web.checkout',compact('userDetails','countries'));
     }
 
     /**
@@ -37,17 +42,7 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
-            'name' => 'required',
-            'email' => 'required|email',
-            'phone' => 'required',
-            'subject' => 'required',
-            'message' => 'required',
-        ]);
-
-        Mail::send( new ContactMessage($request));
-        
-        return redirect()->back();
+        //
     }
 
     /**

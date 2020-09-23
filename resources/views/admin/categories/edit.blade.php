@@ -22,9 +22,7 @@
 
                             <h4 class="mt-0 header-title">Update Category</h4>
 
-                            <form method="POST" action="{{ route('updateCategory' , $categoryDetails->id) }}">
-                                @csrf
-                                {{--  @method('PUT')  --}}
+                            <form class="" enctype="multipart/form-data" method="POST" action="{{ route('updateCategory' , $categoryDetails->id) }}">{{csrf_field()}}
                                 <div class="form-group">
                                     <label>Name</label>
                                     <div>
@@ -36,9 +34,9 @@
                                         <button type="submit" class="btn btn-primary waves-effect waves-light">
                                             Update
                                         </button>
-                                        <a href="/admin/categories" class="btn btn-secondary waves-effect m-l-5">
+                                        <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                                             Cancel
-                                        </a>
+                                        </button>
                                     </div>
                                 </div>
                             </form>

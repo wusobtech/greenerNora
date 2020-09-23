@@ -19,6 +19,8 @@ class CartItem extends Model
     }
 
     public function getPrice(){
-        return $this->price - $this->discount;
+        $price_= ($this->price * $this->quantity);
+        $disc_ = ($this->discount * $this->quantity);
+        return $price_ - $disc_;
     }
 }

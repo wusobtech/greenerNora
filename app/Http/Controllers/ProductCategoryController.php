@@ -65,7 +65,12 @@ class ProductCategoryController extends Controller
      */
     public function edit($id)
     {
+<<<<<<< HEAD
         return view('admin.categories.edit',['categoryDetails' => ProductCategory::FindorFail($id)]);
+=======
+        $categoryDetails = ProductCategory::FindorFail($id);
+        return view('admin.categories.edit',compact('categoryDetails'));
+>>>>>>> dd29d9d3bbc9d35b688d4b6c5352f08dce87c25c
     }
 
     /**
@@ -83,7 +88,11 @@ class ProductCategoryController extends Controller
 
         $categories = ProductCategory::findorfail($id);
         $categories->name = $request->name;
+<<<<<<< HEAD
         $categories->update();
+=======
+        $categories->save();
+>>>>>>> dd29d9d3bbc9d35b688d4b6c5352f08dce87c25c
 
         toastr()->success('Category updated successfully!');
         return redirect()->route('adminCategories');

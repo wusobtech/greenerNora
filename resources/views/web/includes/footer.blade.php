@@ -22,8 +22,13 @@
                         <h4 class="widget-title">Useful Links</h4><!-- End .widget-title -->
 
                         <ul class="widget-list">
+<<<<<<< HEAD
                             <li><a href="#">FAQ</a></li>
                             <li><a href="#">Contact us</a></li>
+=======
+                            <li><a href="{{route('faq')}}">FAQ</a></li>
+                        <li><a href="{{route('contactus')}}">Contact us</a></li>
+>>>>>>> dd29d9d3bbc9d35b688d4b6c5352f08dce87c25c
                         </ul><!-- End .widget-list -->
                     </div><!-- End .widget -->
                 </div><!-- End .col-sm-6 col-lg-3 -->
@@ -33,8 +38,13 @@
                         <h4 class="widget-title">Customer Service</h4><!-- End .widget-title -->
 
                         <ul class="widget-list">
+<<<<<<< HEAD
                             <li><a href="#">Terms and conditions</a></li>
                             <li><a href="#">Privacy Policy</a></li>
+=======
+                            <li><a href="{{route('terms')}}">Terms and conditions</a></li>
+                            <li><a href="{{route('privacypolicy')}}">Privacy Policy</a></li>
+>>>>>>> dd29d9d3bbc9d35b688d4b6c5352f08dce87c25c
                         </ul><!-- End .widget-list -->
                     </div><!-- End .widget -->
                 </div><!-- End .col-sm-6 col-lg-3 -->

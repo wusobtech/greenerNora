@@ -8,7 +8,11 @@
         <div class="container d-flex align-items-center">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+<<<<<<< HEAD
                 <li class="breadcrumb-item"><a href="{{ route('shop') }}">Shop</a></li>
+=======
+                <li class="breadcrumb-item"><a href="{{  url()->previous() }}">Shop</a></li>
+>>>>>>> dd29d9d3bbc9d35b688d4b6c5352f08dce87c25c
                 <li class="breadcrumb-item active" aria-current="page">{{$product->name}}</li>
             </ol>
         </div><!-- End .container -->
@@ -22,7 +26,11 @@
                         <div class="product-gallery product-gallery-vertical">
                             <div class="row">
                                 <figure class="product-main-image">
+<<<<<<< HEAD
                                     <img id="product-zoom" src="{{ asset('Product_images/'.$product->image) }}" data-zoom-image="{{ asset('Product_images/'.$product->image) }}" alt="product image">
+=======
+                                    <img id="product-zoom" src="{{ getFileFromStorage($product->getImage() , 'storage') }}" data-zoom-image="{{ getFileFromStorage($product->getImage() , 'storage') }}" alt="product image">
+>>>>>>> dd29d9d3bbc9d35b688d4b6c5352f08dce87c25c
                                 </figure><!-- End .product-main-image -->
 
                             </div><!-- End .row -->
@@ -40,6 +48,7 @@
                             </div><!-- End .rating-container -->
 
                             <div class="product-price">
+<<<<<<< HEAD
                                 &#x20a6 {{$product->price}}
                             </div><!-- End .product-price -->
 
@@ -47,6 +56,11 @@
                                 <p>Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing. Sed lectus. </p>
                             </div><!-- End .product-content -->
 
+=======
+                                {{ format_money($product->getPrice() )}}
+                            </div><!-- End .product-price -->
+
+>>>>>>> dd29d9d3bbc9d35b688d4b6c5352f08dce87c25c
                             <div class="product-details-action">
                                 @if ($product->weight == 0)
 
@@ -57,6 +71,7 @@
                                     <b>{{$product->weight}}kg</b>
                                 </div><!-- End .select-custom -->
                             @endif
+<<<<<<< HEAD
 
                                 <div class="details-action-col">
                                     <div class="product-details-quantity">
@@ -65,11 +80,44 @@
 
                                     <a href="{{ route('cart.add') }}" class="btn-product btn-cart"><span>add to cart</span></a>
                                 </div><!-- End .details-action-col -->
+=======
+                             @auth
+                                <div class="details-action-col">
+                                    <div class="product-details-quantity">
+                                    @php
+                                        $item = cartHasItem($product->id)
+                                    @endphp
+                                    <form action="{{ route('cart.update_quantity') }}" id="quantity_form_{{$product->id}}" method="POST">@csrf
+                                    <input  type="number"
+                                            name="quantity"
+                                            id="product_cart_qty"
+                                            cart_item_id="{{ !empty($item) ? $item->id : ''}}"
+                                            item_id="{{$product->id}}"
+                                            data-target=".quantity_input_{{$product->id}}"
+                                            class="form-control product_cart_item_quantity_{{$product->id}}"
+                                            value="{{ !empty($item) ? $item->quantity : '1'}}"
+                                            min="1"
+                                            max="10"
+                                            step="1"
+                                            data-decimals="0"
+                                            required>
+                                    </form>
+                                    </div><!-- End .product-details-quantity -->
+
+                                    @include('web.fragments.cart_actions' , ['product' => $product ])
+                                </div><!-- End .details-action-col -->
+                                @else
+                                    <div class="text-center">
+                                        Login to add to cart
+                                    </div>
+                                @endauth
+>>>>>>> dd29d9d3bbc9d35b688d4b6c5352f08dce87c25c
                             </div><!-- End .product-details-action -->
 
                             <div class="product-details-footer">
                                 <div class="product-cat">
                                     <span>Category:</span>
+<<<<<<< HEAD
                                     <a href="#">{{$product->category->name}}</a>,
                                 </div><!-- End .product-cat -->
 
@@ -80,6 +128,10 @@
                                     <a href="#" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
                                     <a href="#" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
                                 </div>
+=======
+                                    <a>{{$product->category->name}}</a>,
+                                </div><!-- End .product-cat -->
+>>>>>>> dd29d9d3bbc9d35b688d4b6c5352f08dce87c25c
                             </div><!-- End .product-details-footer -->
                         </div><!-- End .product-details -->
                     </div><!-- End .col-md-6 -->
@@ -139,6 +191,7 @@
                         }
                     }
                 }'>
+<<<<<<< HEAD
                 <div class="product product-7 text-center">
                     <figure class="product-media">
                         <span class="product-label label-new">New</span>
@@ -323,6 +376,52 @@
                         </div><!-- End .rating-container -->
                     </div><!-- End .product-body -->
                 </div><!-- End .product -->
+=======
+                @foreach($similars as $similar)
+                    <div class="product product-7 text-center">
+                        <figure class="product-media">
+                            <a href="{{ route('product',['id'=>$similar->id])}}">
+                                <img src="{{ getFileFromStorage($similar->getImage() , 'storage') }}" alt="Product image" class="product-image">
+                            </a>
+
+                            <div class="product-action">
+                                @if (auth('web')->check())
+                                @if(!empty($item = cartHasItem($similar->id)))
+                                    <form action="{{ route('cart.remove') }}" method="post" item_id="{{$similar->id}}" class="cart_ajax_form cart_form_{{$similar->id}}"> @csrf
+                                        <input type="hidden" name="product_id" value="{{$similar->id}}">
+                                        <input type="hidden" class="product_cart_input_{{$similar->id}}" name="product_cart_id" value="{{$similar->id}}">
+                                        <button type="submit" class="product_enroll_btn btn cart_btn_{{$similar->id}} btn-product btn-cart" title="Remove from cart">
+                                            <span class="spinner-border text-light spinner cart_btn_spinner_{{$similar->id}} d-none"></span>
+                                            <span class="cart_btn_text_{{$similar->id}}">Remove from cart</span>
+                                        </button>
+                                    </form>
+                                @else
+                                    <form action="{{ route('cart.add') }}" method="post" item_id="{{$similar->id}}" class="cart_ajax_form"> @csrf
+                                        <input type="hidden" name="product_id" value="{{$similar->id}}">
+                                        <input type="hidden" class="product_cart_input_{{$similar->id}}" name="product_cart_id" value="">
+                                        <button type="submit" class="product_enroll_btn btn cart_btn_{{$similar->id}} btn-product btn-cart" title="Add To Cart">
+                                            <span class="spinner-border text-light spinner cart_btn_spinner_{{$similar->id}} d-none"></span>
+                                            <span class="cart_btn_text_{{$similar->id}} ">Add to cart</span>
+                                        </button>
+                                    </form>
+                                @endif
+                            @endif
+                            </div><!-- End .product-action -->
+                        </figure><!-- End .product-media -->
+
+                        <div class="product-body">
+                            <div class="product-cat">
+                                <span>Category:</span>
+                                <a>{{$similar->category->name}}</a>,
+                            </div><!-- End .product-cat -->
+                            <h3 class="product-title"><a href="{{ route('product',['id'=>$similar->id])}}">{{ $similar->name}}</a></h3><!-- End .product-title -->
+                            <div class="product-price">
+                                {{ format_money($similar->getPrice() )}}
+                            </div><!-- End .product-price -->
+                        </div><!-- End .product-body -->
+                    </div><!-- End .product -->
+                @endforeach
+>>>>>>> dd29d9d3bbc9d35b688d4b6c5352f08dce87c25c
             </div><!-- End .owl-carousel -->
         </div><!-- End .container -->
     </div><!-- End .page-content -->

@@ -139,34 +139,30 @@
                                 <td>{{ $product->category->name}}</td>
                                 <td>
                                     @if (!empty($product->image))
-                                      <a href="{{ asset('Product_images/'.$product->image) }}" target="_blank" class="btn btn-primary btn-block">Click to View Image</a>
+                                      <a href="{{ getFileFromStorage($product->getImage() , 'storage') }}" target="_blank" class="btn btn-primary btn-block">Click to View Image</a>
                                     @endif
                                 </td>
                                 <td>{{ $product->quantityonhand }}</td>
                                 <td>{{ $product->weight }}</td>
                                 <td>{{ $product->discount }}</td>
                                 <td>{{ date('F j, Y g:i a',strtotime($product->created_at)) }}</td>
-                                    <div class="fr">
-                                        <td class="center">
-                                            <a href="{{ route('editProduct', $product->id) }}" class="btn btn-primary btn-sm"><i class="ti-pencil"></i></a>
-                                            
-                                        <form action="{{ route('deleteProduct',$product->id) }}" method="post">
-                                            {{ csrf_field() }}
-                                            {{--  {{ method_field('DELETE') }}  --}}
-                                            <button class="btn btn-danger btn-sm"><i class="ti-trash"></i></button>
-                                        </form>
-                                        </td>
+                                    <div class="fr"><td class="center"><a href="{{ route('editProduct', $product->id) }}" class="btn btn-primary btn-sm"><i class="ti-pencil"></i></a>
+                                        <a  href="{{ route('deleteProduct', $product->id )}}" class="btn btn-primary btn-sm"><i class="ti-trash"></i></a></td>
                                     </div>
                             </tr>
                             @endforeach
+                            
                             {{ $products->links() }}
                             </tbody>
                         </table>
-
                     </div>
                 </div>
             </div> <!-- end col -->
         </div> <!-- end row -->
 
     </div><!-- container fluid -->
+<<<<<<< HEAD
 @endsection
+=======
+@endsection
+>>>>>>> dd29d9d3bbc9d35b688d4b6c5352f08dce87c25c

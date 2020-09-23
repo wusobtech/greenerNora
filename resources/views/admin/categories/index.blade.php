@@ -21,8 +21,7 @@
                         <div class="card-body">
                             <h4 class="mt-0 header-title">Create Category</h4>
 
-                            <form method="POST" action="{{ route('submitCategory') }}">
-                                {{csrf_field()}}
+                            <form class="" enctype="multipart/form-data" method="POST" action="{{ route('submitCategory') }}">{{csrf_field()}}
                                 <div class="form-group">
                                     <label>Category Name</label>
                                     <div>

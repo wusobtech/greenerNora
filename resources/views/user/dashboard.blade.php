@@ -13,7 +13,10 @@ Dashboard
             <div class="container">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+<<<<<<< HEAD
                     <li class="breadcrumb-item"><a href="{{ route('shop') }}">Shop</a></li>
+=======
+>>>>>>> dd29d9d3bbc9d35b688d4b6c5352f08dce87c25c
                     <li class="breadcrumb-item active" aria-current="page">My Account</li>
                 </ol>
             </div><!-- End .container -->
@@ -53,7 +56,11 @@ Dashboard
 
                                 <div class="tab-pane fade" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
                                     <p>No order has been made yet.</p>
+<<<<<<< HEAD
                                     <a href="category.html" class="btn btn-outline-primary-2"><span>GO SHOP</span><i class="icon-long-arrow-right"></i></a>
+=======
+                                    <a href="{{route('homepage')}}" class="btn btn-outline-primary-2"><span>GO SHOP</span><i class="icon-long-arrow-right"></i></a>
+>>>>>>> dd29d9d3bbc9d35b688d4b6c5352f08dce87c25c
                                     
                                 </div><!-- .End .tab-pane -->
 

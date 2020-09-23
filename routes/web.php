@@ -19,13 +19,17 @@ Route::get('/frozenfoods', 'WebController@shop')->name('frozenfoods');
 Route::get('/lounge', 'WebController@lounge')->name('lounge');
 Route::get('/cart', 'CartController@items')->name('cart')->middleware('auth');
 Route::get('/contactus', 'WebController@contactus')->name('contactus');
+Route::get('/checkout', 'CheckoutController@index')->name('checkout')->middleware('auth');
 Route::get('/login', 'WebController@login')->name('login');
 Route::get('/productInfo/{id}', 'WebController@product')->name('product');
+Route::get('/faq', 'WebController@faq')->name('faq');
+Route::get('/terms', 'WebController@tandc')->name('terms');
+Route::get('/privacypolicy', 'WebController@privacypolicy')->name('privacypolicy');
+Route::get('/file/{path}', 'WebController@read_file')->name('read_file');
 /**Route::get('/product', function($id){
     return view('product');
 });
 */
-
 
 Route::prefix('cart')->as('cart.')->middleware(['auth'])->group(function () {
     Route::match(['get','post'],'/items', 'CartController@items')->name('items');
@@ -33,11 +37,12 @@ Route::prefix('cart')->as('cart.')->middleware(['auth'])->group(function () {
     Route::match(['get','post'],'/remove', 'CartController@removeProductFromCart')->name('remove');
     Route::match(['get','post'],'/checkout', 'CartController@checkout')->name('checkout');
     Route::match(['get','post'],'/checkout/success/{data}', 'CartController@checkoutSuccess')->name('checkout.success');
+    Route::post('/update-quantity', 'CartController@updateQuantity')->name('update_quantity');
 });
 
 
 
-Auth::routes(['verify' => true]);
+Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout','HomeController@logout');
@@ -55,12 +60,20 @@ Route::group(['middleware'=> ['admin']],function(){
     Route::match(['get','post'],'/submit-product', 'ProductController@store')->name('submitProduct');
     Route::match(['get','post'],'/edit-product/{id}','ProductController@edit')->name('editProduct');
     Route::match(['get','post'],'/update-product/{id}','ProductController@update')->name('updateProduct');
-    Route::match(['get','post'],'product-delete/{id}' , 'ProductController@destroy')->name('deleteProduct');
+    Route::match('product-delete/{id}' , 'ProductController@destroy')->name('deleteProduct');
 });
 
+Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('/contact-process','ContactController');
+
 Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::put('/profile', 'ProfileController@update')->name('profile.update');
 Route::put('/setting', 'ProfileController@changeProfile')->name('profile.changeprofile');
+
+Route::get('/command', function() {
+    $output = [];  //'--path' => 'vendor/laravel/passport/database/migrations'
+    \Artisan::call('migrate', $output);
+    dd($output);
+});
+Route::get('search', 'WebController@search')->name('search');

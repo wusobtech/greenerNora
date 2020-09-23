@@ -13,15 +13,32 @@ Cart
             <div class="container">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+<<<<<<< HEAD
                     <li class="breadcrumb-item"><a href="{{ route('shop') }}">Shop</a></li>
+=======
+                    <li class="breadcrumb-item"><a href="{{ url()->previous() }}">Shop</a></li>
+>>>>>>> dd29d9d3bbc9d35b688d4b6c5352f08dce87c25c
                     <li class="breadcrumb-item active" aria-current="page">Shopping Cart</li>
                 </ol>
             </div><!-- End .container -->
         </nav><!-- End .breadcrumb-nav -->
 
         <div class="page-content">
+<<<<<<< HEAD
             <div class="cart">
                 <div class="container">
+=======
+                <div class="cart">
+                    @php
+                    if($items->count() > 0){
+                        $show = true;
+                    }
+                    else{
+                        $show = false;
+                    }
+                @endphp
+                <div class="container {{ $show == true ? '' : 'd-none'}}" id="has_cart_items">
+>>>>>>> dd29d9d3bbc9d35b688d4b6c5352f08dce87c25c
                     <div class="row">
                         <div class="col-lg-9">
                             <table class="table table-cart table-mobile">
@@ -30,7 +47,11 @@ Cart
                                         <th>Product</th>
                                         <th>Price</th>
                                         <th>Discount</th>
+<<<<<<< HEAD
                                         {{-- <th>Quantity</th> --}}
+=======
+                                        <th>Quantity</th>
+>>>>>>> dd29d9d3bbc9d35b688d4b6c5352f08dce87c25c
                                         <th>Total</th>
                                         <th></th>
                                     </tr>
@@ -39,7 +60,11 @@ Cart
                                 <tbody>
                                     @foreach ($items as $item)
 
+<<<<<<< HEAD
                                     <tr>
+=======
+                                    <tr class="cartItem_{{ $item->id }}">
+>>>>>>> dd29d9d3bbc9d35b688d4b6c5352f08dce87c25c
                                         <td class="product-col">
                                             <div class="product">
                                                 <figure class="product-media">
@@ -55,6 +80,7 @@ Cart
                                         </td>
                                         <td class="price-col">{{ format_money($item->price )}}</td>
                                         <td class="price-col">{{ format_money($item->discount )}}</td>
+<<<<<<< HEAD
                                         {{-- <td class="quantity-col">
                                             <div class="cart-product-quantity">
                                                 <input type="number" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
@@ -63,6 +89,30 @@ Cart
                                         <td class="total-col">{{ format_money($item->getPrice() )}}</td>
                                         <td class="remove-col">
                                             <form action="{{ route('cart.remove') }}" method="post" item_id="{{$item->id}}" class="cart_ajax_form cart_form_{{$item->id}}"> @csrf
+=======
+                                        <td class="quantity-col">
+                                            <div class="cart-product-quantity">
+
+                                            <form action="{{ route('cart.update_quantity') }}" id="quantity_form_{{$item->product->id}}" method="POST">@csrf
+                                            <input  type="number"
+                                                    name="quantity"
+                                                    id="product_cart_qty"
+                                                    cart_item_id="{{ !empty($item) ? $item->id : ''}}"
+                                                    item_id="{{$item->product->id}}"
+                                                    product-target=".itemTotal_{{$item->id}}"
+                                                    class="form-control product_cart_item_quantity_{{$item->product->id}} updateItemProduct"
+                                                    value="{{ !empty($item) ? $item->quantity : '1'}}"
+                                                    min="1"
+                                                    max="10"
+                                                    step="1"
+                                                    data-decimals="0"
+                                                    required>
+                                            </form>                                            </div><!-- End .cart-product-quantity -->
+                                        </td>
+                                        <td class="total-col itemTotal_{{$item->id}}">{{ format_money($item->getPrice() )}}</td>
+                                        <td class="remove-col">
+                                            <form action="{{ route('cart.remove') }}" method="post" item_id="{{$item->id}}" class="cart_ajax_form cart_form_{{$item->id}} hideItem"> @csrf
+>>>>>>> dd29d9d3bbc9d35b688d4b6c5352f08dce87c25c
                                                 <input type="hidden" name="product_id" value="{{$item->id}}">
                                                 <input type="hidden" class="product_cart_input_{{$item->id}}" name="product_cart_id" value="{{$item->id}}">
                                                 <button type="submit" class="product_enroll_btn btn cart_btn_{{$item->id}} btn-remove" title="Remove from cart">
@@ -102,6 +152,7 @@ Cart
                                     </tbody>
                                 </table><!-- End .table table-summary -->
 
+<<<<<<< HEAD
                                 <a href="checkout.html" class="btn btn-outline-primary-2 btn-order btn-block">PROCEED TO CHECKOUT</a>
                             </div><!-- End .summary -->
 
@@ -109,6 +160,26 @@ Cart
                         </aside><!-- End .col-lg-3 -->
                     </div><!-- End .row -->
                 </div><!-- End .container -->
+=======
+                                <a href="{{ route('checkout') }}" class="btn btn-outline-primary-2 btn-order btn-block">PROCEED TO CHECKOUT</a>
+                            </div><!-- End .summary -->
+
+                            <a href="{{ url()->previous() }}" class="btn btn-outline-dark-2 btn-block mb-3"><span>CONTINUE SHOPPING</span><i class="icon-refresh"></i></a>
+                        </aside><!-- End .col-lg-3 -->
+                    </div><!-- End .row -->
+                </div><!-- End .container -->
+                <div class="container {{ $show == false ? '' : 'd-none'}}" id="no_cart_item">
+                    <div class="text-center row offset-md-2">
+                        <div class="col-md-4 ">
+                        </div>
+                        <div class="col-md-4 p-4 mt-md-5">
+                            No item in your cart at the moment!
+                            <br>
+                            <a href="{{ route('homepage')}}" class="btn btn-outline-primary">Browse Products</a>
+                        </div>
+                    </div>
+                   </div>
+>>>>>>> dd29d9d3bbc9d35b688d4b6c5352f08dce87c25c
             </div><!-- End .cart -->
         </div><!-- End .page-content -->
     </main><!-- End .main -->

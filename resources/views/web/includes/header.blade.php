@@ -41,7 +41,11 @@
             <div class="header-right">
                 <div class="header-search">
                     <a href="#" class="search-toggle" role="button" title="Search"><i class="icon-search"></i></a>
+<<<<<<< HEAD
                     <form action="#" method="get">
+=======
+                    <form action="{{route('search')}}" method="get">
+>>>>>>> dd29d9d3bbc9d35b688d4b6c5352f08dce87c25c
                         <div class="header-search-wrapper">
                             <label for="q" class="sr-only">Search</label>
                             <input type="search" class="form-control" name="q" id="q" placeholder="Search in..." required>
