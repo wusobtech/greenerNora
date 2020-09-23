@@ -13,10 +13,7 @@ Dashboard
             <div class="container">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
-<<<<<<< HEAD
-                    <li class="breadcrumb-item"><a href="{{ route('shop') }}">Shop</a></li>
-=======
->>>>>>> dd29d9d3bbc9d35b688d4b6c5352f08dce87c25c
+
                     <li class="breadcrumb-item active" aria-current="page">My Account</li>
                 </ol>
             </div><!-- End .container -->
@@ -49,56 +46,51 @@ Dashboard
                         <div class="col-md-8 col-lg-9">
                             <div class="tab-content">
                                 <div class="tab-pane fade show active" id="tab-dashboard" role="tabpanel" aria-labelledby="tab-dashboard-link">
-                                <p>Hello(<span class="font-weight-normal text-dark">{{Auth::user()->name}}) 
+                                <p>Hello(<span class="font-weight-normal text-dark">{{Auth::user()->name}})
                                     <br>
                                     From your account dashboard you can view your <a href="#tab-orders" class="tab-trigger-link link-underline">recent orders</a>, manage your <a href="#tab-address" class="tab-trigger-link">shipping and billing addresses</a>, and <a href="#tab-account" class="tab-trigger-link">edit your password and account details</a>.</p>
                                 </div><!-- .End .tab-pane -->
 
                                 <div class="tab-pane fade" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
                                     <p>No order has been made yet.</p>
-<<<<<<< HEAD
-                                    <a href="category.html" class="btn btn-outline-primary-2"><span>GO SHOP</span><i class="icon-long-arrow-right"></i></a>
-=======
-                                    <a href="{{route('homepage')}}" class="btn btn-outline-primary-2"><span>GO SHOP</span><i class="icon-long-arrow-right"></i></a>
->>>>>>> dd29d9d3bbc9d35b688d4b6c5352f08dce87c25c
-                                    
+
                                 </div><!-- .End .tab-pane -->
 
                                 <div class="tab-pane fade" id="tab-downloads" role="tabpanel" aria-labelledby="tab-downloads-link">
                                     <div class="card mb-4">
                                         <div class="card-body">
-                                            @if (session('error'))
-                                            <div class="alert alert-danger">
-                                                {{ session('error') }}
-                                            </div>
-                                        @endif
-                                            @if (session()->get('success'))
-                                                <div class="alert alert-success">
-                                                    {{ session()->get('success') }}
-                                                </div>
-                                            @endif
                                             <form method="POST" action="{{route('profile.update')}}" autocomplete="off">
                                                @csrf
                                                @method('PUT')
                                                 <h6 class="heading-small text-muted mb-4 text-center">User information</h6>
-                        
+
                                                 <div class="row">
                                                     <div class="col-lg-4">
                                                         <div class="form-group focused">
                                                             <label class="form-control-label" for="current_password">Current password</label>
                                                             <input type="password" id="current_password" class="form-control" name="current_password" placeholder="Current password" required>
+                                                            @if ($errors->has('current-password'))
+                                                                <span class="help-block">
+                                                                    <strong>{{ $errors->first('current-password') }}</strong>
+                                                                </span>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4">
                                                         <div class="form-group focused">
                                                             <label class="form-control-label" for="new_password">New password</label>
-                                                            <input type="password" id="new_password" class="form-control" name="new_password" placeholder="New password" required>
+                                                            <input type="password" class="form-control" name="new-password" id="new-password" placeholder="New password" required>
+                                                            @if ($errors->has('new-password'))
+                                                                <span class="help-block">
+                                                                    <strong>{{ $errors->first('new-password') }}</strong>
+                                                                </span>
+                                                             @endif
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4">
                                                         <div class="form-group focused">
                                                             <label class="form-control-label" for="confirm_password">Confirm password</label>
-                                                            <input type="password" id="confirm_password" class="form-control" name="password_confirmation" placeholder="Confirm password" required>
+                                                            <input type="password" class="form-control" name="new-password_confirmation" id="new-password-confirm" placeholder="Confirm password" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -112,8 +104,8 @@ Dashboard
                                                     </div>
                                                 </div>
                                             </form>
-                                    
-                        
+
+
                                     </div>
                                 </div><!-- .End .tab-pane -->
 

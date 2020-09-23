@@ -16,6 +16,7 @@
             $category_list = ProductCategory::get();
             $categories = ProductCategory::where('id', $id)->get();
             $products = Product::where('category_id', $id)->where('status', 'Active')->orderBy('id' , 'desc')->paginate(8);
+
             return view('web.shop', compact('products','categories','category_list'));
         }
 
@@ -36,9 +37,14 @@
 
         public function product($id){
             $product=Product::where('id', $id)->first();
+            if ($product->quantityonhand > 0) {
+                $stockLevel = "In Stock";
+            } else{
+                $stockLevel = "Out of Stock";
+            }
             $cat = Product::where('id', $id)->first();
             $similars = Product::where('category_id' , $cat->category_id)->where('id' , '!=' , $cat->id)->get();
-            return view('web.product', compact('product','similars'));
+            return view('web.product', compact('product','similars','stockLevel'));
         }
 
         public function faq(){
