@@ -223,8 +223,13 @@ function getFileType(String $type)
     /** Returns cart details
      * @return object
      */
-    function getUserCart(){
-        $user = auth('web')->user();
+    function getUserCart($user_id = null){
+        if(!empty($user_id)){
+            $user = User::find($user_id);
+        }
+        else{
+            $user = auth('web')->user();
+        }
 
         $cart = Cart::where('user_id', $user->id)->first();
         if(empty($cart)){

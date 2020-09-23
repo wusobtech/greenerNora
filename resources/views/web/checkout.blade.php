@@ -54,7 +54,7 @@ Checkout
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <label>Postcode / ZIP *</label>
-                                            <input type="tel" name="postcode" value="{{ $shippingDetails->postcode }}" class="form-control" required>
+                                            <input type="number" name="postcode" value="{{ $shippingDetails->postcode }}" class="form-control" required>
                                         </div><!-- End .col-sm-6 -->
 
                                         <div class="col-sm-6">
