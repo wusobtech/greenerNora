@@ -16,8 +16,9 @@ use Auth;
 use Carbon\Carbon;
 use DB;
 use App\Payment;
-use Session;
 use Paystack;
+use Session;
+
 
 class CheckoutController extends Controller
 {
@@ -45,10 +46,6 @@ class CheckoutController extends Controller
         $shippingCount = DeliveryAddress::where('user_id',$user_id)->count();
         if ($shippingCount > 0) {
             $shippingDetails = DeliveryAddress::where('user_id',$user_id)->first();
-
-        }
-        if(empty($shippingDetails)){
-            $shippingDetails = new DeliveryAddress();
         }
         $cart = getUserCart();
         $items = getUserCart()->cartItems;
@@ -160,6 +157,7 @@ class CheckoutController extends Controller
         }
 
         if ($type == 'Paystack') {
+
             return Paystack::getAuthorizationUrl()->redirectNow();
         }
     }
@@ -188,22 +186,32 @@ class CheckoutController extends Controller
                 . mt_rand(1000000, 9999999)
                 . $characters[rand(0, strlen($characters) - 1)];
         $user = Auth::User();
-        $cart = getUserCart($user->id);
+        $cart = getUserCart();
+        $cartItems = $cart->cartItems;
+        //dd($cartItems);
+        $all = Cart::where('user_id' , $user->id)->count();
+        $delivery = $all * 500;
+        $sum = Cart::where('user_id' , $user->id)->sum('total');
+        $type = $request->input('type');
+        $date = new Carbon;
 
             DB::beginTransaction();
+            $currentorder = Order::where('user_id' , $user->id)->where('status' , 'Pending')->orderby('created_at', 'desc')->first();
+            // $carts = Cart::where('user_id' , $user->id)->get();
+            //$cartItems = CartItem::where('cart_id' , $cart->id)->first();
+
 
             try{
                 $order = Order::create([
                     'payment_id' => $payment->id,
                     'user_id' => $user->id,
-                    'orderdate' => now(),
+                    'orderdate' => $date,
                     'payment_method' => 'Paystack',
-                    'totalamount' => $cart->total,
-                    'status' => 'Approved',
+                    'totalamount' => $cart->total, // $request->input('amount'),
+                    'status' => 'Pending',
                     'ref_no' => str_shuffle($pin)
                 ]);
-
-                foreach ($cart->cartItems as $item){
+                foreach ($cartItems as $item){
                     // copy cart item details to order item
                     OrderItem::create([
                         'order_id' => $order->id,
@@ -216,7 +224,7 @@ class CheckoutController extends Controller
                     // Reduce product quantity
                     $item->product->quantityonhand - $item->quantity;
                     $item->product->save();
-                    // Delete cart item from cart
+                        // Delete cart item from cart
                     $item->delete();
                 }
                 DB::commit();
@@ -225,8 +233,14 @@ class CheckoutController extends Controller
                 DB::rollback();
                 throw $e ;
             }
-        refreshCart($cart->id);
-        return redirect()->route('home');
+
+        return redirect()
+        ->route('home');
+
+        //dd($paymentDetails);
+        // Now you have the payment details,
+        // you can store the authorization_code in your db to allow for recurrent subscriptions
+        // you can then redirect or do whatever you want
     }
 
     /**
@@ -260,29 +274,23 @@ class CheckoutController extends Controller
      */
     public function update(Request $request)
     {
-        $user = Auth::user();
+        $user_id = Auth::user()->id;
         if ($request->isMethod('post')) {
             $data = $request->all();
-            $data =  [
-                'name'=>$data['name'],
-                'address'=>$data['address'],
-                'city'=>$data['city'],
-                'state'=>$data['state'],
-                'postcode'=>$data['postcode'],
-                'country'=>$data['country'],
-                'phone'=>$data['phone'],
-            ];
-            $delivery = DeliveryAddress::where('user_id',$user->id)->first();
-            if(empty($delivery)){
-                $data['user_id'] = $user->id;
-                $data['user_email'] = $user->email;
-                DeliveryAddress::create($data);
-            }
-            else{
-                $delivery->update($data);
-            }
+            DeliveryAddress::where('user_id',$user_id)->update(
+                [
+                    'name'=>$data['name'],
+                    'address'=>$data['address'],
+                    'city'=>$data['city'],
+                    'state'=>$data['state'],
+                    'postcode'=>$data['postcode'],
+                    'country'=>$data['country'],
+                    'phone'=>$data['phone'],
+                ]
+            );
+            //dd($data);
 
-            toastr()->success('Billing Address has been updated successfully!');
+            toastr()->success('Billing Address has been Updated successfully!');
             return redirect()->back();
         }
     }

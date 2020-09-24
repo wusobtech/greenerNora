@@ -92,7 +92,7 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $id)
+    public function edit($id)
     {
         $productDetails = Product::FindorFail($id);
         return view('admin.products.edit',compact('productDetails'));
