@@ -17,4 +17,18 @@ class Order extends Model
 	{
 		return $this->belongsTo(Payment::class);
     }
+
+    public function orders(){
+        return $this->hasMany('App\OrderItem','order_id');
+    }
+
+    public static function getOrderDetails($order_id){
+        $getOrderDetails = Order::where('id',$order_id)->first();
+        return $getOrderDetails;
+    }
+
+    public static function getCountryCode($country){
+        $getCountryCode = Country::where('name', $country)->first();
+        return $getCountryCode;
+    }
 }

@@ -54,7 +54,7 @@ Checkout
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <label>Postcode / ZIP *</label>
-                                            <input type="number" name="postcode" value="{{ $shippingDetails->postcode }}" class="form-control" required>
+                                            <input type="text" name="postcode" value="{{ $shippingDetails->postcode }}" class="form-control" required>
                                         </div><!-- End .col-sm-6 -->
 
                                         <div class="col-sm-6">
@@ -150,22 +150,6 @@ Checkout
                                                     </div><!-- End .card-body -->
                                                 </div><!-- End .collapse -->
                                             </div><!-- End .card -->
-
-                                            <div class="card">
-                                                <div class="card-header" id="heading-4">
-                                                    <h2 class="card-title">
-                                                        <input type="radio" name="type" id="Paystack" value="Paystack" class="collapsed" role="button" data-toggle="collapse" href="#collapse-4" aria-expanded="false" aria-controls="collapse-4">
-                                                            Paystack
-                                                        </input>
-                                                    </h2>
-                                                </div><!-- End .card-header -->
-                                                <div id="collapse-4" class="collapse" aria-labelledby="heading-4" data-parent="#accordion-payment">
-                                                    <div class="card-body">
-                                                        Credit Card Payment System with Paystack.
-                                                    </div><!-- End .card-body -->
-                                                </div><!-- End .collapse -->
-                                            </div><!-- End .card -->
-
                                             </div><!-- End .accordion -->
 
                                         <button type="submit" onclick="return selectPaymentMethod();" class="btn btn-outline-primary-2 btn-order btn-block">

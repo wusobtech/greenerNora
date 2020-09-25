@@ -15,6 +15,7 @@
         "laravel/framework": "^7.24",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.2",
+        "mpdf/mpdf": "^8.0",
         "unicodeveloper/laravel-paystack": "^1.0",
         "yoeunes/toastr": "^1.2"
     },

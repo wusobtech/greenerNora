@@ -26,6 +26,7 @@ Route::get('/faq', 'WebController@faq')->name('faq');
 Route::get('/terms', 'WebController@tandc')->name('terms');
 Route::get('/privacypolicy', 'WebController@privacypolicy')->name('privacypolicy');
 Route::get('/file/{path}', 'WebController@read_file')->name('read_file');
+Route::get('/thank-you', 'WebController@thankyou');
 /**Route::get('/product', function($id){
     return view('product');
 });
@@ -85,3 +86,4 @@ Route::get('/command', function() {
     dd($output);
 });
 Route::get('search', 'WebController@search')->name('search');
+Route::get('/receipt', 'CheckoutController@receipt');
