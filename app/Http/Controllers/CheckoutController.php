@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use App\User;
 use App\Product;
 use App\Order;
@@ -53,6 +54,14 @@ class CheckoutController extends Controller
         $total_amount = 0;
         $type = 0;
         return view('web.checkout',compact('shippingDetails','countries','cart','items','reference','total_amount','type'));
+    }
+
+    public function receipt(){
+        $cart = getUserCart();
+        $items = getUserCart()->cartItems;
+        $reference = $cart->reference;
+        $total_amount = 0;
+        return view('web.receipt', compact('cart','items','reference','total_amount'));
     }
 
     /**
@@ -156,11 +165,71 @@ class CheckoutController extends Controller
             }
         }
 
+        if ($type == 'DBT') {
+            DB::beginTransaction();
+            $currentorder = Order::where('user_id' , $user->id)->where('status' , 'Pending')->orderby('created_at', 'desc')->first();
+
+            try{
+                $order = Order::create([
+                    'user_id' => $user->id,
+                    'orderdate' => $date,
+                    'payment_method' => 'Direct Bank Transfer',
+                    'totalamount' => $cart->total, // $request->input('amount'),
+                    'status' => 'Pending',
+                    'ref_no' => str_shuffle($pin)
+                ]);
+                foreach ($cartItems as $item){
+                    // copy cart item details to order item
+                    OrderItem::create([
+                        'order_id' => $order->id,
+                        'product_id' => $item->product_id,
+                        'price' => $item->price,
+                        'quantity' => $item->quantity,
+                        'discount' => $item->discount,
+                    ]);
+
+                    Session::put('order_id',$order->id);
+                    Session::put('ref_no',str_shuffle($pin));
+                    Session::put('totalamount',$cart->total);
+
+                    //Code for Order Email
+                    $email = Auth::user()->email;
+                    $messageData = [
+                        'email' => $email,
+                        'name' => Auth::user()->name,
+                        'order_ref_no' => str_shuffle($pin)
+                    ];
+
+                    Mail::send('emails.order', $messageData, function($message) use ($email){
+                        $message->from('contact@greenernorahinvestments.com', 'Greenernora-Investments');
+                        $message->to($email)->subject('Order Placed - Greenernora-Investments');
+                    });
+
+                    return redirect('/receipt');
+
+                    // Reduce product quantity
+                    $item->product->quantityonhand - $item->quantity;
+                    $item->product->save();
+                        // Delete cart item from cart
+                    $item->delete();
+                }
+                DB::commit();
+            }
+            catch(Exception $e){
+                DB::rollback();
+                throw $e ;
+            }
+
+
+        }
+
         if ($type == 'Paystack') {
 
             return Paystack::getAuthorizationUrl()->redirectNow();
         }
     }
+
+
 
     public function handleGatewayCallback()
     {

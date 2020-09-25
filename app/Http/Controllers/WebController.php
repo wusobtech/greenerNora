@@ -1,6 +1,6 @@
 <?php
 
-    namespace App\Http\COntrollers;
+    namespace App\Http\Controllers;
     use App\Product;
     use Auth;
     use App\User;
@@ -38,6 +38,10 @@
 
         public function cart(){
             return view('web.cart');
+        }
+
+        public function thankyou(){
+            return view('web.thankyou');
         }
 
         public function product($id){

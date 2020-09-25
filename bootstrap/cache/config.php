@@ -469,11 +469,11 @@
       'smtp' => 
       array (
         'transport' => 'smtp',
-        'host' => 'smtp.mailtrap.io',
-        'port' => '2525',
-        'encryption' => NULL,
-        'username' => NULL,
-        'password' => NULL,
+        'host' => 'mail.greenernorahinvestments.com',
+        'port' => '465',
+        'encryption' => 'ssl',
+        'username' => 'contact@greenernorahinvestments.com',
+        'password' => '+^uCcpsEAU;$',
         'timeout' => NULL,
         'auth_mode' => NULL,
       ),
@@ -506,7 +506,7 @@
     ),
     'from' => 
     array (
-      'address' => NULL,
+      'address' => 'contact@greenernorahinvestments.com',
       'name' => 'GreenerNora',
     ),
     'markdown' => 
