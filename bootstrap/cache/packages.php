@@ -63,6 +63,17 @@
       'Paystack' => 'Unicodeveloper\\Paystack\\Facades\\Paystack',
     ),
   ),
+  'uxweb/sweet-alert' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'UxWeb\\SweetAlert\\SweetAlertServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Alert' => 'UxWeb\\SweetAlert\\SweetAlert',
+    ),
+  ),
   'yoeunes/toastr' => 
   array (
     'providers' => 

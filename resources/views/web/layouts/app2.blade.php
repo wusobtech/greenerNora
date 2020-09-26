@@ -10,6 +10,7 @@
     <title>@yield('title') :: Greener Norah</title>
     <meta name="keywords" content="Frozen Foods,Whole Chicken, Frozen Fish">
     <meta name="author" content="wusob-technologies">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="{{ $web_source }}/images/icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ $web_source }}/images/icons/favicon-32x32.png">
@@ -38,6 +39,7 @@
      @toastr_css
 </head>
 <body>
+    @include('sweet::alert')
     <!-- main content -->
     <!-- header -->
     <div class="main-content" id="home">

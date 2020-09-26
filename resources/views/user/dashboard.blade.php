@@ -61,7 +61,6 @@ Dashboard
                                         <div class="card-body">
                                             <form method="POST" action="{{route('profile.update')}}" autocomplete="off">
                                                @csrf
-                                               @method('PUT')
                                                 <h6 class="heading-small text-muted mb-4 text-center">User information</h6>
 
                                                 <div class="row">
@@ -112,7 +111,6 @@ Dashboard
                                 <div class="tab-pane fade" id="tab-account" role="tabpanel" aria-labelledby="tab-account-link">
                                     <form method="POST" action="{{route('profile.changeprofile')}}">
                                         @csrf
-                                        @method('PUT')
                                         <div class="row">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 <label>Full Name<small style="color: red;">*</small></label>

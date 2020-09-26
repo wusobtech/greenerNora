@@ -69,7 +69,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Description</label>
-                                            <textarea name="description" class="form-control" id="description"  required></textarea>
+                                            <textarea name="description" class="ckeditor form-control" id="description"  required></textarea>
                                         </div>
                                         <div class="form-group">
                                             <label>Product Price</label>
@@ -151,7 +151,7 @@
                                     </div>
                             </tr>
                             @endforeach
-                            
+
                             {{ $products->links() }}
                             </tbody>
                         </table>

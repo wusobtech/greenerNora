@@ -53,15 +53,23 @@ class CheckoutController extends Controller
         $reference = $cart->reference;
         $total_amount = 0;
         $type = 0;
-        return view('web.checkout',compact('shippingDetails','countries','cart','items','reference','total_amount','type'));
+        $delivery = 600;
+        $grand_total = 0;
+        return view('web.checkout',compact('shippingDetails','delivery','grand_total','countries','cart','items','reference','total_amount','type'));
     }
 
     public function receipt(){
+
         $cart = getUserCart();
         $items = getUserCart()->cartItems;
         $reference = $cart->reference;
         $total_amount = 0;
+
         return view('web.receipt', compact('cart','items','reference','total_amount'));
+    }
+
+    public function thankyou(){
+        return view('web.thankyou');
     }
 
     /**
@@ -118,10 +126,12 @@ class CheckoutController extends Controller
                 . $characters[rand(0, strlen($characters) - 1)];
         $user = Auth::User();
         $cart = getUserCart();
+        $delivery = 600;
+        $cart->total = $cart->total + ($delivery);
         $cartItems = $cart->cartItems;
         //dd($cartItems);
         $all = Cart::where('user_id' , $user->id)->count();
-        $delivery = $all * 500;
+
         $sum = Cart::where('user_id' , $user->id)->sum('total');
         $type = $request->input('type');
         $date = new Carbon;
@@ -132,12 +142,13 @@ class CheckoutController extends Controller
             //$cartItems = CartItem::where('cart_id' , $cart->id)->first();
 
 
+
             try{
                 $order = Order::create([
                     'user_id' => $user->id,
                     'orderdate' => $date,
                     'payment_method' => 'Cash On Delivery',
-                    'totalamount' => $cart->total, // $request->input('amount'),
+                    'totalamount' => $cart->total,
                     'status' => 'Pending',
                     'ref_no' => str_shuffle($pin)
                 ]);
@@ -189,6 +200,9 @@ class CheckoutController extends Controller
                     ]);
 
                     Session::put('order_id',$order->id);
+                    Session::put('product_id',$item->product_id);
+                    Session::put('price',$item->price);
+                    Session::put('quantity',$item->quantity);
                     Session::put('ref_no',str_shuffle($pin));
                     Session::put('totalamount',$cart->total);
 
@@ -205,7 +219,6 @@ class CheckoutController extends Controller
                         $message->to($email)->subject('Order Placed - Greenernora-Investments');
                     });
 
-                    return redirect('/receipt');
 
                     // Reduce product quantity
                     $item->product->quantityonhand - $item->quantity;
@@ -219,6 +232,8 @@ class CheckoutController extends Controller
                 DB::rollback();
                 throw $e ;
             }
+            alert()->success('Order Completed Succesfully!', 'Thank you for Shopping with us');
+            return redirect('/thank-you');
 
 
         }

@@ -36,6 +36,27 @@
             return view('web.contactus');
         }
 
+        public function store(){
+            //dd(request()->all());
+            $data = request()->validate([
+                'name' => 'required',
+                'email' => 'required',
+                'phone' => 'required',
+                'subject' => 'required',
+                'message' => 'required',
+            ]);
+
+
+            $email = 'contact@greenernorahinvestments.com';
+
+            // Send An Email
+            Mail::to($email)->send(new ContactMessage($data));
+            toastr()->success('Product has been saved successfully!');
+            return redirect()->back();
+            return redirect()->back()->with('flash_message_success','Message Sent!');
+
+        }
+
         public function cart(){
             return view('web.cart');
         }

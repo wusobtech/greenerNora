@@ -100,6 +100,7 @@ Checkout
                                         <td class="total-col itemTotal_{{$item->id}}">{{ format_money($item->getPrice() )}}</td>
                                     </tr>
                                     <?php $total_amount = $total_amount + ($item->price*$item->quantity); ?>
+                                    <?php $grand_total = $total_amount + $delivery; ?>
                                     @endforeach
                                     <tr class="summary-subtotal">
                                         <td>Subtotal:</td>
@@ -107,11 +108,11 @@ Checkout
                                     </tr><!-- End .summary-subtotal -->
                                     <tr>
                                         <td>Shipping:</td>
-                                        <td>50% Discount</td>
+                                        <td>{{ format_money($delivery)}}</td>
                                     </tr>
                                     <tr class="summary-total">
                                         <td>Total:</td>
-                                        <td>{{ format_money($total_amount) }}</td>
+                                        <td>{{ format_money($grand_total) }}</td>
                                     </tr><!-- End .summary-total -->
 
                                         </tbody>
@@ -119,7 +120,7 @@ Checkout
 
                                     <div class="accordion-summary" id="accordion-payment">
                                         <form name="paymentForm" enctype="multipart/form-data" id="paymentForm" action="{{ route('placeOrder') }}" method="POST">{{ csrf_field() }}
-                                            <input type="hidden" name="amount" value="{{ $total_amount * 100 }} ">
+                                            <input type="hidden" name="amount" value="{{ $grand_total * 100 }} ">
                                             <input type="hidden" name="email" value="{{ Auth::user()->email }}"> {{-- required --}}
                                             <input type="hidden" name="currency" value="NGN">
                                             <input type="hidden" name="quantity" value="1">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Order;
 use Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -36,5 +37,11 @@ class HomeController extends Controller
     public function logout(){
         Session::flush();
         return redirect()->route('login');
+    }
+
+    public function order(){
+        $user = Auth::User();
+        $orders = Order::where('user_id' , $user->id)->get();
+        return view('user.dashboard', compact('orders','user'));
     }
 }
