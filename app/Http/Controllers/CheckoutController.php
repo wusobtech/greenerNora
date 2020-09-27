@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderMail;
 use App\User;
 use App\Product;
 use App\Order;
@@ -162,6 +163,35 @@ class CheckoutController extends Controller
                         'discount' => $item->discount,
                     ]);
 
+                    Session::put('order_id',$order->id);
+                    Session::put('product_id',$item->product->name);
+                    Session::put('orderdate',$date);
+                    Session::put('payment_method','Cash On Delivery');
+                    Session::put('price',$item->price);
+                    Session::put('description',$item->product->description);
+                    Session::put('quantity',$item->quantity);
+                    //Session::put('ref_no',str_shuffle($pin));
+                    Session::put('totalamount',$cart->total);
+
+                    //Code for Order Email
+                    $email = Auth::user()->email;
+                    $messageData = [
+                        'email' => $email,
+                        'product_id' => $item->product->name,
+                        'order_id' => $order->id,
+                        'price' => $item->price,
+                        'description' => $item->product->description,
+                        'orderdate' => $date,
+                        'payment_method' => 'Cash On Delivery',
+                        'quantity' => $item->quantity,
+                        'totalamount' => $cart->total,
+                        'name' => Auth::user()->name,
+                        //'order_ref_no' => str_shuffle($pin)
+                    ];
+
+                    //dd($messageData);
+                    Mail::to($email)->send(new OrderMail($messageData));
+
                     // Reduce product quantity
                     $item->product->quantityonhand - $item->quantity;
                     $item->product->save();
@@ -174,6 +204,8 @@ class CheckoutController extends Controller
                 DB::rollback();
                 throw $e ;
             }
+            alert()->success('Order Completed Succesfully!', 'Thank you for Shopping with us');
+            return redirect('/thank-you');
         }
 
         if ($type == 'DBT') {
@@ -200,25 +232,33 @@ class CheckoutController extends Controller
                     ]);
 
                     Session::put('order_id',$order->id);
-                    Session::put('product_id',$item->product_id);
+                    Session::put('product_id',$item->product->name);
+                    Session::put('orderdate',$date);
+                    Session::put('payment_method','Direct Bank Transfer');
                     Session::put('price',$item->price);
+                    Session::put('description',$item->product->description);
                     Session::put('quantity',$item->quantity);
-                    Session::put('ref_no',str_shuffle($pin));
+                    //Session::put('ref_no',str_shuffle($pin));
                     Session::put('totalamount',$cart->total);
 
                     //Code for Order Email
                     $email = Auth::user()->email;
                     $messageData = [
                         'email' => $email,
+                        'product_id' => $item->product->name,
+                        'order_id' => $order->id,
+                        'price' => $item->price,
+                        'description' => $item->product->description,
+                        'orderdate' => $date,
+                        'payment_method' => 'Direct Bank Transfer',
+                        'quantity' => $item->quantity,
+                        'totalamount' => $cart->total,
                         'name' => Auth::user()->name,
-                        'order_ref_no' => str_shuffle($pin)
+                        //'order_ref_no' => str_shuffle($pin)
                     ];
 
-                    Mail::send('emails.order', $messageData, function($message) use ($email){
-                        $message->from('contact@greenernorahinvestments.com', 'Greenernora-Investments');
-                        $message->to($email)->subject('Order Placed - Greenernora-Investments');
-                    });
-
+                    //dd($messageData);
+                    Mail::to($email)->send(new OrderMail($messageData));
 
                     // Reduce product quantity
                     $item->product->quantityonhand - $item->quantity;
