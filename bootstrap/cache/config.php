@@ -473,7 +473,7 @@
         'port' => '465',
         'encryption' => 'ssl',
         'username' => 'contact@greenernorahinvestments.com',
-        'password' => '+^uCcpsEAU;$',
+        'password' => 'CvEK4xSmHpZ4',
         'timeout' => NULL,
         'auth_mode' => NULL,
       ),
@@ -653,6 +653,10 @@
     'remote_sites_path' => '',
     'local_sites_path' => '',
     'housekeeping_endpoint_prefix' => '_ignition',
+  ),
+  'sweet-alert' => 
+  array (
+    'autoclose' => 2500,
   ),
   'toastr' => 
   array (

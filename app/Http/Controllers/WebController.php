@@ -4,6 +4,8 @@
     use App\Product;
     use Auth;
     use App\User;
+    use App\Mail\ContactMessage;
+    use Illuminate\Support\Facades\Mail;
     use App\ProductCategory;
 
     use Illuminate\Http\Request;
@@ -36,7 +38,7 @@
             return view('web.contactus');
         }
 
-        public function store(){
+        public function submitContact(){
             //dd(request()->all());
             $data = request()->validate([
                 'name' => 'required',
@@ -46,14 +48,17 @@
                 'message' => 'required',
             ]);
 
+            //dd($data);
+
 
             $email = 'contact@greenernorahinvestments.com';
 
+
+
             // Send An Email
             Mail::to($email)->send(new ContactMessage($data));
-            toastr()->success('Product has been saved successfully!');
+            alert()->success('Your Mail has been sent Succesfully!', 'We will Get back to you shortly!');
             return redirect()->back();
-            return redirect()->back()->with('flash_message_success','Message Sent!');
 
         }
 

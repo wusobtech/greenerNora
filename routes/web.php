@@ -88,3 +88,4 @@ Route::get('/command', function() {
 Route::get('search', 'WebController@search')->name('search');
 Route::get('/receipt', 'CheckoutController@receipt');
 Route::get('/thank-you', 'CheckoutController@thankyou');
+Route::post('/submitContactForm', 'WebController@submitContact')->name('submitContact');

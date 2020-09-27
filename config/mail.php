@@ -40,7 +40,7 @@ return [
             'port' => env('MAIL_PORT', 465),
             'encryption' => env('MAIL_ENCRYPTION', 'ssl'),
             'username' => env('MAIL_USERNAME','contact@greenernorahinvestments.com'),
-            'password' => env('MAIL_PASSWORD','+^uCcpsEAU;$'),
+            'password' => env('MAIL_PASSWORD','CvEK4xSmHpZ4'),
             'timeout' => null,
             'auth_mode' => null,
         ],
