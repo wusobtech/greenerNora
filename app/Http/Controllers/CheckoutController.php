@@ -48,6 +48,9 @@ class CheckoutController extends Controller
         $shippingCount = DeliveryAddress::where('user_id',$user_id)->count();
         if ($shippingCount > 0) {
             $shippingDetails = DeliveryAddress::where('user_id',$user_id)->first();
+        } else{
+            alert()->error('Something went wrong!', 'Please fill in your billing address details from your dashboard before you can proceed');
+            return redirect()->back();
         }
         $cart = getUserCart();
         $items = getUserCart()->cartItems;
