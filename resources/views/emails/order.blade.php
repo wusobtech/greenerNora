@@ -205,7 +205,7 @@ a[x-apple-data-detectors] {
                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                      <tr style="border-collapse:collapse">
                       <!--INPUT ITEM NAME AND PICTURE-->
-                      <td align="center" style="padding:0;Margin:0;font-size:0"><a target="_blank" href="#" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:14px;text-decoration:none;color:#C44D39"><img class="adapt-img" src="" width="120" title="ITEM NAME"></a></td>
+                      <td align="center" style="padding:0;Margin:0;font-size:0"><a target="_blank" href="#" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:14px;text-decoration:none;color:#C44D39"></a></td>
                      </tr>
                    </table></td>
                  </tr>

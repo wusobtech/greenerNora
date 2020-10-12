@@ -87,8 +87,9 @@ Dashboard
                                                 <table class="table table-cart table-mobile">
                                                     <thead>
                                                         <tr>
-                                                            <th>Product</th>
+                                                            <th>Product name</th>
                                                             <th>Price</th>
+                                                            <th>Order Reference No.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                                                             <th>Status</th>
                                                             <th>Payment</th>
                                                             <th>Date</th>
@@ -107,11 +108,13 @@ Dashboard
                                                                 </div><!-- End .product -->
                                                             </td>
                                                             <td class="price-col">{{ $order->price - $order->discount }}</td>
-                                                            <td class="price-col">{{ $order->order->status }}</td>
+                                                            <td class="price-col">{{ $order->order->ref_no }}</td>
+                                                            <td class="price-col">&nbsp;&nbsp;{{ $order->order->status }}</td>
                                                             <td class="price-col">{{ $order->order->payment_method }}</td>
                                                             <td class="price-col">{{ $order->order->orderdate }}</td>
                                                         </tr>
                                                         @endforeach
+                                                        {{ $orders->links() }}
 
                                                     </tbody>
                                                 </table><!-- End .table table-wishlist -->
@@ -207,7 +210,7 @@ Dashboard
                                 </div><!-- .End .tab-pane -->
 
                                 <div class="tab-pane fade" id="tab-billing" role="tabpanel" aria-labelledby="tab-billing-link">
-                                    <form method="POST" action="{{route('profile.changeprofile')}}">
+                                    <form method="POST" action="{{route('submitAddress')}}">
                                         @csrf
                                         <div class="row">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
@@ -215,21 +218,45 @@ Dashboard
                                             <input type="text" name="name" value="{{Auth::user()->name}}" class="form-control" required>
                                             </div><!-- End .col-sm-6 -->
                                             <div class="col-sm-12 col-md-12 col-lg-12">
-                                                <label>phone Number <small style="color: red;">*</small></label>
-                                                <input type="text" value="{{Auth::user()->phone}}" name="phone" class="form-control" required>
+                                                <label>Country *</label>
+                                                <select id="country" name="country" class="form-control" required>
+                                                    <option value="">Select Country</option>
+                                                    @foreach ($countries as $country)
+                                                        <option value="{{ $country->name }}">
+                                                            {{ $country->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                             <div class="col-sm-12 col-md-12 col-lg-12">
-                                                <label>State <small style="color: red;">*</small></label>
-                                                <input type="text" value="{{Auth::user()->state}}" name="state" class="form-control" required>
+                                                <label>Street address *</label>
+                                                <input type="text" name="address" class="form-control" placeholder="House number and Street name" required>
                                             </div>
-                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                <label>Address <small style="color: red;">*</small></label>
-                                                <input type="text" value="{{Auth::user()->address}}" name="address" class="form-control" required>
-                                            </div>
+
+                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                    <label>Town / City *</label>
+                                                    <input type="text" name="city" class="form-control" required>
+                                                </div><!-- End .col-sm-6 -->
+
+                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                    <label>State / County *</label>
+                                                    <input type="text" name="state" class="form-control" required>
+                                                </div><!-- End .col-sm-6 -->
+
+                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                    <label>Postcode / ZIP *</label>
+                                                    <input type="text" name="postcode"  class="form-control" required>
+                                                </div><!-- End .col-sm-6 -->
+
+                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                    <label>Phone *</label>
+                                                    <input type="tel" name="phone" class="form-control" required>
+                                                </div><!-- End .col-sm-6 -->
+                                            </div><!-- End .row -->
+
                                         </div><!-- End .row -->
 
-                                        <label>Email address <small style="color: red;">*</small></label>
-                                        <input type="email" value="{{Auth::user()->email}}" class="form-control" name="email" required readonly>
+
 
                                         <button type="submit" class="btn btn-outline-primary-2">
                                             <span>SAVE CHANGES</span>

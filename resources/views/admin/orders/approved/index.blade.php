@@ -46,6 +46,7 @@
                             </tr>
                             @endforeach
                             </tbody>
+                            {{ $approval->links() }}
                         </table>
 
                     </div>

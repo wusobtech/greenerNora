@@ -27,12 +27,12 @@ class OrderController extends Controller
     }
 
     public function unapproved_orders(){
-        $orders = Order::where('status','Pending')->orderBy('id' , 'desc')->get();
+        $orders = Order::where('status','Pending')->orderBy('id' , 'desc')->paginate(6);
         return view('admin.orders.unapproved.index', compact('orders'));
     }
 
     public function approved_orders(){
-        $approval = Order::where('status', 'Approved')->get();
+        $approval = Order::where('status', 'Approved')->orderBy('id' , 'desc')->paginate(6);
         return view('admin.orders.approved.index', compact('approval'));
     }
 

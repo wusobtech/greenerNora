@@ -74,7 +74,6 @@ Route::group(['middleware'=> ['admin']],function(){
     Route::get('/verify-order-info/{id}', 'OrderController@verify_order_info')->name('verify_order_info');
     Route::post('/verify-order-status/{id}', 'OrderController@verify_order_status')->name('verify_order_status');
     Route::get('/approved-orders-list', 'OrderController@approved_orders')->name('approved_orders');
-    Route::get('/declined-orders-list', 'OrderController@declined_orders')->name('declined_orders');
     Route::get('/order','OrderController@index');
 });
 

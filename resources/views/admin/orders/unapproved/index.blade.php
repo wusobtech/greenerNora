@@ -45,6 +45,7 @@
                             </tr>
                             @endforeach
                             </tbody>
+                            {{ $orders->links() }}
                         </table>
 
                     </div>
