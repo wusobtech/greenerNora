@@ -52,12 +52,75 @@ Dashboard
                                     <br>
                                     From your account dashboard you can view your <a href="#tab-orders" class="tab-trigger-link link-underline">recent orders</a>, manage your <a href="#tab-address" class="tab-trigger-link">shipping and billing addresses</a>, and <a href="#tab-account" class="tab-trigger-link">edit your password and account details</a>.</p>
                                 </div><!-- .End .tab-pane -->
-
                                 <div class="tab-pane fade" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
-                                    <p>No order has been made yet.</p>
-                                    <a href="{{route('homepage')}}" class="btn btn-outline-primary-2"><span>GO SHOP</span><i class="icon-long-arrow-right"></i></a>
+                                    {{-- <div class="container">
+                                        <table class="table table-wishlist table-mobile">
+                                            <thead>
+                                                <tr>
+                                                    <th>Product</th>
+                                                    <th>Price</th>
+                                                    <th>Status</th>
+                                                    <th></th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach ($orders as $order)
+                                                <tr>
+                                                    <td class="">
+                                                        <div class="product">
+                                                            <h3 class="product-title">
+                                                                {{ $order->product->name }}
+                                                            </h3><!-- End .product-title -->
+                                                        </div><!-- End .product -->
+                                                    </td>
+                                                    <td class="">{{ $order->price - $order->discount }}</td>
+                                                    <td class="price-col">{{ $order->order->status }}<td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table><!-- End .table table-wishlist -->
+                                    </div><!-- End .container --> --}}
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-9">
+                                                <table class="table table-cart table-mobile">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Product</th>
+                                                            <th>Price</th>
+                                                            <th>Status</th>
+                                                            <th>Payment</th>
+                                                            <th>Date</th>
+                                                        </tr>
+                                                    </thead>
 
-                                </div><!-- .End .tab-pane -->
+                                                    <tbody>
+                                                        @foreach ($orders as $order)
+
+                                                        <tr class="cartItem">
+                                                            <td class="product-col">
+                                                                <div class="product">
+                                                                    <h3 class="product-title">
+                                                                        {{ $order->product->name }}
+                                                                    </h3><!-- End .product-title -->
+                                                                </div><!-- End .product -->
+                                                            </td>
+                                                            <td class="price-col">{{ $order->price - $order->discount }}</td>
+                                                            <td class="price-col">{{ $order->order->status }}</td>
+                                                            <td class="price-col">{{ $order->order->payment_method }}</td>
+                                                            <td class="price-col">{{ $order->order->orderdate }}</td>
+                                                        </tr>
+                                                        @endforeach
+
+                                                    </tbody>
+                                                </table><!-- End .table table-wishlist -->
+
+                                            </div><!-- End .col-lg-9 -->
+                                        </div><!-- End .row -->
+                                    </div><!-- End .container -->
+                                    </div><!-- .End .tab-pane -->
+
 
                                 <div class="tab-pane fade" id="tab-downloads" role="tabpanel" aria-labelledby="tab-downloads-link">
                                     <div class="card mb-4">

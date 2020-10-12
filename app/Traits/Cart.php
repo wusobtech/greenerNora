@@ -32,7 +32,7 @@ trait Cart{
                 'product_id' => $product->id,
                 'quantity' => $quantity,
                 'price' => $product->price,
-                'discount' => $product->discount,
+                'discount' => $product->discount ?? 0,
             ]);
             $msg = 'Item added to cart!';
 

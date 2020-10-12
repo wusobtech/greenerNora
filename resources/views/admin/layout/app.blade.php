@@ -89,6 +89,7 @@
                                     <li><a href="{{ route('adminProducts') }}">View</a></li>
                                 </ul>
                             </li>
+<<<<<<< HEAD
 
                             <li class="has_sub">
                                 <a href="javascript:void(0);" class="waves-effect"><i class="dripicons-store"></i> <span> Lounges List </span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
@@ -103,6 +104,10 @@
                                     <li><a href="{{ route('unapproved_orders') }}">Unapproved Orders</a></li>
                                     <li><a href="{{ route('approved_orders') }}">Approved Orders</a></li>
                                 </ul>
+=======
+                            <li class="has_sub">
+                                <a href="/order" class="waves-effect"><i class="dripicons-broadcast"></i> <span> Orders </span> <span class="menu-arrow float-right"><i class="mdi mdi-cart-right"></i></span></a>
+>>>>>>> 07c0a2d2443cfd88c6419838dece430f95e944bd
                             </li>
                         </ul>
                     </div>
