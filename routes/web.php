@@ -62,11 +62,13 @@ Route::group(['middleware'=> ['admin']],function(){
     Route::match(['get','post'],'/edit-product/{id}','ProductController@edit')->name('editProduct');
     Route::match(['get','post'],'/update-product/{id}','ProductController@update')->name('updateProduct');
     Route::match('product-delete/{id}' , 'ProductController@destroy')->name('deleteProduct');
+    Route::get('/order','OrderController@index');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/user-order', 'HomeController@order')->name('user-order');
 
 Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::match(['get','post'],'/profile', 'ProfileController@update')->name('profile.update');

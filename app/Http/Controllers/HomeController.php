@@ -31,7 +31,9 @@ class HomeController extends Controller
         if($user->role == "Admin"){
             return redirect('admin/dashboard');
         }
-        return view('user/dashboard');
+        $user = Auth::User();
+        $orders = Order::where('user_id' , $user->id)->get();
+        return view('user.dashboard', compact('orders','user'));
     }
 
     public function logout(){

@@ -52,8 +52,35 @@ Dashboard
 
                                 <div class="tab-pane fade" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
                                     <p>No order has been made yet.</p>
-                                    <a href="{{route('homepage')}}" class="btn btn-outline-primary-2"><span>GO SHOP</span><i class="icon-long-arrow-right"></i></a>
+                                        <div class="container">
+                                            <table class="table table-wishlist table-mobile">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Product</th>
+                                                        <th>Price</th>
+                                                        <th>Stock Status</th>
+                                                        <th></th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
 
+                                                <tbody>
+                                                @foreach ($orders as $order)
+                                                    <tr>
+                                                        <td class="product-col">
+                                                            <div class="product">
+                                                                <h3 class="product-title">
+                                                                    <a href="#">{{ $order->product->name }} </a>
+                                                                </h3><!-- End .product-title -->
+                                                            </div><!-- End .product -->
+                                                        </td>
+                                                        <td class="price-col">$52.00</td>
+                                                    </tr>
+                                                @endforeach
+
+                                                </tbody>
+                                            </table><!-- End .table table-wishlist -->
+                                        </div><!-- End .container -->
                                 </div><!-- .End .tab-pane -->
 
                                 <div class="tab-pane fade" id="tab-downloads" role="tabpanel" aria-labelledby="tab-downloads-link">

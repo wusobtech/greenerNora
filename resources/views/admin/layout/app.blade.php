@@ -81,6 +81,9 @@
                                     <li><a href="{{ route('adminProducts') }}">View</a></li>
                                 </ul>
                             </li>
+                            <li class="has_sub">
+                                <a href="/order" class="waves-effect"><i class="dripicons-broadcast"></i> <span> Orders </span> <span class="menu-arrow float-right"><i class="mdi mdi-cart-right"></i></span></a>
+                            </li>
                         </ul>
                     </div>
                     <div class="clearfix"></div>

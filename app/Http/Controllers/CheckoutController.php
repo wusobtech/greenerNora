@@ -42,7 +42,7 @@ class CheckoutController extends Controller
 
         $countries = Country::get();
 
-        //$address = DeliveryAddress::get();
+        $address = DeliveryAddress::get();
         //dd($address);
         $user_id = Auth::user()->id;
         $shippingCount = DeliveryAddress::where('user_id',$user_id)->count();
@@ -61,7 +61,6 @@ class CheckoutController extends Controller
         $grand_total = 0;
         return view('web.checkout',compact('shippingDetails','delivery','grand_total','countries','cart','items','reference','total_amount','type'));
     }
-
     public function receipt(){
 
         $cart = getUserCart();
