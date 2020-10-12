@@ -2,6 +2,7 @@
 
     namespace App\Http\Controllers;
     use App\Product;
+    use App\Lounge;
     use Auth;
     use App\User;
     use App\Mail\ContactMessage;
@@ -19,19 +20,23 @@
             return view('welcome', compact('categories', 'newArrivals', 'featuredArrivals'));
         }
 
-        public function shop($id){
-            $category_list = ProductCategory::get();
-            $categories = ProductCategory::where('id', $id)->get();
-            $products = Product::where('category_id', $id)->where('status', 'Active')->orderBy('id' , 'desc')->paginate(8);
+        // public function shop($id){
+        //     $category_list = ProductCategory::get();
+        //     $categories = ProductCategory::where('id', $id)->get();
+        //     $products = Product::where('category_id', $id)->where('status', 'Active')->orderBy('id' , 'desc')->paginate(8);
 
-            return view('web.shop', compact('products','categories','category_list'));
-        }
+        //     return view('web.shop', compact('products','categories','category_list'));
+        // }
 
         public function frozenfoods(){
-            return view('web.frozen_foods');
+            $categories = ProductCategory::where('id', 1)->get();
+            $products = Product::where('category_id', 1)->where('status', 'Active')->orderBy('id' , 'desc')->paginate(8);
+            return view('web.frozen_foods', compact('products','categories'));
         }
         public function lounge(){
-            return view('web.lounge');
+            $categories = ProductCategory::where('id', 2)->get();
+            $products = Lounge::where('category_id', 2)->where('status', 'Active')->orderBy('id' , 'desc')->paginate(8);
+            return view('web.lounge', compact('products','categories'));
         }
 
         public function contactus(){
@@ -80,6 +85,14 @@
             $cat = Product::where('id', $id)->first();
             $similars = Product::where('category_id' , $cat->category_id)->where('id' , '!=' , $cat->id)->get();
             return view('web.product', compact('product','similars','stockLevel'));
+        }
+
+        public function loungeInfo($id){
+            $product=Lounge::where('id', $id)->first();
+
+            $cat = Lounge::where('id', $id)->first();
+            $similars = Lounge::where('category_id' , $cat->category_id)->where('id' , '!=' , $cat->id)->get();
+            return view('web.lounges', compact('product','similars'));
         }
 
         public function faq(){

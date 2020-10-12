@@ -31,6 +31,7 @@ class HomeController extends Controller
         if($user->role == "Admin"){
             return redirect('admin/dashboard');
         }
+        $countries = Country::get();
         return view('user/dashboard');
     }
 

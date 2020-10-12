@@ -41,9 +41,6 @@ class CheckoutController extends Controller
     {
 
         $countries = Country::get();
-
-        //$address = DeliveryAddress::get();
-        //dd($address);
         $user_id = Auth::user()->id;
         $shippingCount = DeliveryAddress::where('user_id',$user_id)->count();
         if ($shippingCount > 0) {
@@ -73,7 +70,9 @@ class CheckoutController extends Controller
     }
 
     public function thankyou(){
-        return view('web.thankyou');
+        $user = Auth::User();
+        $orders = Order::where('user_id' , $user->id)->first();
+        return view('web.thankyou', compact('orders','user'));
     }
 
     /**
@@ -173,7 +172,7 @@ class CheckoutController extends Controller
                     Session::put('price',$item->price);
                     Session::put('description',$item->product->description);
                     Session::put('quantity',$item->quantity);
-                    //Session::put('ref_no',str_shuffle($pin));
+                    Session::put('ref_no',$order->ref_no);
                     Session::put('totalamount',$cart->total);
 
                     //Code for Order Email
@@ -189,7 +188,7 @@ class CheckoutController extends Controller
                         'quantity' => $item->quantity,
                         'totalamount' => $cart->total,
                         'name' => Auth::user()->name,
-                        //'order_ref_no' => str_shuffle($pin)
+                        'order_ref_no' => $order->ref_no
                     ];
 
                     //dd($messageData);
@@ -241,7 +240,7 @@ class CheckoutController extends Controller
                     Session::put('price',$item->price);
                     Session::put('description',$item->product->description);
                     Session::put('quantity',$item->quantity);
-                    //Session::put('ref_no',str_shuffle($pin));
+                    Session::put('ref_no',$order->ref_no);
                     Session::put('totalamount',$cart->total);
 
                     //Code for Order Email
@@ -257,7 +256,7 @@ class CheckoutController extends Controller
                         'quantity' => $item->quantity,
                         'totalamount' => $cart->total,
                         'name' => Auth::user()->name,
-                        //'order_ref_no' => str_shuffle($pin)
+                        'order_ref_no' => $order->ref_no
                     ];
 
                     //dd($messageData);

@@ -176,6 +176,8 @@ trait Constants
      */
     public $productImagePath = 'images/products';
 
+    public $loungeImagePath = 'images/lounges';
+
 
      /**
      * Testimonial images file path

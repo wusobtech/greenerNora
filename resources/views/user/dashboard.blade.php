@@ -37,6 +37,9 @@ Dashboard
                                     <a class="nav-link" id="tab-account-link" data-toggle="tab" href="#tab-account" role="tab" aria-controls="tab-account" aria-selected="false">Account Details</a>
                                 </li>
                                 <li class="nav-item">
+                                    <a class="nav-link" id="tab-billing-link" data-toggle="tab" href="#tab-billing" role="tab" aria-controls="tab-billing" aria-selected="false">Billing Details</a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link" href="{{ route('logout') }}">Sign Out</a>
                                 </li>
                             </ul>
@@ -109,6 +112,38 @@ Dashboard
                                 </div><!-- .End .tab-pane -->
 
                                 <div class="tab-pane fade" id="tab-account" role="tabpanel" aria-labelledby="tab-account-link">
+                                    <form method="POST" action="{{route('profile.changeprofile')}}">
+                                        @csrf
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <label>Full Name<small style="color: red;">*</small></label>
+                                            <input type="text" name="name" value="{{Auth::user()->name}}" class="form-control" required>
+                                            </div><!-- End .col-sm-6 -->
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <label>phone Number <small style="color: red;">*</small></label>
+                                                <input type="text" value="{{Auth::user()->phone}}" name="phone" class="form-control" required>
+                                            </div>
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <label>State <small style="color: red;">*</small></label>
+                                                <input type="text" value="{{Auth::user()->state}}" name="state" class="form-control" required>
+                                            </div>
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <label>Address <small style="color: red;">*</small></label>
+                                                <input type="text" value="{{Auth::user()->address}}" name="address" class="form-control" required>
+                                            </div>
+                                        </div><!-- End .row -->
+
+                                        <label>Email address <small style="color: red;">*</small></label>
+                                        <input type="email" value="{{Auth::user()->email}}" class="form-control" name="email" required readonly>
+
+                                        <button type="submit" class="btn btn-outline-primary-2">
+                                            <span>SAVE CHANGES</span>
+                                            <i class="icon-long-arrow-right"></i>
+                                        </button>
+                                    </form>
+                                </div><!-- .End .tab-pane -->
+
+                                <div class="tab-pane fade" id="tab-billing" role="tabpanel" aria-labelledby="tab-billing-link">
                                     <form method="POST" action="{{route('profile.changeprofile')}}">
                                         @csrf
                                         <div class="row">

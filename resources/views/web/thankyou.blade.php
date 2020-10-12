@@ -25,7 +25,7 @@ Thank You
                                     <p id="responseref" style="font-weight: 500;font-size: 1.4rem;color:#2d2d2d;">
                                     </p>
                                 </h1>
-                                <p class="text-center" id="msgs">you can check your email or dashboard for order details and delivery date <br><br>
+                                <p class="text-center" id="msgs">Order Reference Number :- <b>{{ $orders->ref_no }}</b><br>you can check your email or dashboard for order details and delivery date <br><br>
                                     <a href="/" class="btn btn-outline-dark-2 mb-3"><span>CONTINUE SHOPPING</span><i class="icon-refresh"></i></a>
                                 </p>
                             </div>

@@ -2,84 +2,42 @@
 
 namespace App\Http\Controllers;
 
-use App\Order;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use App\Order;
 
 class OrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
+    public function index(){
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function unapproved_orders(){
+        $orders = Order::where('status','Pending')->orderBy('id' , 'desc')->get();
+        return view('admin.orders.unapproved.index', compact('orders'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function approved_orders(){
+        $approval = Order::where('status', 'Approved')->get();
+        return view('admin.orders.approved.index', compact('approval'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Order $order)
+    public function verify_order_info($id)
     {
-        //
+        $verification = Order::findorfail($id);
+        return view('admin.orders.unapproved.info',compact('verification'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Order $order)
+    public function verify_order_status(Request $request, $id)
     {
-        //
+        $data = $request->validate([
+            'status'=> 'required|string',
+        ]);
+        $data['admin_id'] = auth('web')->user()->id;
+        $verification = Order::findorfail($id);
+        $verification->update($data);
+        toastr()->success('Order '.$data['status'].' successfully!');
+        return redirect()->route('unapproved_orders');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Order $order)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Order $order)
-    {
-        //
-    }
 }

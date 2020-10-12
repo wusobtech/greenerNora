@@ -18,34 +18,30 @@
             <div class="col-12">
                 <div class="card m-b-30">
                     <div class="card-body">
-
-                        <h4 class="mt-0 header-title">Latest Registered Users Info</h4>
+                        <h4 class="mt-0 header-title">Latest Order Info</h4>
                         <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                             <thead>
                             <tr>
-                                <th>  ID</th>
-                                <th>  Full Name</th>
-                                <th> Email </th>
-                                <th> Phone </th>
-                                <th>  Address </th>
-                                <th> Role </th>
-                                <th> Signup Date</th>
-                                <th>Actions</th>
+                                <th> Action</th>
+                                <th> Customer Name</th>
+                                <th> Order Date </th>
+                                <th> Order Reference Number </th>
+                                <th> Payment Method </th>
+                                <th> Status</th>
+                                <th> Creation Date</th>
                             </tr>
                             </thead>
 
                             <tbody>
-                            @foreach ($users as $user)
+                            @foreach ($orders as $order)
                             <tr>
-                                <td>{{ $user->id }}</td>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td>{{ $user->phone }}</td>
-                                <td>{{ $user->address }}</td>
-                                <td>{{ $user->role }}</td>
-                                <td>{{ date('F j, Y g:i a',strtotime($user->created_at)) }}</td>
-                                <div class="fr"><td class="center"><a href="" class="btn btn-primary btn-sm"><i class="ti-pencil"></i></a>
-                                <a id="delCat" href="" class="btn btn-danger btn-mini">Suspend</a></td></div>
+                                <td><a href="{{ route('verify_order_info',$order) }}" class="btn btn-outline-primary sm">View Info</a></td>
+                                <td>{{ $order->user->name }}</td>
+                                <td>{{ date('F j, Y', strtotime($order->orderdate)) }}</td>
+                                <td>{{ $order->ref_no }}</td>
+                                <td>{{ $order->payment_method }}</td>
+                                <td>{{ $order->status }}</td>
+                                <td>{{ date('F j, Y g:i a',strtotime($order->created_at)) }}</td>
                             </tr>
                             @endforeach
                             </tbody>
