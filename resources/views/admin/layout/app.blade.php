@@ -52,7 +52,8 @@
 
                 <div class="left-side-logo d-block d-lg-none">
                     <div class="text-center">
-                        <a href="#" class="logo"><img src="{{ $admin_source }}/assets/images/logo-dark.png" height="20" alt="logo"></a>
+                        <a href="#" class="logo"><img alt="logo" height="25" width="105" src="{{ $web_source ?? '' }}/images/logo.png" /> </a>
+
                     </div>
                 </div>
 
@@ -68,21 +69,40 @@
                                 </a>
                             </li>
 
-                            <li class="has_sub">
+                            <li>
+                                <a href="{{'/'}}" class="waves-effect">
+                                    <i class="dripicons-home"></i>
+                                    <span> View Website </span>
+                                </a>
+                            </li>
+
+                            {{--  <li class="has_sub">
                                 <a href="javascript:void(0);" class="waves-effect"><i class="dripicons-calendar"></i> <span> Categories List </span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                                 <ul class="list-unstyled">
                                     <li><a href="{{ route('adminCategories') }}">View</a></li>
                                 </ul>
-                            </li>
+                            </li>  --}}
 
                             <li class="has_sub">
-                                <a href="javascript:void(0);" class="waves-effect"><i class="dripicons-broadcast"></i> <span> Products List </span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                                <a href="javascript:void(0);" class="waves-effect"><i class="dripicons-shopping-bag"></i> <span> Products List </span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                                 <ul class="list-unstyled">
                                     <li><a href="{{ route('adminProducts') }}">View</a></li>
                                 </ul>
                             </li>
+
                             <li class="has_sub">
-                                <a href="/order" class="waves-effect"><i class="dripicons-broadcast"></i> <span> Orders </span> <span class="menu-arrow float-right"><i class="mdi mdi-cart-right"></i></span></a>
+                                <a href="javascript:void(0);" class="waves-effect"><i class="dripicons-store"></i> <span> Lounges List </span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="{{ route('adminLounges') }}">View</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="has_sub">
+                                <a href="javascript:void(0);" class="waves-effect"><i class="dripicons-basket"></i> <span> Orders List </span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="{{ route('unapproved_orders') }}">Unapproved Orders</a></li>
+                                    <li><a href="{{ route('approved_orders') }}">Approved Orders</a></li>
+                                </ul>
                             </li>
                         </ul>
                     </div>
@@ -103,7 +123,7 @@
                         <div class="topbar-left	d-none d-lg-block">
                             <div class="text-center">
 
-                                <a href="#" class="logo"><img src="{{ $admin_source }}/assets/images/logo.png" height="20" alt="logo"></a>
+                                <a href="#" class="logo"><img alt="logo" height="25" width="105" src="{{ $web_source ?? '' }}/images/logo.png" /> </a>
                             </div>
                         </div>
 
@@ -149,7 +169,7 @@
                 </div> <!-- content -->
 
                 <footer class="footer">
-                    Â© 2018 <b>Drixo</b> <span class="d-none d-sm-inline-block"> - Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesdesign.</span>
+                    Â© 2018 <b>GreenerNorah</b> <span class="d-none d-sm-inline-block"> - Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesdesign.</span>
                 </footer>
 
             </div>
