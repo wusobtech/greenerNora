@@ -255,13 +255,6 @@ Dashboard
                                             </div><!-- End .row -->
 
                                         </div><!-- End .row -->
-
-
-
-                                        <button type="submit" class="btn btn-outline-primary-2">
-                                            <span>SAVE CHANGES</span>
-                                            <i class="icon-long-arrow-right"></i>
-                                        </button>
                                     </form>
                                 </div><!-- .End .tab-pane -->
                             </div>
