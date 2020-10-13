@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Order;
+use App\Country;
 use App\OrderItem;
 use Auth;
 use Illuminate\Support\Facades\Session;
@@ -32,11 +33,12 @@ class HomeController extends Controller
         if($user->role == "Admin"){
             return redirect('admin/dashboard');
         }
+        $countries = Country::get();
         $user = Auth::User();
         $orders = OrderItem::whereHas('order' , function($query) use ($user) {
             $query->where('user_id' , $user->id)->where('status' , 0);
-        })->get();
-        return view('user.dashboard', compact('orders','user'));
+        })->paginate(5);
+        return view('user.dashboard', compact('orders','user','countries'));
     }
 
     public function logout(){
@@ -46,7 +48,7 @@ class HomeController extends Controller
 
     public function order(){
         $user = Auth::User();
-        $orders = Order::where('user_id' , $user->id)->get();
+        $orders = Order::where('user_id' , $user->id)->paginate(5);
         return view('user.dashboard', compact('orders','user'));
     }
 }

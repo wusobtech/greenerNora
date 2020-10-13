@@ -16,9 +16,8 @@
                 <li>
                     <a href="#">Shop</a>
                     <ul>
-                        @foreach ($categories as $cat)
-                    <li><a href="{{ route('shops',['id'=>$cat->id,'name'=>$cat->name])}}" class="menu-title">{{$cat->name}}</a></li>
-                        @endforeach
+                        <li><a href="{{ route('frozenfoods') }}" class="menu-title">Frozen foods</a></li>
+                        <li><a href="{{ route('lounge') }}" class="menu-title">Lounges</a></li>
                     </ul>
                 </li>
                 <li>
@@ -28,9 +27,9 @@
                     <a href="{{ route('login') }}"><i class="icon-user"></i>@if(Auth::check())
                         {{Auth::user()->name}}
                         @else
-                           Login 
+                           Login
                       @endif
-                
+
                 </a>
                 </li>
             </ul>

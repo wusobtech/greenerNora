@@ -21,19 +21,9 @@
                 <div class="card-body">
 
                     <h4 class="mt-0 header-title">Update Product</h4>
-                    @if ($errors->any())
-                    @foreach ($errors->all() as $error)
-                        <ul class="list-group">
-                            <li class="list-group-item alart alert-danger mb-1">
-                                {{ $error }}
-                            </li>
-                        </ul>
-                    @endforeach
-                 @endif
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="p-20">
-
                                 <form class="" enctype="multipart/form-data" method="POST" action="{{ route('updateProduct',$productDetails->id) }}">
                                     {{csrf_field()}}
                                     <div class="form-group">

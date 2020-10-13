@@ -37,6 +37,9 @@ Dashboard
                                     <a class="nav-link" id="tab-account-link" data-toggle="tab" href="#tab-account" role="tab" aria-controls="tab-account" aria-selected="false">Account Details</a>
                                 </li>
                                 <li class="nav-item">
+                                    <a class="nav-link" id="tab-billing-link" data-toggle="tab" href="#tab-billing" role="tab" aria-controls="tab-billing" aria-selected="false">Billing Details</a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link" href="{{ route('logout') }}">Sign Out</a>
                                 </li>
                             </ul>
@@ -84,8 +87,9 @@ Dashboard
                                                 <table class="table table-cart table-mobile">
                                                     <thead>
                                                         <tr>
-                                                            <th>Product</th>
+                                                            <th>Product name</th>
                                                             <th>Price</th>
+                                                            <th>Order Reference No.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                                                             <th>Status</th>
                                                             <th>Payment</th>
                                                             <th>Date</th>
@@ -104,11 +108,13 @@ Dashboard
                                                                 </div><!-- End .product -->
                                                             </td>
                                                             <td class="price-col">{{ $order->price - $order->discount }}</td>
-                                                            <td class="price-col">{{ $order->order->status }}</td>
+                                                            <td class="price-col">{{ $order->order->ref_no }}</td>
+                                                            <td class="price-col">&nbsp;&nbsp;{{ $order->order->status }}</td>
                                                             <td class="price-col">{{ $order->order->payment_method }}</td>
                                                             <td class="price-col">{{ $order->order->orderdate }}</td>
                                                         </tr>
                                                         @endforeach
+                                                        {{ $orders->links() }}
 
                                                     </tbody>
                                                 </table><!-- End .table table-wishlist -->
@@ -195,6 +201,62 @@ Dashboard
 
                                         <label>Email address <small style="color: red;">*</small></label>
                                         <input type="email" value="{{Auth::user()->email}}" class="form-control" name="email" required readonly>
+
+                                        <button type="submit" class="btn btn-outline-primary-2">
+                                            <span>SAVE CHANGES</span>
+                                            <i class="icon-long-arrow-right"></i>
+                                        </button>
+                                    </form>
+                                </div><!-- .End .tab-pane -->
+
+                                <div class="tab-pane fade" id="tab-billing" role="tabpanel" aria-labelledby="tab-billing-link">
+                                    <form method="POST" action="{{route('submitAddress')}}">
+                                        @csrf
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <label>Full Name<small style="color: red;">*</small></label>
+                                            <input type="text" name="name" value="{{Auth::user()->name}}" class="form-control" required>
+                                            </div><!-- End .col-sm-6 -->
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <label>Country *</label>
+                                                <select id="country" name="country" class="form-control" required>
+                                                    <option value="">Select Country</option>
+                                                    @foreach ($countries as $country)
+                                                        <option value="{{ $country->name }}">
+                                                            {{ $country->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <label>Street address *</label>
+                                                <input type="text" name="address" class="form-control" placeholder="House number and Street name" required>
+                                            </div>
+
+                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                    <label>Town / City *</label>
+                                                    <input type="text" name="city" class="form-control" required>
+                                                </div><!-- End .col-sm-6 -->
+
+                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                    <label>State / County *</label>
+                                                    <input type="text" name="state" class="form-control" required>
+                                                </div><!-- End .col-sm-6 -->
+
+                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                    <label>Postcode / ZIP *</label>
+                                                    <input type="text" name="postcode"  class="form-control" required>
+                                                </div><!-- End .col-sm-6 -->
+
+                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                    <label>Phone *</label>
+                                                    <input type="tel" name="phone" class="form-control" required>
+                                                </div><!-- End .col-sm-6 -->
+                                            </div><!-- End .row -->
+
+                                        </div><!-- End .row -->
+
+
 
                                         <button type="submit" class="btn btn-outline-primary-2">
                                             <span>SAVE CHANGES</span>

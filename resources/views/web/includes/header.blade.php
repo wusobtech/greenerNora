@@ -15,9 +15,8 @@
                         <li>
                             <a class="sf-with-ul">Shop</a>
                             <ul>
-                                @foreach ($categories as $cat)
-                            <li><a href="{{ route('shops',['id'=>$cat->id,'name'=>$cat->name])}}" class="menu-title">{{$cat->name}}</a></li>
-                                @endforeach
+                                <li><a href="{{ route('frozenfoods') }}" class="menu-title">Frozen foods</a></li>
+                                <li><a href="{{ route('lounge') }}" class="menu-title">Lounges</a></li>
                             </ul>
                         </li>
                         <li>

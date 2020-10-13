@@ -42,7 +42,7 @@
     @include('sweet::alert')
     <!-- main content -->
     <!-- header -->
-    @php($categories = App\ProductCategory::get())
+    
     <div class="main-content" id="home">
         @include('web.includes.header')
     </div>
