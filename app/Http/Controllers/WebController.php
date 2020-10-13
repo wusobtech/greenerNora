@@ -22,7 +22,7 @@
 
         public function frozenfoods(){
             $categories = ProductCategory::where('id', 1)->get();
-            $products = Product::inRandomOrder()->paginate(8);
+            $products = Product::where('category_id', 1)->where('status', 'Active')->orderBy('id' , 'desc')->paginate(8);
             return view('web.frozen_foods', compact('products','categories'));
         }
         public function lounge(){

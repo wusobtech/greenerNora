@@ -37,7 +37,7 @@ class HomeController extends Controller
         $user = Auth::User();
         $orders = OrderItem::whereHas('order' , function($query) use ($user) {
             $query->where('user_id' , $user->id)->where('status' , 0);
-        })->paginate(5);
+        })->orderBy('id' , 'desc')->paginate(4);
         return view('user.dashboard', compact('orders','user','countries'));
     }
 
@@ -48,7 +48,7 @@ class HomeController extends Controller
 
     public function order(){
         $user = Auth::User();
-        $orders = Order::where('user_id' , $user->id)->paginate(5);
+        $orders = Order::where('user_id' , $user->id)->orderBy('id' , 'desc')->paginate(4);
         return view('user.dashboard', compact('orders','user'));
     }
 }

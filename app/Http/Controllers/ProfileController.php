@@ -19,20 +19,17 @@ class ProfileController extends Controller
 
         if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
             // The passwords matches
-            toastr()->error('Your current password does not matche with the password you provided. Please try again.');
-            return redirect()->back();
+            return redirect()->back()->with("error","Your current password does not matches with the password you provided. Please try again.");
         }
 
         if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
             //Current password and new password are same
-            toastr()->error('New Password cannot be same as your current password. Please choose a different password.');
-            return redirect()->back();
+            return redirect()->back()->with("error","New Password cannot be same as your current password. Please choose a different password.");
         }
 
         if(strcmp($request->get('new-password'), $request->get('new-password_confirmation')) != 0){
             //new password and confirm password are  not the same
-            toastr()->error('New Password and Confirm password are not the same. Please try again');
-            return redirect()->back();
+            return redirect()->back()->with("error","New Password and Confirm password are not the same. Please try again");
         }
 
         $validatedData = $request->validate([
