@@ -83,7 +83,7 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified'
 Route::get('/user-order', 'HomeController@order')->name('user-order')->middleware('verified');;
 
 Route::get('/profile', 'ProfileController@index')->name('profile');
-Route::match(['get','post'],'/profile', 'ProfileController@update')->name('profile.update');
+Route::match(['get','post'],'/update-user-pwd', 'ProfileController@update')->name('profile.update');
 Route::match(['get','post'],'/setting', 'ProfileController@changeProfile')->name('profile.changeprofile')->middleware('verified');;
 
 //Blling Address Routes

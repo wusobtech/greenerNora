@@ -136,7 +136,7 @@ Dashboard
                                                     <div class="col-lg-4">
                                                         <div class="form-group focused">
                                                             <label class="form-control-label" for="current_password">Current password</label>
-                                                            <input type="password" id="current_password" class="form-control" name="current_password" placeholder="Current password" required>
+                                                            <input type="password" id="current_password" class="form-control" name="current-password" placeholder="Current password" required>
                                                             @if ($errors->has('current-password'))
                                                                 <span class="help-block">
                                                                     <strong>{{ $errors->first('current-password') }}</strong>
@@ -253,8 +253,12 @@ Dashboard
                                                     <input type="tel" name="phone" class="form-control" required>
                                                 </div><!-- End .col-sm-6 -->
                                             </div><!-- End .row -->
-
+                                            <button type="submit" class="btn btn-outline-primary-2">
+                                                <span>SAVE CHANGES</span>
+                                                <i class="icon-long-arrow-right"></i>
+                                            </button>
                                         </div><!-- End .row -->
+
                                     </form>
                                 </div><!-- .End .tab-pane -->
                             </div>

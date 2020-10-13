@@ -241,6 +241,7 @@ function getFileType(String $type)
                 'items' => 0,
                 'reference' => generateCartHash(),
             ]);
+
         }
         return $cart;
     }
@@ -277,7 +278,7 @@ function getFileType(String $type)
         }
         $cart->save();
 
-        session()->forget('my_courses');
+        session()->forget('cart');
         session()->forget('my_plans');
 
         return $cart;

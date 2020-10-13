@@ -73,7 +73,7 @@ class CheckoutController extends Controller
 
     public function thankyou(){
         $user = Auth::User();
-        $orders = Order::where('user_id' , $user->id)->first();
+        $orders = Order::where('user_id' , $user->id)->orderBy('id' , 'desc')->first();
         return view('web.thankyou', compact('orders','user'));
     }
 
@@ -219,16 +219,17 @@ class CheckoutController extends Controller
     public function sendOrderEmail($order){
 
         //Code for Order Email
+        $user = Auth::User();
+        $orders = Order::where('user_id' , $user->id)->orderBy('id' , 'desc')->first();
         $email = Auth::user()->email;
         $messageData = [
             'email' => $email,
             'order_id' => $order->id,
             'price' => $order->totalamount,
-            'description' => 'Descrittion from tope',
             'orderdate' => $order->orderdate,
             'payment_method' => $order->payment_method,
             'name' => Auth::user()->name,
-            'order_ref_no' => $order->ref_no,
+            'order_ref_no' => $orders->ref_no,
             'order_items' => OrderItem::where('order_id' , $order->id)->get(),
         ];
         Mail::to($email)->send(new OrderMail($messageData));
@@ -276,7 +277,7 @@ class CheckoutController extends Controller
 
 
             try{
-                $this->processCartToOrder($cart , 'Çash on Delivery');
+                $this->processCartToOrder($cart , 'Cash on Delivery');
                 DB::commit();
                 $this->sendOrderEmail($order);
             }
