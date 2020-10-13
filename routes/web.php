@@ -46,7 +46,7 @@ Route::prefix('cart')->as('cart.')->middleware(['auth'])->group(function () {
 
 Auth::routes(['register' => false]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');;
 Route::get('/logout','HomeController@logout');
 
 Route::group(['middleware'=> ['admin']],function(){
@@ -77,14 +77,14 @@ Route::group(['middleware'=> ['admin']],function(){
     Route::get('/order','OrderController@index');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/user-order', 'HomeController@order')->name('user-order');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');;
+Route::get('/user-order', 'HomeController@order')->name('user-order')->middleware('verified');;
 
 Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::match(['get','post'],'/profile', 'ProfileController@update')->name('profile.update');
-Route::match(['get','post'],'/setting', 'ProfileController@changeProfile')->name('profile.changeprofile');
+Route::match(['get','post'],'/setting', 'ProfileController@changeProfile')->name('profile.changeprofile')->middleware('verified');;
 
 //Blling Address Routes
 Route::post('/save-address', 'CheckoutController@store')->name('submitAddress');
