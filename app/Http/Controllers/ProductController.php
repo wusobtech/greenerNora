@@ -94,8 +94,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
+        $categories = ProductCategory::get();
         $productDetails = Product::FindorFail($id);
-        return view('admin.products.edit',compact('productDetails'));
+        return view('admin.products.edit',compact('productDetails','categories'));
     }
 
     /**
@@ -107,18 +108,19 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $request->validate([
             'name' => 'required|unique:products',
             'category_id' => 'required',
             'description' => 'required',
             'weight' => 'nullable',
             'status' => 'required',
-            'image' => 'required|image',
+            'image' => 'nullable|image',
             'type' => 'required',
             'price' => 'required',
-            'quantityonhand' => 'required'
+            'quantityonhand' => 'nullable'
         ]);
-
+        // dd($request->all());
         $image = $request->file('image');
         $products = Product::findorfail($id);
 
@@ -155,7 +157,11 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::findOrFail($id);
-        deleteFileFromStorage($product->getImage());
+
+        if(file_exists($product->image))
+        {
+            unlink($product->image);
+        }
         $product->delete();
         toastr()->success('Product deleted successfully!');
         return redirect('admin/products');
