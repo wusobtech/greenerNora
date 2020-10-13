@@ -62,7 +62,7 @@ Route::group(['middleware'=> ['admin']],function(){
     Route::match(['get','post'],'/submit-product', 'ProductController@store')->name('submitProduct');
     Route::match(['get','post'],'/edit-product/{id}','ProductController@edit')->name('editProduct');
     Route::match(['get','post'],'/update-product/{id}','ProductController@update')->name('updateProduct');
-    Route::match('product-delete/{id}' , 'ProductController@destroy')->name('deleteProduct');
+    Route::match(['get','post'],'product-delete/{id}' , 'ProductController@destroy')->name('deleteProduct');
 
     Route::get('admin/lounge', 'LoungeController@index')->name('adminLounges');
     Route::match(['get','post'],'/submit-lounge', 'LoungeController@store')->name('submitLounge');

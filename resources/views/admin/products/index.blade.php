@@ -147,7 +147,13 @@
                                 <td>{{ $product->discount }}</td>
                                 <td>{{ date('F j, Y g:i a',strtotime($product->created_at)) }}</td>
                                     <div class="fr"><td class="center"><a href="{{ route('editProduct', $product->id) }}" class="btn btn-primary btn-sm"><i class="ti-pencil"></i></a>
-                                        <a  href="{{ route('deleteProduct', $product->id )}}" class="btn btn-primary btn-sm"><i class="ti-trash"></i></a></td>
+                                    <form method="POST" class="d-inline" action="{{ route('deleteProduct',$product->id) }}">
+                                        {{ csrf_field() }}
+                                     <button class="btn btn-primary btn-sm">
+                                        <i class="ti-trash"></i>
+                                     </button>
+                                    </form>
+                                      </td>
                                     </div>
                             </tr>
                             @endforeach

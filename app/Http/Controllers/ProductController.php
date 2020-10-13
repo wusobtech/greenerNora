@@ -157,7 +157,11 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::findOrFail($id);
-        deleteFileFromStorage($product->getImage());
+
+        if(file_exists($product->image))
+        {
+            unlink($product->image);
+        }
         $product->delete();
         toastr()->success('Product deleted successfully!');
         return redirect('admin/products');
