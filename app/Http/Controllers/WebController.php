@@ -20,17 +20,9 @@
             return view('welcome', compact('categories', 'newArrivals', 'featuredArrivals'));
         }
 
-        // public function shop($id){
-        //     $category_list = ProductCategory::get();
-        //     $categories = ProductCategory::where('id', $id)->get();
-        //     $products = Product::where('category_id', $id)->where('status', 'Active')->orderBy('id' , 'desc')->paginate(8);
-
-        //     return view('web.shop', compact('products','categories','category_list'));
-        // }
-
         public function frozenfoods(){
             $categories = ProductCategory::where('id', 1)->get();
-            $products = Product::where('category_id', 1)->where('status', 'Active')->orderBy('id' , 'desc')->paginate(8);
+            $products = Product::inRandomOrder()->paginate(8);
             return view('web.frozen_foods', compact('products','categories'));
         }
         public function lounge(){
