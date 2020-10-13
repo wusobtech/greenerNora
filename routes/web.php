@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'WebController@index')->name('homepage');
 Route::get('/shop', 'WebController@shop')->name('shop');
 // Route::get('/shop/{id}/{name}', 'WebController@shop')->name('shops');
-Route::get('/frozenfoods', 'WebController@shop')->name('frozenfoods');
+Route::get('/frozenfoods', 'WebController@frozenfoods')->name('frozenfoods');
 Route::get('/lounge', 'WebController@lounge')->name('lounge');
 Route::get('/cart', 'CartController@items')->name('cart')->middleware('auth');
 Route::get('/contactus', 'WebController@contactus')->name('contactus');

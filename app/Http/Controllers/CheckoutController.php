@@ -134,7 +134,6 @@ class CheckoutController extends Controller
         $delivery = 600;
         $cart->total = $cart->total + ($delivery);
         $cartItems = $cart->cartItems;
-        //dd($cartItems);
         $all = Cart::where('user_id' , $user->id)->count();
 
         $sum = Cart::where('user_id' , $user->id)->sum('total');
@@ -142,67 +141,11 @@ class CheckoutController extends Controller
         $date = new Carbon;
         if($type == 'COD'){
             DB::beginTransaction();
-            $currentorder = Order::where('user_id' , $user->id)->where('status' , 'Pending')->orderby('created_at', 'desc')->first();
-            // $carts = Cart::where('user_id' , $user->id)->get();
-            //$cartItems = CartItem::where('cart_id' , $cart->id)->first();
-
-
-
             try{
-                $order = Order::create([
-                    'user_id' => $user->id,
-                    'orderdate' => $date,
-                    'payment_method' => 'Cash On Delivery',
-                    'totalamount' => $cart->total,
-                    'status' => 'Pending',
-                    'ref_no' => str_shuffle($pin)
-                ]);
-                foreach ($cartItems as $item){
-                    // copy cart item details to order item
-                    OrderItem::create([
-                        'order_id' => $order->id,
-                        'product_id' => $item->product_id,
-                        'price' => $item->price,
-                        'quantity' => $item->quantity,
-                        'discount' => $item->discount,
-                    ]);
+                $order = $this->processCartToOrder($cart , 'Çash on Delivery');
 
-                    Session::put('order_id',$order->id);
-                    Session::put('product_id',$item->product->name);
-                    Session::put('orderdate',$date);
-                    Session::put('payment_method','Cash On Delivery');
-                    Session::put('price',$item->price);
-                    Session::put('description',$item->product->description);
-                    Session::put('quantity',$item->quantity);
-                    Session::put('ref_no',$order->ref_no);
-                    Session::put('totalamount',$cart->total);
-
-                    //Code for Order Email
-                    $email = Auth::user()->email;
-                    $messageData = [
-                        'email' => $email,
-                        'product_id' => $item->product->name,
-                        'order_id' => $order->id,
-                        'price' => $item->price,
-                        'description' => $item->product->description,
-                        'orderdate' => $date,
-                        'payment_method' => 'Cash On Delivery',
-                        'quantity' => $item->quantity,
-                        'totalamount' => $cart->total,
-                        'name' => Auth::user()->name,
-                        'order_ref_no' => $order->ref_no
-                    ];
-
-                    //dd($messageData);
-                    Mail::to($email)->send(new OrderMail($messageData));
-
-                    // Reduce product quantity
-                    $item->product->quantityonhand - $item->quantity;
-                    $item->product->save();
-                        // Delete cart item from cart
-                    $item->delete();
-                }
                 DB::commit();
+                $this->sendOrderEmail($order);
             }
             catch(Exception $e){
                 DB::rollback();
@@ -214,63 +157,11 @@ class CheckoutController extends Controller
 
         if ($type == 'DBT') {
             DB::beginTransaction();
-            $currentorder = Order::where('user_id' , $user->id)->where('status' , 'Pending')->orderby('created_at', 'desc')->first();
 
             try{
-                $order = Order::create([
-                    'user_id' => $user->id,
-                    'orderdate' => $date,
-                    'payment_method' => 'Direct Bank Transfer',
-                    'totalamount' => $cart->total, // $request->input('amount'),
-                    'status' => 'Pending',
-                    'ref_no' => str_shuffle($pin)
-                ]);
-                foreach ($cartItems as $item){
-                    // copy cart item details to order item
-                    OrderItem::create([
-                        'order_id' => $order->id,
-                        'product_id' => $item->product_id,
-                        'price' => $item->price,
-                        'quantity' => $item->quantity,
-                        'discount' => $item->discount,
-                    ]);
-
-                    Session::put('order_id',$order->id);
-                    Session::put('product_id',$item->product->name);
-                    Session::put('orderdate',$date);
-                    Session::put('payment_method','Direct Bank Transfer');
-                    Session::put('price',$item->price);
-                    Session::put('description',$item->product->description);
-                    Session::put('quantity',$item->quantity);
-                    Session::put('ref_no',$order->ref_no);
-                    Session::put('totalamount',$cart->total);
-
-                    //Code for Order Email
-                    $email = Auth::user()->email;
-                    $messageData = [
-                        'email' => $email,
-                        'product_id' => $item->product->name,
-                        'order_id' => $order->id,
-                        'price' => $item->price,
-                        'description' => $item->product->description,
-                        'orderdate' => $date,
-                        'payment_method' => 'Direct Bank Transfer',
-                        'quantity' => $item->quantity,
-                        'totalamount' => $cart->total,
-                        'name' => Auth::user()->name,
-                        'order_ref_no' => $order->ref_no
-                    ];
-
-                    //dd($messageData);
-                    Mail::to($email)->send(new OrderMail($messageData));
-
-                    // Reduce product quantity
-                    $item->product->quantityonhand - $item->quantity;
-                    $item->product->save();
-                        // Delete cart item from cart
-                    $item->delete();
-                }
+                $order = $this->processCartToOrder($cart , 'Direct Bank Transfer');
                 DB::commit();
+                $this->sendOrderEmail($order);
             }
             catch(Exception $e){
                 DB::rollback();
@@ -286,6 +177,61 @@ class CheckoutController extends Controller
 
             return Paystack::getAuthorizationUrl()->redirectNow();
         }
+    }
+
+    public function processCartToOrder($cart , $modeOfPayment){
+        $user = auth('web')->user();
+        $date = new Carbon;
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $cartItems = $cart->cartItems;
+        $pin = mt_rand(1000000, 9999999)
+                . mt_rand(1000000, 9999999)
+                . $characters[rand(0, strlen($characters) - 1)];
+        $order = Order::create([
+            'user_id' => $user->id,
+            'orderdate' => $date,
+            'payment_method' => $modeOfPayment,
+            'totalamount' => $cart->total, // $request->input('amount'),
+            'status' => 'Pending',
+            'ref_no' => str_shuffle($pin)
+        ]);
+        foreach ($cartItems as $item){
+            // copy cart item details to order item
+           $ordItem =  OrderItem::create([
+                'order_id' => $order->id,
+                'product_id' => $item->product_id,
+                'price' => $item->price,
+                'quantity' => $item->quantity,
+                'discount' => $item->discount,
+            ]);
+            // Reduce product quantity
+            $item->product->quantityonhand - $item->quantity;
+            $item->product->save();
+                // Delete cart item from cart
+            $item->delete();
+            // dump($item);
+            // dd($ordItem);
+        }
+        return $order;
+    }
+
+
+    public function sendOrderEmail($order){
+
+        //Code for Order Email
+        $email = Auth::user()->email;
+        $messageData = [
+            'email' => $email,
+            'order_id' => $order->id,
+            'price' => $order->totalamount,
+            'description' => 'Descrittion from tope',
+            'orderdate' => $order->orderdate,
+            'payment_method' => $order->payment_method,
+            'name' => Auth::user()->name,
+            'order_ref_no' => $order->ref_no,
+            'order_items' => OrderItem::where('order_id' , $order->id)->get(),
+        ];
+        Mail::to($email)->send(new OrderMail($messageData));
     }
 
 
@@ -330,32 +276,9 @@ class CheckoutController extends Controller
 
 
             try{
-                $order = Order::create([
-                    'payment_id' => $payment->id,
-                    'user_id' => $user->id,
-                    'orderdate' => $date,
-                    'payment_method' => 'Paystack',
-                    'totalamount' => $cart->total, // $request->input('amount'),
-                    'status' => 'Pending',
-                    'ref_no' => str_shuffle($pin)
-                ]);
-                foreach ($cartItems as $item){
-                    // copy cart item details to order item
-                    OrderItem::create([
-                        'order_id' => $order->id,
-                        'product_id' => $item->product_id,
-                        'price' => $item->price,
-                        'quantity' => $item->quantity,
-                        'discount' => $item->discount,
-                    ]);
-
-                    // Reduce product quantity
-                    $item->product->quantityonhand - $item->quantity;
-                    $item->product->save();
-                        // Delete cart item from cart
-                    $item->delete();
-                }
+                $this->processCartToOrder($cart , 'Çash on Delivery');
                 DB::commit();
+                $this->sendOrderEmail($order);
             }
             catch(Exception $e){
                 DB::rollback();

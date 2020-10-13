@@ -70,6 +70,7 @@ a[x-apple-data-detectors] {
 			</v:background>
 		<![endif]-->
    <table class="es-wrapper" width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;padding:0;Margin:0;width:100%;height:100%;background-repeat:repeat;background-position:center top">
+
      <tr style="border-collapse:collapse">
       <td valign="top" style="padding:0;Margin:0">
       <!--HEADER-->
@@ -166,6 +167,7 @@ a[x-apple-data-detectors] {
                  </tr>
                </table></td>
              </tr>
+             @foreach ($messageData['order_items'] as $item)
              <tr style="border-collapse:collapse">
               <td align="left" bgcolor="#02913f" style="Margin:0;padding-top:10px;padding-bottom:10px;padding-left:20px;padding-right:20px;background-color:#02913F">
                <!--[if mso]><table dir="rtl" style="width:560px" cellpadding="0" cellspacing="0"><tr><td dir="ltr" style="width:270px" valign="top"><![endif]-->
@@ -217,14 +219,14 @@ a[x-apple-data-detectors] {
                    <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                      <tr style="border-collapse:collapse">
                       <!--INPUT ITEM NAME-->
-                      <td align="left" style="padding:0;Margin:0;padding-bottom:5px"><h2 class="product-name" style="Margin:0;line-height:29px;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;font-size:24px;font-style:normal;font-weight:normal;color:#6AA38B">{{ $messageData['product_id']}}</h2></td>
+                      <td align="left" style="padding:0;Margin:0;padding-bottom:5px"><h2 class="product-name" style="Margin:0;line-height:29px;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;font-size:24px;font-style:normal;font-weight:normal;color:#6AA38B">{{ $item->product->name }}</h2></td>
                      </tr>
                      <tr style="border-collapse:collapse">
                       <!--INPUT ITEM PRICE-->
-                      <td align="left" style="padding:0;Margin:0"><h3 class="price" style="Margin:0;line-height:22px;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;font-size:18px;font-style:normal;font-weight:normal;color:#000000">{{ $messageData['price'] }}</h3></td>
+                      <td align="left" style="padding:0;Margin:0"><h3 class="price" style="Margin:0;line-height:22px;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;font-size:18px;font-style:normal;font-weight:normal;color:#000000">{{ $item->price }}</h3></td>
                      </tr>
                      <tr style="border-collapse:collapse">
-                      <td align="left" style="padding:0;Margin:0;padding-top:5px;padding-bottom:10px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333">{{ $messageData['description'] }}</p></td>
+                      <td align="left" style="padding:0;Margin:0;padding-top:5px;padding-bottom:10px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333">{{ $item->quantity }}</p></td>
                      </tr>
                    </table></td>
                  </tr>
@@ -242,7 +244,7 @@ a[x-apple-data-detectors] {
                    <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                      <tr style="border-collapse:collapse">
                       <!--ORDER TOTAL AMOUNT-->
-                      <td align="right" class="es-m-txt-c" style="padding:0;Margin:0"><h2 style="Margin:0;line-height:29px;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;font-size:24px;font-style:normal;font-weight:normal;color:#FFFFFF"><strong><a target="_blank" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:24px;text-decoration:none;color:#FFFFFF" href="">{{ $messageData['totalamount'] }}</a></strong></h2></td>
+                      <td align="right" class="es-m-txt-c" style="padding:0;Margin:0"><h2 style="Margin:0;line-height:29px;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;font-size:24px;font-style:normal;font-weight:normal;color:#FFFFFF"><strong><a target="_blank" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:24px;text-decoration:none;color:#FFFFFF" href="">{{ $item->price }}</a></strong></h2></td>
                      </tr>
                    </table></td>
                  </tr>
@@ -260,7 +262,9 @@ a[x-apple-data-detectors] {
                </table>
                <!--[if mso]></td></tr></table><![endif]--></td>
              </tr>
-           </table></td>
+             @endforeach
+           </table>
+        </td>
          </tr>
        </table>
       <!--END CONTENT-->
