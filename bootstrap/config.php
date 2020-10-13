@@ -1,7 +1,7 @@
 <?php return array (
   'app' => 
   array (
-    'name' => 'GreenerNora',
+    'name' => 'Laravel',
     'env' => 'local',
     'debug' => true,
     'url' => 'http://localhost',
@@ -10,7 +10,7 @@
     'locale' => 'en',
     'fallback_locale' => 'en',
     'faker_locale' => 'en_US',
-    'key' => 'base64:2+Q5rZVdL2xdWQze6kXI1gMHZ9jEzROP9YPhkfBXZTg=',
+    'key' => '',
     'cipher' => 'AES-256-CBC',
     'providers' => 
     array (
@@ -179,7 +179,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => 'C:\\wamp64\\www\\WUSOB_PROJECTS\\greenerNora\\storage\\framework/cache/data',
+        'path' => 'C:\\xampp\\htdocs\\greenerNora\\storage\\framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -218,7 +218,7 @@
         'endpoint' => NULL,
       ),
     ),
-    'prefix' => 'greenernora_cache',
+    'prefix' => 'laravel_cache',
   ),
   'cors' => 
   array (
@@ -256,7 +256,7 @@
       array (
         'driver' => 'sqlite',
         'url' => NULL,
-        'database' => 'greenernora',
+        'database' => 'greenernoral',
         'prefix' => '',
         'foreign_key_constraints' => true,
       ),
@@ -266,7 +266,7 @@
         'url' => NULL,
         'host' => '127.0.0.1',
         'port' => '3306',
-        'database' => 'greenernora',
+        'database' => 'greenernoral',
         'username' => 'root',
         'password' => '',
         'unix_socket' => '',
@@ -286,7 +286,7 @@
         'url' => NULL,
         'host' => '127.0.0.1',
         'port' => '3306',
-        'database' => 'greenernora',
+        'database' => 'greenernoral',
         'username' => 'root',
         'password' => '',
         'charset' => 'utf8',
@@ -301,7 +301,7 @@
         'url' => NULL,
         'host' => '127.0.0.1',
         'port' => '3306',
-        'database' => 'greenernora',
+        'database' => 'greenernoral',
         'username' => 'root',
         'password' => '',
         'charset' => 'utf8',
@@ -316,7 +316,7 @@
       'options' => 
       array (
         'cluster' => 'redis',
-        'prefix' => 'greenernora_database_',
+        'prefix' => 'laravel_database_',
       ),
       'default' => 
       array (
@@ -345,12 +345,12 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\wamp64\\www\\WUSOB_PROJECTS\\greenerNora\\storage\\app',
+        'root' => 'C:\\xampp\\htdocs\\greenerNora\\storage\\app',
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\wamp64\\www\\WUSOB_PROJECTS\\greenerNora\\storage\\app/public',
+        'root' => 'C:\\xampp\\htdocs\\greenerNora\\storage\\app/public',
         'url' => 'http://localhost/storage',
         'visibility' => 'public',
       ),
@@ -367,7 +367,7 @@
     ),
     'links' => 
     array (
-      'C:\\wamp64\\www\\WUSOB_PROJECTS\\greenerNora\\public\\storage' => 'C:\\wamp64\\www\\WUSOB_PROJECTS\\greenerNora\\storage\\app/public',
+      'C:\\xampp\\htdocs\\greenerNora\\public\\storage' => 'C:\\xampp\\htdocs\\greenerNora\\storage\\app/public',
     ),
   ),
   'hashing' => 
@@ -401,13 +401,13 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => 'C:\\wamp64\\www\\WUSOB_PROJECTS\\greenerNora\\storage\\logs/laravel.log',
+        'path' => 'C:\\xampp\\htdocs\\greenerNora\\storage\\logs/laravel.log',
         'level' => 'debug',
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => 'C:\\wamp64\\www\\WUSOB_PROJECTS\\greenerNora\\storage\\logs/laravel.log',
+        'path' => 'C:\\xampp\\htdocs\\greenerNora\\storage\\logs/laravel.log',
         'level' => 'debug',
         'days' => 14,
       ),
@@ -457,7 +457,7 @@
       ),
       'emergency' => 
       array (
-        'path' => 'C:\\wamp64\\www\\WUSOB_PROJECTS\\greenerNora\\storage\\logs/laravel.log',
+        'path' => 'C:\\xampp\\htdocs\\greenerNora\\storage\\logs/laravel.log',
       ),
     ),
   ),
@@ -471,9 +471,9 @@
         'transport' => 'smtp',
         'host' => 'smtp.mailtrap.io',
         'port' => '2525',
-        'encryption' => 'tls',
-        'username' => '866a9d1b6b5824',
-        'password' => 'ac2993c1bda7c5',
+        'encryption' => NULL,
+        'username' => NULL,
+        'password' => NULL,
         'timeout' => NULL,
         'auth_mode' => NULL,
       ),
@@ -506,24 +506,24 @@
     ),
     'from' => 
     array (
-      'address' => 'contact@greenernorahinvestments.com',
-      'name' => 'GreenerNora',
+      'address' => NULL,
+      'name' => 'Laravel',
     ),
     'markdown' => 
     array (
       'theme' => 'default',
       'paths' => 
       array (
-        0 => 'C:\\wamp64\\www\\WUSOB_PROJECTS\\greenerNora\\resources\\views/vendor/mail',
+        0 => 'C:\\xampp\\htdocs\\greenerNora\\resources\\views/vendor/mail',
       ),
     ),
   ),
   'paystack' => 
   array (
-    'publicKey' => 'pk_test_e7aa24268609f683fbaf840b089fdeccd905d70c',
-    'secretKey' => 'sk_test_ee17845058961dbda91e29eba7db699ed867612c',
-    'paymentUrl' => 'https://api.paystack.co',
-    'merchantEmail' => 'topeolotu75@gmail.com',
+    'publicKey' => false,
+    'secretKey' => false,
+    'paymentUrl' => false,
+    'merchantEmail' => false,
   ),
   'queue' => 
   array (
@@ -600,7 +600,7 @@
     'lifetime' => '120',
     'expire_on_close' => false,
     'encrypt' => false,
-    'files' => 'C:\\wamp64\\www\\WUSOB_PROJECTS\\greenerNora\\storage\\framework/sessions',
+    'files' => 'C:\\xampp\\htdocs\\greenerNora\\storage\\framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -609,7 +609,7 @@
       0 => 2,
       1 => 100,
     ),
-    'cookie' => 'greenernora_session',
+    'cookie' => 'laravel_session',
     'path' => '/',
     'domain' => NULL,
     'secure' => NULL,
@@ -620,9 +620,9 @@
   array (
     'paths' => 
     array (
-      0 => 'C:\\wamp64\\www\\WUSOB_PROJECTS\\greenerNora\\resources\\views',
+      0 => 'C:\\xampp\\htdocs\\greenerNora\\resources\\views',
     ),
-    'compiled' => 'C:\\wamp64\\www\\WUSOB_PROJECTS\\greenerNora\\storage\\framework\\views',
+    'compiled' => 'C:\\xampp\\htdocs\\greenerNora\\storage\\framework\\views',
   ),
   'flare' => 
   array (
