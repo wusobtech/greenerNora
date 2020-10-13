@@ -167,21 +167,24 @@ a[x-apple-data-detectors] {
                  </tr>
                </table></td>
              </tr>
-             @foreach ($messageData['order_items'] as $item)
+
              <tr style="border-collapse:collapse">
               <td align="left" bgcolor="#02913f" style="Margin:0;padding-top:10px;padding-bottom:10px;padding-left:20px;padding-right:20px;background-color:#02913F">
                <!--[if mso]><table dir="rtl" style="width:560px" cellpadding="0" cellspacing="0"><tr><td dir="ltr" style="width:270px" valign="top"><![endif]-->
                <!--INPUT ORDER NUMBER-->
+
                 <table cellpadding="0" cellspacing="0" class="es-right" align="right" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:right">
                  <tr style="border-collapse:collapse">
                   <td align="left" class="es-m-p20b" style="padding:0;Margin:0;width:270px">
                    <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
+
                      <tr style="border-collapse:collapse">
                       <!--INPUT ORDER NUMBER-->
                       <td align="right" class="es-m-txt-c" style="padding:0;Margin:0"><h2 style="Margin:0;line-height:19px;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;font-size:16px;font-style:normal;font-weight:normal;color:#FFFFFF"><strong><a target="_blank" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:16px;text-decoration:none;color:#FFFFFF" href="">Order Reference Number {{ $messageData['order_ref_no'] }}</a></strong></h2></td>
                      </tr>
                    </table></td>
                  </tr>
+
                </table>
                <!--[if mso]></td><td dir="ltr" style="width:20px"></td><td dir="ltr" style="width:270px" valign="top"><![endif]-->
                <table cellpadding="0" cellspacing="0" align="left" class="es-left" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:left">
@@ -197,6 +200,7 @@ a[x-apple-data-detectors] {
                <!--[if mso]></td></tr></table><![endif]--></td>
              </tr>
              <!--PRODUCTS ROW-->
+             @foreach ($messageData['order_items'] as $item)
              <tr style="border-collapse:collapse">
               <td align="left" style="padding:0;Margin:0;padding-top:20px;padding-left:20px;padding-right:20px">
                <!--[if mso]><table style="width:560px" cellpadding="0" cellspacing="0"><tr><td style="width:120px" valign="top"><![endif]-->
@@ -223,15 +227,18 @@ a[x-apple-data-detectors] {
                      </tr>
                      <tr style="border-collapse:collapse">
                       <!--INPUT ITEM PRICE-->
-                      <td align="left" style="padding:0;Margin:0"><h3 class="price" style="Margin:0;line-height:22px;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;font-size:18px;font-style:normal;font-weight:normal;color:#000000">{{ $item->price }}</h3></td>
+                      <td align="left" style="padding:0;Margin:0"><h3 class="price" style="Margin:0;line-height:22px;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;font-size:18px;font-style:normal;font-weight:normal;color:#000000">&#8358;{{ $item->price }}</h3></td>
                      </tr>
                      <tr style="border-collapse:collapse">
                       <td align="left" style="padding:0;Margin:0;padding-top:5px;padding-bottom:10px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333">{{ $item->quantity }}</p></td>
                      </tr>
                    </table></td>
+                <hr>
                  </tr>
                </table>
+               @endforeach
                <!--[if mso]></td></tr></table><![endif]--></td>
+
              </tr>
              <!--END PRODUCTS ROW-->
              <!--ORDER TOTAL AMOUNT-->
@@ -242,18 +249,29 @@ a[x-apple-data-detectors] {
                  <tr style="border-collapse:collapse">
                   <td align="left" class="es-m-p20b" style="padding:0;Margin:0;width:270px">
                    <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
+                    <tr style="border-collapse:collapse">
+                        <!--ORDER TOTAL AMOUNT-->
+                        <td align="right" class="es-m-txt-c" style="padding:0;Margin:0"><h2 style="Margin:0;line-height:29px;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;font-size:24px;font-style:normal;font-weight:normal;color:#FFFFFF"><strong><a target="_blank" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:24px;text-decoration:none;color:#FFFFFF" href="">&#8358;{{ number_format(600) }}</a></strong></h2></td>
+                       </tr>
                      <tr style="border-collapse:collapse">
                       <!--ORDER TOTAL AMOUNT-->
-                      <td align="right" class="es-m-txt-c" style="padding:0;Margin:0"><h2 style="Margin:0;line-height:29px;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;font-size:24px;font-style:normal;font-weight:normal;color:#FFFFFF"><strong><a target="_blank" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:24px;text-decoration:none;color:#FFFFFF" href="">{{ $item->price }}</a></strong></h2></td>
+                      <td align="right" class="es-m-txt-c" style="padding:0;Margin:0"><h2 style="Margin:0;line-height:29px;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;font-size:24px;font-style:normal;font-weight:normal;color:#FFFFFF"><strong><a target="_blank" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:24px;text-decoration:none;color:#FFFFFF" href="">&#8358;{{ $messageData['price'] }}</a></strong></h2></td>
                      </tr>
-                   </table></td>
+                   </table>
+                 </td>
+
                  </tr>
+                    <hr>
                </table>
                <!--[if mso]></td><td dir="ltr" style="width:20px"></td><td dir="ltr" style="width:270px" valign="top"><![endif]-->
                <table cellpadding="0" cellspacing="0" align="left" class="es-left" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:left">
                  <tr style="border-collapse:collapse">
                   <td align="left" style="padding:0;Margin:0;width:270px">
                    <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
+                    <tr style="border-collapse:collapse">
+                        <td align="left" class="es-m-txt-c" style="padding:0;Margin:0"><h2 style="Margin:0;line-height:29px;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;font-size:24px;font-style:normal;font-weight:normal;color:#FFFFFF">Delivery Fees</h2></td>
+                       </tr>
+
                      <tr style="border-collapse:collapse">
                       <td align="left" class="es-m-txt-c" style="padding:0;Margin:0"><h2 style="Margin:0;line-height:29px;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;font-size:24px;font-style:normal;font-weight:normal;color:#FFFFFF">Total</h2></td>
                      </tr>
@@ -262,7 +280,7 @@ a[x-apple-data-detectors] {
                </table>
                <!--[if mso]></td></tr></table><![endif]--></td>
              </tr>
-             @endforeach
+
            </table>
         </td>
          </tr>
