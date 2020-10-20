@@ -110,14 +110,14 @@ class ProductController extends Controller
     {
 
         $request->validate([
-            'name' => 'required|unique:products',
-            'category_id' => 'required',
-            'description' => 'required',
+            'name' => 'nullable',
+            'category_id' => 'nullable',
+            'description' => 'nullable',
             'weight' => 'nullable',
-            'status' => 'required',
+            'status' => 'nullable',
             'image' => 'nullable|image',
-            'type' => 'required',
-            'price' => 'required',
+            'type' => 'nullable',
+            'price' => 'nullable',
             'quantityonhand' => 'nullable'
         ]);
         // dd($request->all());

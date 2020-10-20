@@ -23,7 +23,7 @@
                         <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                             <thead>
                             <tr>
-                                <th>  Id</th>
+                                <th>  Action</th>
                                 <th> Customer Name</th>
                                 <th> Order Date </th>
                                 <th> Order Reference Number </th>
@@ -36,7 +36,7 @@
                             <tbody>
                             @foreach ($approval as $approve)
                             <tr>
-                                <td>{{ $approve->id }}</td>
+                                <td><a href="{{ route('verify_order_info',$approve) }}" class="btn btn-outline-primary sm">View Info</a></td>
                                 <td>{{ $approve->user->name }}</td>
                                 <td>{{ date('F j, Y', strtotime($approve->orderdate)) }}</td>
                                 <td>{{ $approve->ref_no }}</td>

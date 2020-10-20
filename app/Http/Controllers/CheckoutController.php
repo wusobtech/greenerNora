@@ -11,7 +11,6 @@ use App\Order;
 use App\OrderItem;
 use App\Cart;
 use App\CartItem;
-use App\OrdersDetail;
 use App\DeliveryAddress;
 use App\Country;
 use Auth;
@@ -187,13 +186,24 @@ class CheckoutController extends Controller
         $pin = mt_rand(1000000, 9999999)
                 . mt_rand(1000000, 9999999)
                 . $characters[rand(0, strlen($characters) - 1)];
+
+        $user_id = Auth::user()->id;
+        $shipping = DeliveryAddress::where(['user_id' => $user_id])->first();
         $order = Order::create([
             'user_id' => $user->id,
             'orderdate' => $date,
             'payment_method' => $modeOfPayment,
             'totalamount' => $cart->total, // $request->input('amount'),
             'status' => 'Pending',
-            'ref_no' => str_shuffle($pin)
+            'ref_no' => str_shuffle($pin),
+            'user_email' => $user->email,
+            'name' => $shipping->name,
+            'country' => $shipping->country,
+            'address' => $shipping->address,
+            'city' => $shipping->city,
+            'state' => $shipping->state,
+            'postcode' => $shipping->postcode,
+            'phone' => $shipping->phone,
         ]);
         foreach ($cartItems as $item){
             // copy cart item details to order item
@@ -232,7 +242,8 @@ class CheckoutController extends Controller
             'order_ref_no' => $orders->ref_no,
             'order_items' => OrderItem::where('order_id' , $order->id)->get(),
         ];
-        Mail::to($email)->send(new OrderMail($messageData));
+        $admin = 'contact@greenernorahinvestments.com';
+        Mail::to($email)->cc($admin)->send(new OrderMail($messageData));
     }
 
 
