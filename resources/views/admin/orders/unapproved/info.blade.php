@@ -47,15 +47,61 @@
                                     </div>
                                 </div>
 
-
-                                <form class="form-horizontal" action="{{ route('verify_order_status',$verification) }}" method="post">@csrf
-                                    <input type="hidden" required name="status" value="Approved"/>
-                                    <div class="form-group">
-                                        <div class="col-sm-offset-2 mt-3 col-sm-10">
-                                            <button type="submit" class="btn btn-danger">Approve</button>
-                                        </div>
+                                <div class="form-group">
+                                    <label>Customer Shipping Country </label>
+                                    <div>
+                                        <input type="text" class="form-control" readonly value="{{ $verification->country }}">
                                     </div>
-                                </form>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Customer Shipping Address </label>
+                                    <div>
+                                        <input type="text" class="form-control" readonly value="{{ $verification->address }}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Customer Shipping City </label>
+                                    <div>
+                                        <input type="text" class="form-control" readonly value="{{ $verification->city }}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Customer Shipping State </label>
+                                    <div>
+                                        <input type="text" class="form-control" readonly value="{{ $verification->state }}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Customer Phone Number </label>
+                                    <div>
+                                        <input type="text" class="form-control" readonly value="{{ $verification->phone }}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Customer Shipping Zip-Code </label>
+                                    <div>
+                                        <input type="text" class="form-control" readonly value="{{ $verification->postcode }}">
+                                    </div>
+                                </div>
+
+                                @if ($verification->status == 'Approved')
+
+                                @else
+                                    <form class="form-horizontal" action="{{ route('verify_order_status',$verification) }}" method="post">@csrf
+                                        <input type="hidden" required name="status" value="Approved"/>
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-2 mt-3 col-sm-10">
+                                                <button type="submit" class="btn btn-danger">Approve</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                @endif
+
                         </div>
                     </div>
                 </div> <!-- end col -->
