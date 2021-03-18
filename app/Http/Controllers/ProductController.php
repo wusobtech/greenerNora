@@ -114,9 +114,9 @@ class ProductController extends Controller
             'category_id' => 'nullable',
             'description' => 'nullable',
             'weight' => 'nullable',
-            'status' => 'nullable',
+            'status' => 'required',
             'image' => 'nullable|image',
-            'type' => 'nullable',
+            'type' => 'required',
             'price' => 'nullable',
             'quantityonhand' => 'nullable'
         ]);
