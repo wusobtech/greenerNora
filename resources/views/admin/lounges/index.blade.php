@@ -32,15 +32,15 @@
                                             <input type="file" name="image" class="form-control">
                                         </div>
                                         <div class="form-group">
-                                            <label>Phone Numbeer for Bookings</label>
+                                            <label>Phone Number for Bookings</label>
                                             <input type="text" name="phone" class="form-control">
                                         </div>
                                         <div class="form-group">
-                                            <label>lounge Discount</label>
+                                            <label>Lounge Discount</label>
                                             <input type="number" name="discount" class="form-control">
                                         </div>
                                         <div class="form-group">
-                                            <label>lounge Status </label>
+                                            <label>Lounge Status </label>
                                             <select name="status"  id="type" class="form-control">
                                                 <option  disabled selected>Select</option>
                                                 <option value="Active">Active</option>
@@ -48,7 +48,7 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label>lounge Price</label>
+                                            <label>Lounge Price</label>
                                             <input type="number" placeholder="" name="price" class="form-control">
                                         </div>
                                 </div>

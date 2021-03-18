@@ -97,7 +97,8 @@ class LoungeController extends Controller
     public function edit($id)
     {
         $loungeDetails = Lounge::FindorFail($id);
-        return view('admin.lounges.edit',compact('loungeDetails'));
+        $categories = ProductCategory::get();
+        return view('admin.lounges.edit',compact('loungeDetails' , 'categories'));
     }
 
     /**
@@ -109,19 +110,19 @@ class LoungeController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $lounge = Lounge::findorfail($id);
         $request->validate([
-            'name' => 'required|unique:lounges',
+            'name' => 'required|unique:lounges,name,'.$lounge->id,
             'category_id' => 'required',
             'description' => 'required',
             'phone' => 'required',
             'discount' => 'nullable',
-            'image' => 'required|image',
+            'image' => 'nullable|image',
             'price' => 'required',
             'status' => 'required'
         ]);
 
         $image = $request->file('image');
-        $lounge = Lounge::findorfail($id);
 
         if (isset($image)) {
             // $image = $request->file('image');
